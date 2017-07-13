@@ -1,22 +1,22 @@
-module Speed
-  def go_fast
-    puts "I am a #{self.class} and going super fast!"
+class Oracle
+  def predict_the_future
+    "You will " + choices.sample
+  end
+
+  def choices
+    ["eat a nice lunch", "take a nap soon", "stay at work late"]
   end
 end
 
-class Car
-  include Speed
-  def go_slow
-    puts "I am safe and driving slow."
+class RoadTrip < Oracle
+  def choices
+    ["visit Vegas", "fly to Fiji", "romp in Rome"]
   end
 end
 
-class Truck
-  include Speed
-  def go_very_slow
-    puts "I am a heavy truck and like going very slow."
-  end
-end
+trip = RoadTrip.new
+trip.predict_the_future
 
-Car.new.go_fast
-Truck.new.go_fast
+# exacelty the same as above except that the strings that are being selected
+# from are different (choices in RoadTrip, the child class, overwrites
+# the choices method from Oricle)

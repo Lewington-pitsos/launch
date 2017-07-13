@@ -1,13 +1,3 @@
-class Fruit
-  def initialize(name)
-    name = name
-  end
-end
-
-class Pizza
-  def initialize(name)
-    @name = name
-  end
-end
-
-# Pizza because only it has a variable that starts with @
+excited_dog = "excited dog" #local var
+@excited_dog = "excited dog"  #instance var
+@@excited_dog = "excited dog" #class var

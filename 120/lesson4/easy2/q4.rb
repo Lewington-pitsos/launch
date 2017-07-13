@@ -1,7 +1,12 @@
-class AngryCat
-  def hiss
-    puts "Hisssss!!!"
+class BeesWax
+
+  attr_accessor :type
+
+  def initialize(type)
+    @type = type
+  end
+
+  def describe_type
+    puts "I am a #{@type} of Bees Wax"
   end
 end
-
-rebecca = AngryCat.new
