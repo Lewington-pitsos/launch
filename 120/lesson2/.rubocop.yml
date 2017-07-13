@@ -258,3 +258,7 @@ Performance/RedundantMatch:
                   Use `=~` instead of `String#match` or `Regexp#match` in a context where the
                   returned `MatchData` is not needed.
   Enabled: false
+  
+  ########################### extra Louka stuff #######################
+  Style/MethodDefParentheses:
+    Enabled: false
