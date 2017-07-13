@@ -1,0 +1,24 @@
+BASIC Decription
+
+Rock paper scissors is played between two players. Each player selects, without
+Knowledge of the other player's selection, one of three alternatives:
+
+Rock
+Paper
+Scissors
+
+The players then reveal their choices, and the winner is decided by comparing
+the alternatives actually chosen to a pre-decided heirachy of whuch
+alternative beats which other alternatives.
+
+Nouns: player, heirachy, selection
+Verbs: select, compare
+
+Player
+-select
+end
+
+Selection
+heirachy
+
+-compare
