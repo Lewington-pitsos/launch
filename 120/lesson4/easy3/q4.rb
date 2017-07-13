@@ -1,7 +1,11 @@
-class AngryCat
-  def hiss
-    puts "Hisssss!!!"
+class Cat
+  attr_reader :type
+
+  def initialize(type)
+    @type = type
+  end
+
+  def to_s
+    "I am a #{type} cat"
   end
 end
-
-rebecca = AngryCat.new

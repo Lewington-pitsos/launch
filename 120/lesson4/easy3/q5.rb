@@ -1,13 +1,20 @@
-class Fruit
-  def initialize(name)
-    name = name
+class Television
+  def self.manufacturer
+    # method logic
+  end
+
+  def model
+    # method logic
   end
 end
 
-class Pizza
-  def initialize(name)
-    @name = name
-  end
-end
+tv = Television.new
+tv.manufacturer
+tv.model
 
-# Pizza because only it has a variable that starts with @
+Television.manufacturer
+Television.model
+
+# manufacturer is a class method, so it will only work when called on line 15
+# similarly, model, an instance method, will only ever work when it is called
+# thtough an instance of the Television class, like tv

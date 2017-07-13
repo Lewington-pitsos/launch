@@ -1,16 +1,21 @@
-module Speed
-  def go_fast
-    puts "I am a #{self.class} and going super fast!"
+class AngryCat
+  def initialize(age, name)
+    @age  = age
+    @name = name
+  end
+
+  def age
+    puts @age
+  end
+
+  def name
+    puts @name
+  end
+
+  def hiss
+    puts "Hisssss!!!"
   end
 end
 
-class Car
-  include Speed
-  def go_slow
-    puts "I am safe and driving slow."
-  end
-end
-
-# with the use of self.class. Self references whatever object calls it, so when
-# our new car object calls go_fast, self, refers to that object itself, whose
-# class is, of course, Car
+pete = AngryCat.new(4, "pete")
+greg = AngryCat.new(4, "not pete")
