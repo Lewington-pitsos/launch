@@ -1,16 +1,18 @@
-module Speed
-  def go_fast
-    puts "I am a #{self.class} and going super fast!"
+class InvoiceEntry
+  attr_reader :quantity, :product_name
+
+  def initialize(product_name, number_purchased)
+    @quantity = number_purchased
+    @product_name = product_name
+  end
+
+  def update_quantity(updated_count)
+    quantity = updated_count if updated_count >= 0
   end
 end
 
-class Car
-  include Speed
-  def go_slow
-    puts "I am safe and driving slow."
-  end
-end
-
-# with the use of self.class. Self references whatever object calls it, so when
-# our new car object calls go_fast, self, refers to that object itself, whose
-# class is, of course, Car
+# the only problem that i can frosee is that we can now access product_name
+# (@produc_name) with a setter method, which might lead to us changing it
+# at some point, which we probably never really want to do, so maybe change the
+# accessor to protected (not private or else the self. construct will die) or
+# keep product_name in reader and add a seperate acessor for quantity

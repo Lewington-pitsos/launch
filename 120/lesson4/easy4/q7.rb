@@ -1,3 +1,13 @@
-# (1) it will print the object's id and all it's instance variables
-# => and the values of those variables
-# (2) to be sure you would visit the object class on ruby docs
+class Light
+  attr_accessor :brightness, :color
+
+  def initialize(brightness, color)
+    @brightness = brightness
+    @color = color
+  end
+
+  def self.information
+    "I want to turn on the light with a brightness level of super high and a colour of green"
+  end
+
+end

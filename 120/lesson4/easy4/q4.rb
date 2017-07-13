@@ -1,7 +1,18 @@
-class AngryCat
-  def hiss
-    puts "Hisssss!!!"
+class Greeting
+  def greet str
+    puts str
   end
 end
 
-rebecca = AngryCat.new
+class Hello < Greeting
+  def hi
+    greet "Hello"
+  end
+
+end
+
+class Goodby < Greeting
+  def bye
+    greet "Goodbye"
+  end
+end
