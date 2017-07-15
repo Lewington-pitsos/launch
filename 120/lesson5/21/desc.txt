@@ -1,0 +1,41 @@
+21 is a game played with a deck standard of cards.
+
+Each player, including the dealer, is dealt 2 cards. Each player is then given
+The opportunity to hit ( i.e. draw as many more cards as he or she would like)
+or stay (stop hitting)
+
+If at any point the total value of a player's hand is more than 21, that player
+Is considered "bust" and loses the round. If neither player busts, both players
+compare hands and the player with the highest valued hand wins (or the dealer
+in the event of a tie).
+
+The value of a hand is the total value of the cards in their hand, where
+
+10, jack, king and queen are all equal to 10 points, and
+aces are either 11 points or 1 point depending on which the player prefers.
+
+NOUNS: player, deck, card, hand, value
+VERBS: hit, deal, bust, compare, win, stay
+
+Overlord: player, deck
+-shuffle_deck
+-Player_playround
+-win
+-compare
+
+Player: hand
+-hit
+-stay
+-bust
+
+Hand: card
+-value
+-names
+
+Deck
+-shuffle
+-top_card
+
+Card
+-value
+-name
