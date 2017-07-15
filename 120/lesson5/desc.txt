@@ -1,0 +1,13 @@
+Toctactoe is played on a 3x3 board between two players. Each player takes
+A turn to occupy one of the empty squares with his/her marker. A player wins if
+they ever achieve three markers in a horizontal, vertical or diagonal row.
+The game ends in a tie if all board suqares are occuped and no player has won.
+
+Nouns: board, player, square
+Verbs: play, mark
+
+Board
+Square
+Player
+- mark
+- play
