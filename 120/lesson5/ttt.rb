@@ -17,7 +17,7 @@ class Board
     squares[int]
   end
 
-  def set_at int, mark
+  def []=(int, mark)
     self.squares[int].marker = mark
   end
 
@@ -32,29 +32,24 @@ class Board
   end
 
   def someone_won?
-    !!detect_winner
+    !!winning_marker
   end
 
-  def win? mark
+  def win?
     WINNERS.each do |line|
-      if @squares[line[0]].marker == mark &&
-         @squares[line[1]].marker == mark &&
-         @squares[line[2]].marker == mark
-        return true
+      if (
+        @squares[line[0]].marker == @squares[line[1]].marker &&
+        @squares[line[1]].marker == @squares[line[2]].marker) &&
+        @squares[line[0]].marker != Square::BLANK
+        return @squares[line[0]].marker
       end
     end
 
     false
   end
 
-  def detect_winner
-      if win? TTTGame::HUMAN
-        return TTTGame::HUMAN
-      elsif win? TTTGame::COMP
-        return TTTGame::COMP
-      end
-
-    nil
+  def winning_marker
+    win?
   end
 
   def reset
@@ -63,6 +58,22 @@ class Board
       4 => Square.new(), 5 => Square.new(), 6 => Square.new(),
       7 => Square.new(), 8 => Square.new(), 9 => Square.new(),
     }
+  end
+
+  def show
+    puts
+    puts "     |     |     "
+    puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}  "
+    puts "     |     |     "
+    puts "-----+-----+-----"
+    puts "     |     |     "
+    puts "  #{@squares[4]}  |  #{@squares[5]}  |  #{@squares[6]}  "
+    puts "     |     |     "
+    puts "-----+-----+-----"
+    puts "     |     |     "
+    puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}  "
+    puts "     |     |     "
+    puts
   end
 end
 
@@ -85,10 +96,6 @@ class Player
   def initialize marker
     @marker = marker
   end
-
-  def mark
-
-  end
 end
 
 
@@ -103,35 +110,54 @@ class TTTGame
     @board = Board.new
     @human = Player.new(HUMAN)
     @comp = Player.new(COMP)
+
+    @iter = [true, false].cycle
+    @human_turn = @iter.next
   end
 
+  def clear
+    system 'cls'
+  end
 
   def play
     display_welcome_message
 
     loop do
-      display_board(false)
+      display_board_no_clear
 
       loop do
-        human_moves
+        current_player_moves
         break if board.someone_won? || board.full?
 
-        comp_moves
-        break if board.full?
-        display_board
-        break if board.someone_won? || board.full?
-
+        display_board if @human_turn
       end
       display_result
       break unless play_again?
-      board.reset
-      system "cls"
-      puts "okey dokey"
-      puts
-      puts
+      reset
 
     end
     display_goodbye_message
+  end
+
+  private
+
+  def current_player_moves
+
+    if @human_turn
+      human_moves
+    else
+      comp_moves
+    end
+
+    @human_turn = @iter.next
+  end
+
+  def reset
+    board.reset
+    clear
+    puts "okey dokey"
+    puts
+    puts
   end
 
   def play_again?
@@ -144,7 +170,7 @@ class TTTGame
   def display_result
     display_board
 
-    case board.detect_winner
+    case board.winning_marker
     when HUMAN
       puts "you won"
     when COMP
@@ -174,36 +200,25 @@ class TTTGame
   def human_moves
     answer = talk_block "please select a square between #{board.empties.join(", ")}", board.empties.map {|i| i.to_s}
 
-    board.set_at(answer.to_i, human.marker)
+    board[answer.to_i] = human.marker
   end
 
   def comp_moves
-    board.set_at(board.empties.sample, comp.marker)
+    board[board.empties.sample] =  comp.marker
   end
   def display_welcome_message
     puts "welcome to tictattoe"
     puts
   end
 
-
-
-
-  def display_board clear = true
-    system 'cls' if clear
+  def display_board_no_clear
     puts "You are playing as #{human.marker} and the computer is playing as #{comp.marker}"
-    puts
-    puts "     |     |     "
-    puts "  #{board.get_at(1)}  |  #{board.get_at(2)}  |  #{board.get_at(3)}  "
-    puts "     |     |     "
-    puts "-----+-----+-----"
-    puts "     |     |     "
-    puts "  #{board.get_at(4)}  |  #{board.get_at(5)}  |  #{board.get_at(6)}  "
-    puts "     |     |     "
-    puts "-----+-----+-----"
-    puts "     |     |     "
-    puts "  #{board.get_at(7)}  |  #{board.get_at(8)}  |  #{board.get_at(9)}  "
-    puts "     |     |     "
-    puts
+    board.show
+  end
+
+  def display_board
+    clear
+    display_board_no_clear
   end
 end
 
