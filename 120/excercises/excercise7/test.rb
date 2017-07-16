@@ -1,39 +1,55 @@
-class FixedArray
+module HasClub
 
-  def initialize n
-
-    self.array=[nil]*5
-
-  end
-
-  def to_a
-    array
-  end
-
-  def []n
-    to_a.fetch([n])
-  end
-
-  def []=(index, value)
-    self.array[index] = value
-  end
-
-  def to_s
-    "'#{array}'"
-  end
-
-  protected
-
-  attr_accessor :array
-
+  @@club = "ol' whakkey"
 
 end
 
-a = FixedArray.new(5)
+module Stabbable
+  def unsheath
+    p "h"
+  end
+end
 
-p a.to_a
+class Killer
+  include HasClub
+
+  def initialize
+    @gun = "fff"
+  end
+
+  KNIFE = "ol' Stabby"
+
+  @@gun = "ol' Shooty"
+
+end
+
+class Jack < Killer
+  def unsheath
+    p KNIFE
+  end
+end
+
+class Duterte < Killer
+  CLUB = "y"
+
+  include Stabbable
 
 
-puts a.to_s
 
-puts a.to_s == '[nil, nil, nil, nil, nil]'
+  def draw
+    p @@gun
+  end
+
+  def reveal
+    p @@club
+  end
+end
+j = Jack.new
+
+d = Duterte.new
+
+d.draw
+
+d.reveal
+
+d.unsheath
