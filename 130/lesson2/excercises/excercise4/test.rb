@@ -1,0 +1,1 @@
+p "aaaaa".count("a")
