@@ -1,6 +1,10 @@
 class BeerSong
 
 
+def leg 
+
+end
+
 
   def verse num, finish=num-1
 
