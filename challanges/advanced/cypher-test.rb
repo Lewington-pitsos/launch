@@ -19,13 +19,11 @@ class RandomKeyCipherTest < Minitest::Test
   end
 
   def test_cipher_decode
-    skip
     plaintext = 'aaaaaaaaaa'
     assert_equal(plaintext, @cipher.decode(@cipher.key[0, 10]))
   end
 
   def test_cipher_reversible
-    skip
     plaintext = 'abcdefghij'
     assert_equal(plaintext, @cipher.decode(@cipher.encode(plaintext)))
   end

@@ -19,11 +19,23 @@ class Cipher
   end
 
   def encode str
+    self.current = 0
     str.chars.map {|i| convert i}.join
+  end
+
+  def decode str
+    self.current = 0
+    str.chars.map {|i| deconvert i}.join
   end
 
   def convert char
     index = ALPHABET.index(char) + ALPHABET.index(key[current])
+    self.current += 1
+    ALPHABET[index]
+  end
+
+  def deconvert char
+    index = ALPHABET.index(char) - ALPHABET.index(key[current])
     self.current += 1
     ALPHABET[index]
   end
