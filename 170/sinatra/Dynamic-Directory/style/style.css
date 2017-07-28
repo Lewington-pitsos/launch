@@ -1,0 +1,9 @@
+ul, li {
+  list-style-type: none;
+  font-size: 2em;
+  color: Crimson;
+}
+
+p {
+  font-size: 20px;
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<html>
+<body>
+  <ul>
+    <% @files.each do |file| %>
+      <li><a href="<%= file %>"><%= file %></a></li>
+    <% end %>
+  </ul>
+  <a href="ascending">Sort Ascending</a>
+  <a href="descending">Sort Descending</a>
+</body>
+</html>
