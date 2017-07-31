@@ -4,6 +4,8 @@ require "tilt/erubis"
 
 require_relative "readfile.rb"
 
+
+
 before do
   @page_title = "Home Page"
   @title = "Welcome to User Tracker"
@@ -31,10 +33,19 @@ get "/user/:name" do
 
   @others = @users.keys - [name.to_sym]
 
-  @title = name
+  @title = "User: #{name}"
   @page_title = "#{name}'s page'"
 
   erb :userpage
+end
+
+get "/books" do
+  @books = [
+  { title: "Snow Crash", author: "Neil Stephenson", published: "1992" },
+  { title: "Consider Phlebas", author: "Iain M Banks", published: "1987" },
+]
+
+  erb :course
 end
 
 not_found do
