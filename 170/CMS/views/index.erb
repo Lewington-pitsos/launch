@@ -1,0 +1,35 @@
+
+  <ul>
+    <% @file_list.each do |entry| %>
+
+    <li>
+      <a href="/file/<%= entry %>">
+        <div class="general"><%= entry %></div>
+      </a>
+      <a class="edit" href="/file/<%= entry %>/edit">
+        <div class="general">Edit</div>
+      </a>
+      <form class="general" action="/file/<%= entry %>/delete" method="post">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+
+    <% end %>
+  </ul>
+
+  <a href="/new">New Document</a>
+
+  <% if !session[:logged_in] %>
+
+  <button class="general"><a  href="/login">Sign In</a></button>
+
+  <% end %>
+
+  <% if session[:logged_in] %>
+
+    <p><i>Signed in as <%= session[:logged_in] %>.</i></p>
+    <form action="/sign_out" method="post" class="general">
+    <button type="submit">Sign Out</button>
+    </form>
+
+  <% end %>

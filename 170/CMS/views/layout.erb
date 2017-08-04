@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="/style/main.css">
 </head>
 
 <body>
-  <ul>
-    <% @file_list.each do |entry| %>
+  <% if session[:error] %>
 
-    <li><%= entry %></li>
+  <div class="flash"><%= session.delete(:error) %></div>
 
-    <% end %>
-  </ul>
+  <% end %>
+
+  <% if session[:success] %>
+
+  <div class="flash"><%= session.delete(:success) %></div>
+
+  <% end %>
+<%= yield %>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<ol>
+  <% @round.pairs.each do |pair| %>
+
+  <% if pair.finished %>
+  <div class="pair finished">
+  <% else %>
+  <div class="pair">
+  <% end %>
+
+    <li>
+      <form action="/win/<%= pair.white.name %>" method="post">
+        <button type="submit" value="Submit">
+
+
+
+          <p><%= pair.white.name %>: <%= pair.white.score %></p>
+
+        </button>
+      </form>
+      <p>V.S.</p>
+      <form action="/win/<%= pair.black.name %>" method="post">
+        <button type="submit" value="Submit">
+          <p><%= pair.black.name %>: <%= pair.black.score %></p>
+        </button>
+      </form>
+    </li>
+  </div>
+
+  <% end %>
+</ol>

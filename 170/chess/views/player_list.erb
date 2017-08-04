@@ -1,0 +1,9 @@
+<ul>
+<% @player_list.each do |player| %>
+
+<li><%= player.name %>: <%= player.score %></li>
+
+<% end %>
+</ul>
+
+<a href="/new_round">New Round</a>

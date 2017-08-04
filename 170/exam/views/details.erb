@@ -1,0 +1,32 @@
+<p><%= session.delete(:error) %></p>
+<p><%= session.delete(:error_2) %></p>
+
+
+<form action="/payments/create" method="post">
+  <p>
+    <label>First name:
+      <input value="<%= session.delete(:first_name) %>" name="first_name" type="text" />
+    </label>
+  </p>
+  <p>
+    <label>Last name:
+      <input value="<%= session.delete(:last_name) %>"  name="last_name" type="text" />
+    </label>
+  </p>
+  <p>
+    <label>Card number:
+      <input value="<%= session.delete(:num) %>" name="num"  type="text" />
+    </label>
+  </p>
+  <p>
+    <label>Expiration Date:
+      <input value="<%= session.delete(:date) %>" name="date"  type="text" />
+    </label>
+  </p>
+  <p>
+    <label>CCV:
+      <input value="<%= session.delete(:ccv) %>"  name="ccv"  type="text" />
+    </label>
+  </p>
+  <button type="submit">Submit</button>
+</form>
