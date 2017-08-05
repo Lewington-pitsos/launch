@@ -1,0 +1,13 @@
+<h3>Tourniment Files: </h3>
+<ul>
+  <% @files.each do |file| %>
+  <li>
+  <form action="/load/<%= file %>" method="post">
+    <button type="submit" value="Submit">
+      <%= file %>
+    </button>
+  </form>
+  </li>
+
+  <% end %>
+</ul>

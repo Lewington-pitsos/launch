@@ -4,6 +4,9 @@
   <link rel="stylesheet" href="/style/main.css"
 </head>
 <body>
+<% if session[:success] %>
+<h3><%= session.delete(:success) %></h3>
+<% end %>
 <%= yield %>
 </body>
 </html

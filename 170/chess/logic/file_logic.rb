@@ -9,3 +9,11 @@ def write_yaml array, filename
     file.write array.to_yaml
   end
 end
+
+def data_path
+  if ENV["RACK_ENV"] == "test"
+    "test/data/"
+  else
+    "data/"
+  end
+end

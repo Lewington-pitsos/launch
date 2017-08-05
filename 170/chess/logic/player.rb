@@ -1,24 +1,38 @@
 class Player
-  attr_accessor :score, :name, :tiebreak
+  attr_accessor :score, :name, :tiebreak, :playing
   def initialize hash={}
-    @score = hash[:score] || 0
-    @tiebreak = hash[:tiebreak] || 0
+    @score = hash[:score] || 0.0
+    @tiebreak = hash[:tiebreak] || 0.0
     @name = hash[:name]
+    @playing = true
+  end
+
+  def toggle
+    self.playing = !playing
   end
 end
 
 class Pair
-  attr_accessor :players, :white, :black, :finished
+  attr_accessor :players, :white, :black, :winner
   def initialize white, black
     @white = white
     @black = (black || Player.new({name: "BYE"}))
     @players = {@white.name => white, @black.name => black}
-    @finished = false
+    @winner = nil
+    @loser = nil
+  end
+
+  def undo_win player
+    if winner = players[player]
+      winner.score -= 1
+      undo_tiebreak
+    end
   end
 
   def win player
     if winner = players[player]
       winner.score += 1
+      self.winner = winner.name
       update_tiebreak
     end
   end
@@ -35,6 +49,7 @@ class Pair
     else
       players.each { |_, v| v.score += 0.5}
       update_tiebreak
+      self.winner = "DRAW"
     end
   end
 
@@ -43,6 +58,11 @@ class Pair
   def update_tiebreak
     white.tiebreak += black.score
     black.tiebreak += white.score
-    self.finished = true
+  end
+
+  def undo_tiebreak
+    white.tiebreak -= black.score
+    black.tiebreak -= white.score
+    self.winner = nil
   end
 end

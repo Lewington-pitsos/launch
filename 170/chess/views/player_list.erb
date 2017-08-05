@@ -1,9 +1,32 @@
-<ul>
+<h2>Ladder:</h2>
+<ol>
 <% @player_list.each do |player| %>
-
-<li><%= player.name %>: <%= player.score %></li>
-
+<li>
+<form action="/toggle/<%= player.name %>" method="post">
+  <button type="submit" value="Submit">
+    <div class="<%= check_playing(player) %>"><%= player.name %>: <%= player.score %></div>
+  </button>
+</form>
+</li>
 <% end %>
-</ul>
+</ol>
+
+
 
 <a href="/new_round">New Round</a>
+<a href="/new_player">New Player</a>
+
+<form action="/load" method="get">
+  <button type="submit" value="Submit">
+    <p>Load Tourniment</p>
+  </button>
+</form>
+
+<form action="save" method="post">
+  <label>Tourniment Name:
+    <input name="filename" type="text" />
+  </label>
+  <button type="submit" value="Submit">
+    <p>Save Current Tourniment</p>
+  </button>
+</form>

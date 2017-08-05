@@ -3,6 +3,7 @@ require "sinatra/reloader"
 require "tilt/erubis"
 require_relative "logic/player"
 require_relative "logic/sorters"
+require_relative "logic/file_logic"
 
 configure do
   enable :sessions
@@ -18,21 +19,41 @@ before do
 
 end
 
+get "/new_player" do
+
+  erb :new_player
+end
+
+post "/new_player" do
+
+  session[:list] << Player.new({name: params[:name], score: params[:score].to_f})
+
+  session[:success] = "#{params[:name]} added to tourniment"
+
+  redirect "/new_player"
+end
+
+get "/load" do
+  @files = Dir.glob("#{data_path}*").map {|file| File.basename(file)}
+  erb :file_list
+end
+
+post "/load/:filename" do
+  session[:list] = read_yaml "#{data_path}#{params[:filename]}"
+
+  session[:success] = "#{params[:filename]} successfully loaded"
+
+  redirect "/players"
+end
 
 get "/players" do
-  session[:list] = [@bob = Player.new({name: "bob"}),
-  @sam = Player.new({name: "sam"}),
-  @harry = Player.new({name: "harry", score: 1}),
-  @daniel = Player.new({name: "daniel", score: 0, tiebreak: 0.5}),
-  @sarah = Player.new({name: "sarah", score: 0, tiebreak: 1}),
-  @bill = Player.new({name: "bill", score: 0, tiebreak: 99})]
-
-  @player_list = session[:list]
+  @player_list = Sorter.new(session[:list]).players
   erb :player_list
 end
 
 get "/new_round" do
-  list = Sorter.new(session[:list])
+  playing = session[:list].select {|i| i.playing}
+  list = Sorter.new(playing)
   @round = Round.new(list.pairs)
   session[:round] = @round
 
@@ -53,4 +74,43 @@ post "/win/:name" do
   session[:round].win params[:name]
 
   redirect "/round"
+end
+
+post "/undo_win/:name" do
+  session[:round].undo_win params[:name]
+
+  redirect "/round"
+end
+
+post "/finish" do
+  session[:round].finish_round
+
+  redirect "/players"
+end
+
+post "/save" do
+  write_yaml session[:list], "#{data_path}#{params[:filename] + '.yaml'}"
+
+  session[:success] = "File Written"
+
+  redirect "/players"
+end
+
+post "/toggle/:name" do
+
+  session[:list].each do |player|
+    player.toggle if player.name == params[:name]
+  end
+
+  redirect "players"
+end
+
+helpers do
+  def check_playing player
+    if player.playing
+      "playing"
+    else
+      "not_playing"
+    end
+  end
 end

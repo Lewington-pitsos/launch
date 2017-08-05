@@ -18,13 +18,19 @@ class PlayerTest < Minitest::Test
     pair = Pair.new(@bob, nil)
     pair.auto_draw
     assert_equal(1, @bob.score)
-    assert_equal(true, pair.finished)
+    assert(pair.winner)
+  end
+
+  def test_playing
+    assert(@sam.playing)
+    @sam.toggle
+    refute(@sam.playing)
   end
 
   def test_finish
-    assert_equal(false, @pair.finished)
+    assert_nil @pair.winner
     @pair.auto_draw
-    assert_equal(true, @pair.finished)
+    assert(@pair.winner)
   end
 
   def test_draw
@@ -33,6 +39,7 @@ class PlayerTest < Minitest::Test
     assert_equal(0.5, @bob.tiebreak)
     assert_equal(0.5, @sam.score)
     assert_equal(0.5, @sam.tiebreak)
+    assert_equal("DRAW", @pair.winner)
   end
 
   def test_player_wins
@@ -41,6 +48,19 @@ class PlayerTest < Minitest::Test
     assert_equal(0, @bob.tiebreak)
     assert_equal(0, @sam.score)
     assert_equal(1, @sam.tiebreak)
+    assert_equal("bob", @pair.winner,)
+  end
+
+  def test_undo_win
+    @pair.auto_draw
+    @pair.win "bob"
+    assert_equal(1.5, @bob.score)
+    assert_equal(1, @bob.tiebreak)
+    assert_equal("bob", @pair.winner)
+    @pair.undo_win "bob"
+    assert_equal(0.5, @bob.score)
+    assert_equal(0.5, @bob.tiebreak)
+    assert_nil(@pair.winner)
   end
 
   #--------------------------- SORTER ---------------------------------------#
@@ -89,6 +109,15 @@ class PlayerTest < Minitest::Test
     assert_equal(0, @bill.score)
     assert_equal(0.5, @sam.score)
     assert_equal(0.5, @sarah.score)
+  end
+
+  def test_tourney_undo_win
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    tourney = Round.new(sorter.pairs)
+    tourney.win "sarah"
+    assert_equal(1, @sarah.score)
+    tourney.undo_win "sarah"
+    assert_equal(0, @sarah.score)
   end
 
 end

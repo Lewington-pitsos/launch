@@ -1,8 +1,8 @@
-.pair.finished {
-  background-color: Salmon;
+.not_playing {
+  text-decoration: line-through;
+  color: grey;
 }
 
-p.pair {
-  font-family: serif;
-  font-size: 20;
+.pair.finished {
+  background-color: Salmon;
 }
