@@ -6,3 +6,46 @@
 .pair.finished {
   background-color: Salmon;
 }
+
+.inline {
+  float: left;
+  clear: right;
+  margin-right: 30px;
+}
+
+.button {
+  width: 130px;
+}
+
+.holding-list {
+  padding: 40px;
+}
+
+.player-list {
+  padding: 15px;
+}
+
+.break {
+  float: left;
+  width: 300px;
+  height: 60px;
+  background-color: DarkSeaGreen;
+  border: none;
+  clear: both;
+  margin-bottom: 10px;
+}
+
+.new-player {
+  float: left;
+  width: 300px;
+  height: 60px;
+  background-color: salmon;
+  border: none;
+  clear: both;
+  margin-bottom: 10px;
+}
+
+.holder {
+  float: left;
+  clear: both;
+}

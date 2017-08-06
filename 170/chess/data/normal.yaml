@@ -5,11 +5,6 @@
   name: bob
   playing: true
 - !ruby/object:Player
-  score: 22.0
-  tiebreak: 6.0
-  name: sam
-  playing: true
-- !ruby/object:Player
   score: 2.5
   tiebreak: 3.0
   name: harry
@@ -28,9 +23,4 @@
   score: 1.5
   tiebreak: 13.0
   name: bill
-  playing: true
-- !ruby/object:Player
-  score: 6.0
-  tiebreak: 0.0
-  name: nh
   playing: true

@@ -1,20 +1,30 @@
 <h2>Ladder:</h2>
 <ol>
 <% @player_list.each do |player| %>
-<li>
-<form action="/toggle/<%= player.name %>" method="post">
-  <button type="submit" value="Submit">
+<li class="player-list">
+<form action="/toggle/<%= player.name %>" method="post" class="inline">
+  <button type="submit" value="Submit" class="button">
     <div class="<%= check_playing(player) %>"><%= player.name %>: <%= player.score %></div>
+  </button>
+</form>
+<form action="/delete_player/<%= player.name %>" method="post" class="inline">
+  <button type="submit" value="Submit">
+    <div>Delete</div>
   </button>
 </form>
 </li>
 <% end %>
 </ol>
 
+<div class="holder">
+  <a href="/new_player"><button class="new-player">New Player</button></a>
 
+  <a href="/new_round"><button class="break">New Round</button></a>
+</div>
 
-<a href="/new_round">New Round</a>
-<a href="/new_player">New Player</a>
+<div class="holder">
+<h2>Saving and Loading:</h2>
+
 
 <form action="/load" method="get">
   <button type="submit" value="Submit">
@@ -22,11 +32,18 @@
   </button>
 </form>
 
-<form action="save" method="post">
-  <label>Tourniment Name:
+<form action="/save" method="post">
+  <label>Save Current Tourniment As:
     <input name="filename" type="text" />
   </label>
   <button type="submit" value="Submit">
-    <p>Save Current Tourniment</p>
+    <p>Confirm</p>
   </button>
 </form>
+
+<form action="/autosave" method="post">
+  <button type="submit" value="Submit">
+    <p>Auso-Save Current Tourniment</p>
+  </button>
+</form>
+</div>

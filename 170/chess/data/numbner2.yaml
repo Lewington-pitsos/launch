@@ -1,36 +1,36 @@
 ---
 - !ruby/object:Player
-  score: 4.5
-  tiebreak: 23.5
+  score: 5.5
+  tiebreak: 26.0
   name: bob
   playing: true
 - !ruby/object:Player
-  score: 22.0
-  tiebreak: 6.0
+  score: 22.5
+  tiebreak: 12.5
   name: sam
   playing: true
 - !ruby/object:Player
   score: 2.5
-  tiebreak: 3.0
+  tiebreak: 8.5
   name: harry
   playing: true
 - !ruby/object:Player
-  score: 1.0
+  score: 2.0
   tiebreak: 4.0
   name: daniel
   playing: true
 - !ruby/object:Player
-  score: 2.0
-  tiebreak: 3.5
+  score: 2.5
+  tiebreak: 5.5
   name: sarah
   playing: true
 - !ruby/object:Player
-  score: 1.5
-  tiebreak: 13.0
+  score: 2.0
+  tiebreak: 15.5
   name: bill
   playing: true
 - !ruby/object:Player
-  score: 6.0
-  tiebreak: 0.0
+  score: 6.5
+  tiebreak: 22.5
   name: nh
   playing: true
