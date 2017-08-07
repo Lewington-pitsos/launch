@@ -39,10 +39,13 @@ post "/payments/create" do
     end
   end
 
+  unless not_entered.empty?
+    session[:error_2] = "the following were not entered: #{not_entered.join(", ")}"
+  end
+
 
   if session[:num] && session[:num].length != 16
     session[:error] = "invalid credit card: #{session[:num]}"
-    session[:error_2] = "the following were not entered: #{not_entered.join(", ")}"
     # was I supposed to insert error 2 in this case as well? I wasn't sure...
     redirect "/payments/create"
   end
@@ -51,8 +54,6 @@ post "/payments/create" do
     session[:success] = "Thank you for your payment."
     redirect '/payment'
   end
-
-  session[:error_2] = "the following were not entered: #{not_entered.join(", ")}"
 
   redirect "/payments/create"
 end
