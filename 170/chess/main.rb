@@ -32,7 +32,7 @@ end
 
 post "/new_player" do
 
-  if session[:error] = check_player(params[:name])
+  if session[:error] = check_player(params[:name].strip)
     redirect "new_player"
   end
 
@@ -91,30 +91,39 @@ end
 
 # ------------------------ SAVING/LOADING Files ---------------------------- #
 
+post "/tourniment/new" do
+  write_yaml session[:list], "#{data_path}#{session[:current_name]}"
+  create_file params[:filename]
+  
+  load_file params[:filename] + ".yaml"
+  session[:success] = "New Tourniment Created: #{params[:filename]}"
+  redirect "/players"
+end
+
 post "/autosave" do
   write_yaml session[:list], "#{data_path}#{session[:current_name]}"
-
   session[:success] = "File Written"
-
   redirect "/players"
 end
 
 def check_file name
-  files = Dir.glob("#{data_path}*").map {|file| File.basename(file)}
-  check name + ".yaml", files
+  files = Dir.glob("#{data_path}*").map {|file| File.basename(file, ".yaml")}
+  check name, files
 end
 
-post "/save" do
-  name = params[:filename].strip
+def create_file input, state = []
+  name = input.strip
 
   if session[:error] = check_file(name)
     redirect "/players"
   end
 
-  write_yaml session[:list], "#{data_path}#{name + '.yaml'}"
+  write_yaml state, "#{data_path}#{name + '.yaml'}"
+end
 
+post "/save" do
+  create_file params[:filename], session[:list]
   session[:success] = "File Written"
-
   redirect "/players"
 end
 
@@ -123,9 +132,14 @@ get "/load" do
   erb :file_list
 end
 
+def load_file name
+  session[:list] = read_yaml "#{data_path}#{name}"
+  session[:current_name] = name
+end
+
 post "/load/:filename" do
-  session[:list] = read_yaml "#{data_path}#{params[:filename]}"
-  session[:current_name] = params[:filename]
+
+  load_file params[:filename]
 
   session[:success] = "#{params[:filename]} successfully loaded"
 
@@ -163,8 +177,8 @@ helpers do
 end
 
 def check name, list
-  if name == "" || name == ".yaml"
-    "That name was invalid, please enter one with characters"
+  if name == "" || name == ".yaml" || name.match(/[^\w]/)
+    "That name was invalid."
   elsif list.include?(name)
     "That name already exists, please use a new one"
   else
