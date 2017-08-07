@@ -73,7 +73,7 @@ class RoutTesting < Minitest::Test
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "That name was invalid, please enter one with characters"
+    assert_includes last_response.body, "That name was invalid."
   end
 
   def test_player_add_used_name
@@ -130,7 +130,7 @@ class RoutTesting < Minitest::Test
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "That name was invalid, please enter one with characters"
+    assert_includes last_response.body, "That name was invalid."
   end
 
   def test_save_and_reload
