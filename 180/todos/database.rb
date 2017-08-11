@@ -48,10 +48,20 @@ class DatabasePersistence
   end
 
   def all_lists
-    output = data.exec "SELECT * FROM #{LIST_NAME}"
+    command = "SELECT lists.*, count(todos.id) AS todos_number,
+                               count(NULLIF(todos.completed, true)) AS incomplete
+                  FROM lists
+                    LEFT JOIN todos ON lists.id=todos.list_id
+                    GROUP BY lists.id;"
+
+    output = data.exec command
 
     output.map do |row|
-      { id: row["id"], name: row["name"], todos: Todo.new(data, row["id"]) }
+      { id: row["id"],
+        name: row["name"],
+        total: row["todos_number"],
+        incomplete: row["incomplete"]
+       }
     end
   end
 

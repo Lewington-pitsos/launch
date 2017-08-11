@@ -11,26 +11,18 @@ configure do
   set :erb, escape_html: true
 end
 
-configure(:development)
+configure(:development) do
   require "sinatra/reloader"
   also_reload "database.rb"
 end
 
 helpers do
   def list_complete?(list)
-    todos_count(list) > 0 && todos_remaining_count(list) == 0
+    list[:incomplete].to_i == 0 && list[:total].to_i > 0
   end
 
   def list_class(list)
     "complete" if list_complete?(list)
-  end
-
-  def todos_count(list)
-    list[:todos].find_all.size
-  end
-
-  def todos_remaining_count(list)
-    list[:todos].find_all.count { |todo| !todo[:completed] }
   end
 
   def sort_lists(lists, &block)
@@ -50,7 +42,6 @@ end
 
 def load_list(id)
   list = @storage.find_list(id)
-  p list
   return list if list
 
   session[:error] = "The specified list was not found."
