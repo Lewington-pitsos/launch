@@ -1,0 +1,31 @@
+---
+- !ruby/object:Player
+  score: 0.0
+  tiebreak: 0.0
+  name: bob
+  playing: true
+- !ruby/object:Player
+  score: 0.0
+  tiebreak: 0.0
+  name: sam
+  playing: true
+- !ruby/object:Player
+  score: 1.0
+  tiebreak: 0.0
+  name: harry
+  playing: true
+- !ruby/object:Player
+  score: 0.0
+  tiebreak: 0.5
+  name: daniel
+  playing: true
+- !ruby/object:Player
+  score: 0.0
+  tiebreak: 1.0
+  name: sarah
+  playing: true
+- !ruby/object:Player
+  score: 0.0
+  tiebreak: 99.0
+  name: bill
+  playing: true

@@ -1,16 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    backports (3.6.8)
+    backports (3.8.0)
     erubis (2.7.0)
+    minitest (5.10.3)
     multi_json (1.12.1)
-    puma (3.9.1)
-    rack (1.6.4)
+    rack (1.6.8)
     rack-protection (1.5.3)
       rack
-    rack-test (0.6.3)
-      rack (>= 1.0)
-    sinatra (1.4.7)
+    rack-test (0.7.0)
+      rack (>= 1.0, < 3)
+    redcarpet (3.4.0)
+    sinatra (1.4.8)
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
@@ -21,15 +22,17 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (>= 1.3, < 3)
-    tilt (2.0.5)
+    tilt (2.0.8)
 
 PLATFORMS
-  ruby
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   erubis
-  puma
+  minitest
+  rack-test
+  redcarpet
   sinatra (~> 1.4.7)
   sinatra-contrib
 

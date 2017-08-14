@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> <%= @page_title %> </title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+  <div class="page-borders">
+    <div class="page-top"><%= @title %></div>
+
+    <div class="content-holder">
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
+
+    <div class="page-end">
+      <p>There are <%= @user_num %> users with a total of <%= @hobby_num %> interests</p>
+      <a href="/list">Return to list</a>
+    </div>
+  </div>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<ol>
+  <% @round.pairs.each do |pair| %>
+
+  <% if pair.winner %>
+    <li class="holding-list pair finished">
+      <div class="inline">
+      <form action="/undo_win/<%= pair.winner %>" method="post">
+        <button type="submit" value="Submit" class="inline button">
+          <p><%= pair.white.name %>: <%= pair.white.score %></p>
+        </button>
+      <p class="inline">V.S.</p>
+        <button type="submit" value="Submit" class="inline end_row button">
+          <p><%= pair.black.name %>: <%= pair.black.score %></p>
+        </button>
+      </form>
+    </div>
+    </li>
+
+  <% else %>
+    <li class="holding-list">
+      <form action="/win/<%= pair.white.name %>" method="post" class="inline">
+        <button type="submit" value="Submit" class="button">
+          <p><%= pair.white.name %>: <%= pair.white.score %></p>
+        </button>
+      </form>
+      <p class="inline">V.S.</p>
+      <form action="/win/<%= pair.black.name %>" method="post" class="inline end_row">
+        <button type="submit" value="Submit" class="button">
+          <p><%= pair.black.name %>: <%= pair.black.score %></p>
+        </button>
+      </form>
+    </li>
+  <% end %>
+
+  <% end %>
+</ol>
+<a href="/players">Cancel</a>
+
+<form action="/finish" method="post">
+  <button type="submit" value="Submit">
+    <p>Finish Round</p>
+  </button>
+</form>

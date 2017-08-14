@@ -1,0 +1,6 @@
+<h2 class="list-head"><u>Users:</u></li></h2>
+<ul>
+  <% @users.each do |name, _| %>
+  <li><a href="/user/<%= name %>"><i><%= name %></i></a></li>
+  <% end %>
+</ul>

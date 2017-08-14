@@ -1,5 +1,5 @@
 require "sinatra"
-require "sinatra/reloader"
+require "sinatra/reloader" if development?
 require "tilt/erubis"
 require_relative "useful.rb"
 
@@ -25,18 +25,26 @@ end
 
 get "/search" do
 
-  @chapters = Dir.glob("data/chp*").map do |path|
-    File.read(path)
+  @chapters = (1..12).to_a.map do |name|
+    File.read("data/chp#{name}.txt")
   end
 
-  @includes = []
+  @includes = {}
 
   if params[:query]
     @chapters.each_with_index do |chapter, index|
-      mini = []
-      mini << @toc[index] if chapter.include?(params[:query])
-      mini << 
-      @includes
+      next unless chapter.include?(params[:query])
+      mini = {}
+      mini[@toc[index]] = []
+      paragraphs = chapter.split("\n\n")
+
+      paragraphs.each_with_index do |i, number|
+        if i.include?(params[:query])
+          mini[@toc[index]] << {number => i.gsub(params[:query], "<b>#{params[:query]}</b>")}
+        end
+      end
+
+      @includes[index] = mini
     end
 
     if @includes.empty?
@@ -55,10 +63,10 @@ end
 
 helpers do
   def paragraph(text)
-    id = 0
+    id = -1
     text.split("\n\n").map do |paragraph|
-      "<p id=#{id}>#{paragraph}</p>"
       id += 1
+      "<p id=para#{id}>#{paragraph}</p>"
     end.join
   end
 end

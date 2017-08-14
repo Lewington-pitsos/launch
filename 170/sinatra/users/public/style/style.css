@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  border: 0;
+}
+
+.page-top {
+  position: static;
+  width: 100%;
+  background-color: Sienna;
+  color: BurlyWood;
+  font-family: Tahoma, serif;
+  text-align: center;
+  font-size: 56px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.page-borders {
+  position: static;
+  width: 100%;
+  background-color: SaddleBrown;
+}
+
+.content-holder {
+  height: 1000px;
+  width: 80%;
+  margin: auto;
+  color: LightSalmon;
+  background-color: Maroon;
+  font-family: Georgia, serif;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: left;
+
+}
+
+ul {
+  list-style-type: none;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.list-head{
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.user-list {
+  margin-top: 5px;
+}
+
+ul.bottom {
+  margin-top: 700px;
+}
+
+.page-end {
+  position: static;
+  padding-top: 30px;
+  border-radius: 20px 20px 0px 0px;
+  padding-bottom: 30px;
+  color: BurlyWood;
+  font-family: Georgia, serif;
+  text-align: center;
+  background-color: Sienna;
+  font-size: 18px;
+}

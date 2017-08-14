@@ -2,9 +2,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.6.8)
+    bcrypt (3.1.11)
     erubis (2.7.0)
+    minitest (5.8.4)
     multi_json (1.12.1)
-    puma (3.9.1)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -25,16 +26,13 @@ GEM
 
 PLATFORMS
   ruby
-  x64-mingw32
 
 DEPENDENCIES
+  bcrypt
   erubis
-  puma
-  sinatra (~> 1.4.7)
+  minitest
+  sinatra
   sinatra-contrib
 
-RUBY VERSION
-   ruby 2.4.1p111
-
 BUNDLED WITH
-   1.15.3
+   1.12.5

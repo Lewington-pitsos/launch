@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style/main.css">
+</head>
+
+<body>
+  <% if session[:error] %>
+
+  <div class="flash"><%= session.delete(:error) %></div>
+
+  <% end %>
+
+  <% if session[:success] %>
+
+  <div class="flash"><%= session.delete(:success) %></div>
+
+  <% end %>
+<%= yield %>
+</body>
+</html>

@@ -11,7 +11,7 @@ body {
     height: auto;
 }
 
-ul {
+ul.main-search {
     list-style-type: none;
 }
 

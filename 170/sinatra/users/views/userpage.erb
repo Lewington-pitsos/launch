@@ -1,0 +1,20 @@
+<h2 class="list-head"><u>Info:</u></li></h2>
+
+<ul>
+  <li class="user-list">Email: <i><%= @user[:email] %></i></li>
+  <li class="user-list">Hobbies:
+    <ul>
+      <% @user[:interests].each do |interest| %>
+      <li><i><%= interest %></i></li>
+      <% end %>
+    </ul>
+  </li>
+</ul>
+
+<ul class="bottom">
+  <% @others.each do |name| %>
+  <li>
+    <a href="/user/<%= name %>"><%= name %></a>
+  </li>
+  <% end %>
+</ul>
