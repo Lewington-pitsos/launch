@@ -1,0 +1,172 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>TITLE</title>
+     <meta name="description" content="DESCRIPTION">
+    <link rel="stylesheet" href="main.css">
+ </head>
+
+ <body>
+   <h1>Please Enter Your Details:</h1>
+   <form action="#" method="get">
+     <dl>
+
+       <fieldset>
+       <dt>
+         <label for="first">First Name:</label>
+       </dt>
+       <dd>
+         <input type="text" id="first" name="first">
+       </dd>
+       <dt>
+         <label for="last">Last Name:</label>
+       </dt>
+       <dd>
+         <input type="text" id="last" name="last">
+       </dd>
+       <dt>
+         <label for="email">Email Adress:</label>
+       </dt>
+       <dd>
+         <input type="email" id="email" name="email" placeholder="adolf@gmail.com">
+       </dd>
+       </fieldset>
+
+       <fieldset>
+       <dt>
+         <label for="city">City:</label>
+       </dt>
+       <dd>
+         <input class="section-start" type="text" id="city" name="city">
+       </dd>
+       <dt>
+         <label for="zipcode">Zipcode:</label>
+       </dt>
+       <dd>
+         <input type="number" id="zipcode" name="zipcode" maxlength="5">
+       </dd>
+       <dt>
+         <label for="state">State:</label>
+       </dt>
+       <dd>
+         <select name="state" id="state">
+          <option>AK</option>
+          <option>AL</option>
+          <option>AR</option>
+          <option>AZ</option>
+          <option>CA</option>
+          <option>CO</option>
+          <option>CT</option>
+          <option>DC</option>
+          <option>DE</option>
+          <option>FL</option>
+          <option>GA</option>
+          <option>HI</option>
+          <option>IA</option>
+          <option>ID</option>
+          <option>IL</option>
+          <option>IN</option>
+          <option>KS</option>
+          <option>KY</option>
+          <option>LA</option>
+          <option>MA</option>
+          <option>MD</option>
+          <option>ME</option>
+          <option>MI</option>
+          <option>MN</option>
+          <option>MO</option>
+          <option>MS</option>
+          <option>MT</option>
+          <option>NC</option>
+          <option>ND</option>
+          <option>NE</option>
+          <option>NH</option>
+          <option>NJ</option>
+          <option>NM</option>
+          <option>NV</option>
+          <option>NY</option>
+          <option>OH</option>
+          <option>OK</option>
+          <option>OR</option>
+          <option>PA</option>
+          <option>RI</option>
+          <option>SC</option>
+          <option>SD</option>
+          <option>TN</option>
+          <option>TX</option>
+          <option>UT</option>
+          <option>VA</option>
+          <option>VT</option>
+          <option>WA</option>
+          <option>WI</option>
+          <option>WV</option>
+          <option>WY</option>
+        </select>
+      </dd>
+      </fieldset>
+      <fieldset>
+      <dt class="section-start">
+        <h3>Choose a Colour:</h3>
+      </dt>
+      <dd></dd>
+      <dt>
+        <input type="radio" name="colour" value="red" checked id="red">
+        <input type="radio" name="colour" value="green" id="green">
+        <input type="radio" name="colour" value="blue" id="blue">
+        <input type="radio" name="colour" value="yellow" id="yellow">
+        <input type="radio" name="colour" value="pink" id="pink">
+      </dt>
+      <dd>
+        <label for="red"><div class="colour red"></div></label>
+        <label for="green"><div class="colour green"></div></label>
+        <label for="blue"><div class="colour blue"></div></label>
+        <label for="yellow"><div class="colour yellow"></div></label>
+        <label for="pink"><div class="colour pink"></div></label>
+      </dd>
+      <dt class="section-start">
+        <h3>Which Technologies Interest You?</h3>
+      </dt>
+      <dd></dd>
+      <dt>
+        <input type="checkbox" name="HTML" id="html">
+        <input type="checkbox" name="Java" id="java">
+        <input type="checkbox" name="Ruby" id="ruby">
+        <input type="checkbox" name="Python" id="python">
+        <input type="checkbox" name="GOL" id="gol">
+      </dt>
+      <dd class="technology">
+        <label for="html"><div class="tech-label">HTML</div></label>
+        <label for="java"><div class="tech-label">Java</div></label>
+        <label for="ruby"><div class="tech-label">Ruby</div></label>
+        <label for="python"><div class="tech-label">Python</div></label>
+        <label for="gol"><div class="tech-label">Conway's Game of Life</div></label>
+      </dd>
+    </fieldset>
+    <fieldset>
+      <dt class="section-start">
+        <label for="comment">Please leave a Comment:</label>
+      </dt>
+      <dd>
+        <textarea name="comment" id="comment" cols="60" rows="10">I really liked...</textarea>
+      </dd>
+      </fieldset>
+      <fieldset>
+      <dt class="section-start"></dt>
+      <dd>
+        <div class="final-inputs">
+        <input type="hidden" name="date" value="2-1-1999">
+        <input type="submit" value="submit">
+        <input type="reset" value="reset">
+        </div>
+      </dd>
+    </fieldset>
+
+    </dl>
+
+
+  </form>
+ </body>
+
+ </html>

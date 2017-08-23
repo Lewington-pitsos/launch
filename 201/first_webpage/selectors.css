@@ -1,0 +1,24 @@
+p {
+  font-size: 19px;
+}
+
+li {
+  border-bottom: 1px solid #0066cc;
+}
+
+article p{
+  font-family: sans-serif;
+}
+
+.subheading {
+  background-color: red;
+}
+
+#intro {
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+li {
+  border-bottom: 3px, dotted, red;
+}

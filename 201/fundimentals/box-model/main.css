@@ -1,0 +1,26 @@
+div{
+  display: inline-block;
+  border: 3px solid green;
+  color: black;
+}
+
+.one {
+  width: 700px;
+  height: 100px;
+}
+
+.two {
+  width: 400px;
+  height: 150px;
+}
+
+.four {
+  display: block;
+  width: 80px;
+  height: 75px;
+}
+
+.one {
+  width: 500px;
+  height: 60px;
+}

@@ -1,0 +1,24 @@
+h1 {
+  color: CadetBlue;
+}
+
+h3 {
+  color: Crimson;
+}
+
+body {
+  font-size: 1.2em;
+  color: #666;
+}
+
+#entities {
+  color: Pink;
+}
+
+.ingrediants {
+  font-style: italic;
+}
+
+.instructions {
+  font-family: sans-serif;
+}

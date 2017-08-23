@@ -1,0 +1,27 @@
+ol {
+  margin-left: 2em;
+}
+
+h1{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+a {
+  color: green;
+}
+
+h2 {
+  margin-bottom: 2em;
+}
+
+
+body {
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+  background-color: NavajoWhite;
+  color: DarkSlateGrey;
+}

@@ -1,0 +1,13 @@
+table {
+  border-collapse: collapse;
+  background-color: cyan;
+}
+
+
+tbody tr:nth-child(odd){
+  background-color: Yellow;
+}
+
+tbody tr:nth-child(even){
+  background-color: Orange;
+}

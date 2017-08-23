@@ -1,0 +1,67 @@
+html, body {
+  background: LightGrey;
+  background: #2f2840 url("assets/bg_body.gif"); /*repeats by default */
+  background-size: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+header {
+  padding: 10rem 0 0 0;
+  text-align: center;
+}
+
+
+main, footer {
+  background-color: white;
+  width: 800px;
+
+}
+
+main {
+  padding: 5rem 5rem 2.5rem 5rem;
+  margin: 5rem auto 0 auto;
+}
+
+article {
+  text-align: center;
+  margin: 0 auto 6rem auto;
+  font-size: 1.3rem;
+  font-family: sans-serif;
+  line-height: 1.7rem;
+  color: grey;
+}
+
+h2 {
+  color: black;
+  font-size: 2.4rem;
+}
+
+h2 span{
+  font-size: 2.4rem;
+  font-weight: lighter;
+  color: grey;
+  margin: 0 1.8rem;
+}
+
+.second {
+  margin: 8.5rem auto 0 auto;
+}
+
+h3 {
+  color: LightBlue;
+}
+
+footer {
+  padding: 1.8rem 5rem;
+  background: LightGrey;
+  margin: 0 auto 7rem auto;
+  text-align: center;
+}
+
+button {
+  background: transparent;
+  border: none;
+  margin: 0 3.6rem;
+}

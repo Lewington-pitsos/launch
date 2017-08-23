@@ -1,0 +1,40 @@
+body {
+  font-family: Georgia;
+  line-height: 27px;
+  font-size: 18px;
+  width: 690px
+}
+
+figcaption {
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+}
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h2 {
+  font-family: sans-serif;
+  color: DarkRed;
+}
+
+.title {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+a {
+  color: blue;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+blockquote {
+  font-style: italic;
+  margin-left: 0.1em;
+  padding-left: 1em;
+  border-left: dotted 1px Grey;
+}

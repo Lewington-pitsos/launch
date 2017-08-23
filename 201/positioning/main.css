@@ -1,0 +1,18 @@
+.pos {
+  position: absolute;
+  right: 50%;
+  top: 0;
+  margin-right: -220px;
+  background: blue;
+  width: 400px;
+  padding: 40px;
+}
+
+.mini {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background: #fcfc99;
+}

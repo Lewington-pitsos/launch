@@ -1,0 +1,109 @@
+
+* {
+  font-family: Georgia;
+}
+
+fieldset {
+  border: none;
+}
+
+h1 {
+  margin: 20px 0 50px 70px;
+}
+
+dd {
+  margin: 0;
+  width: 75%;
+}
+
+dt {
+  width: 20%;
+  text-align: right;
+  padding: 0 20px;
+}
+
+dd, dt {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+select, input, .colour, .tech-label {
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #854032;
+  border-radius: 10px;
+  padding: 0 10px;;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+input[type="submit"], input[type="reset"] {
+  width: 48%;
+  background: Salmon;
+  float:left;
+}
+
+input[type="reset"] {
+  float: right;
+}
+
+.final-inputs {
+  width: 50%;
+}
+
+select, input[name="zipcode"], input[name="city"], .colour, .tech-label{
+  width: 50%;
+}
+
+.section-start {
+  margin-top: 20px;
+}
+
+input[type="radio"], input[type="checkbox"]{
+  float: right;
+  width: 50px;
+  margin: 0 0 12px 100%;
+}
+
+.red {
+  background: red;
+  border-color: DarkRed;
+}
+
+.blue {
+  background: blue;
+  border-color: DarkBlue;
+}
+
+.green{
+  background: green;
+  border-color: DarkGreen;
+}
+
+.yellow{
+  background: yellow;
+  border-color: Gold;
+}
+
+.pink {
+  background: pink;
+  border-color: Plum;
+}
+
+.technology{
+  vertical-align: bottom;
+}
+
+.tech-label {
+  line-height: 50px;
+  background: #ffeeee;
+}
+textarea {
+  vertical-align: top;
+  padding: 10px;
+  resize: vertical;
+  margin-bottom: 40px;
+  border: 1px solid #854032;
+  border-radius: 10px;
+}

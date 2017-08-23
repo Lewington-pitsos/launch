@@ -1,0 +1,76 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>TITLE</title>
+     <meta name="description" content="DESCRIPTION">
+    <link rel="stylesheet" href="main.css">
+ </head>
+
+ <body>
+   <form action="/index.html" method="get">
+     <dl>
+
+     <dt>
+       <label for="fname">First Name:</label>
+     </dt>
+     <dd>
+        <input name="fname" type="text" placeholder="john" id="fname">
+     </dd>
+     <dt>
+        <label>Last Name</label>
+     </dt>
+     <dd>
+       <input name="lname" type="text" placeholder="smith">
+     </dd>
+     <dt>
+      <label>Email</label>
+     </dt>
+     <dd>
+       <input name="email" type="email" placeholder="johnsmithj@hotmail.com" autocomplete="off" autocorrext="off">
+     </dd>
+     <dt>
+       <label>phone number</label>
+     </dt>
+     <dd>
+       <input name="email" type="tel">
+     </dd>
+     <td for="phonetype">phone type</td>
+     <select name="phone-type" id="phonetype">
+       <option value="home" selected>home</option>
+       <option value="business">business</option>
+       <option value="mobile">mobile</option>
+     </select>
+   </dl>
+
+     <input type="submit" value="submit">
+
+   </form>
+
+   <form action="#" method="get">
+     <label for="filter">Choose your filter</label>
+     <select name="filter" id="filter">
+       <optgroup label="category">
+         <option value="core">Core</option>
+         <option value="libraries">libraries</option>
+         <option value="conventions">conventions</option>
+         <option value="reviews">reveiews</option>
+       </optgroup>
+     </select>
+    <label for="tags">Choose your filter</label>
+    <select name="tags" id="tags" multiple>
+       <optgroup label="tags">
+         <option value="core">Core</option>
+         <option value="libraries">libraries</option>
+         <option value="conventions">conventions</option>
+         <option value="reviews">reveiews</option>
+       </optgroup>
+     </select>
+
+
+     <input type="reset" value="Filter" />
+   </form>
+ </body>
+
+ </html>

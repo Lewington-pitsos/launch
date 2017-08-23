@@ -1,0 +1,70 @@
+header ul {
+  display: none;
+}
+
+header > ul {
+  display: block;
+}
+
+form {
+  width: 450px;
+}
+label {
+  display: block;
+}
+p {
+  font-size: 18px;
+}
+main li {
+  border-bottom: 1px solid #0066cc;
+}
+article p {
+  font-family: sans-serif;
+}
+.subheading {
+  background: #e0e0e0;
+}
+#intro {
+  font-size: 20px;
+  text-decoration: underline;
+}
+main ul li+li {
+  border-top-style: dotted;
+  border-bottom: none;
+}
+
+h2 + p {
+  padding: 20px;
+}
+
+header li:hover ul{
+  display: block;
+}
+
+input[type="text"]:focus {
+  background-color: green;
+}
+
+input[type="checkbox"]:checked + span {
+  font-weight: bold;
+}
+
+input[type="text"] {
+  border: 1px solid Red;
+}
+
+input[required]{
+  border: 1px solid Blue;
+}
+
+article li:first-child {
+  text-indent: 100px;
+}
+
+table tr:nth-child(odd) td {
+  background-color: Salmon;
+}
+
+td:nth-child(3) {
+  text-align: center;
+}

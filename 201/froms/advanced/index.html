@@ -1,0 +1,123 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>TITLE</title>
+     <meta name="description" content="DESCRIPTION">
+    <link rel="stylesheet" href="main.css">
+ </head>
+
+ <body>
+   <h1>Create Your Profile</h1>
+   <form>
+
+     <fieldset>
+       <h2>Personal Info</h2>
+       <dl>
+         <dt>
+           <label for="first">Your Name</label>
+         </dt>
+         <dd>
+           <ul>
+             <li class="name"><input type="text" name="first" id="first" placeholder="First"></li>
+             <li class="name right"><input type="text" name="last" placeholder="Last"></li>
+           </ul>
+         </dd>
+         <dt>
+           <label for="email">Email</label>
+         </dt>
+         <dd>
+           <input type="email" name="email" id="email">
+         </dd>
+       </dl>
+     </fieldset>
+
+     <fieldset>
+       <h2>Social Media Accounts</h2>
+       <dl>
+         <div class="social">
+         <dt>
+           <label for="facebook">Facebook</label>
+         </dt>
+         <dd>
+           <input type="text" name="facebook" id="facebook">
+         </dd>
+         </div><!--
+
+         --><div class="social">
+         <dt>
+           <label for="twitter">Twitter</label>
+         </dt>
+         <dd>
+           <input type="text" name="twitter" id="twitter">
+         </dd>
+       </div><!--
+
+       --><div class="social final">
+         <dt>
+           <label for="linkedin">Linkedin</label>
+         </dt>
+         <dd>
+           <input type="text" name="linkedin" id="linkedin">
+         </dd>
+       </div><!--
+       --></dl>
+
+     </fieldset>
+
+     <fieldset>
+       <h2>Account Info</h2>
+       <dl>
+         <dt>
+           <label for="profile">Profile Name</label>
+         </dt>
+         <dd>
+           <input type="text" name="profile" id="profile">
+         </dd>
+         <div class="password">
+         <dt>
+           <label for="pass1">Password</label>
+         </dt>
+         <dd>
+           <input type="password" name="pass1" id="pass1">
+         </dd>
+       </div><!--
+
+       --><div class="password final">
+         <dt>
+           <label for="pass2">Confirm Password</label>
+         </dt>
+         <dd>
+           <input type="password" name="pass2" id="pass2">
+         </dd>
+         </div>
+       </dl>
+     </fieldset>
+
+     <fieldset>
+       <h2>Bio</h2>
+       <dl>
+         <dt>
+         </dt>
+         <dd>
+          <textarea rows="6"></textarea>
+         </dd>
+       </dl>
+     </fieldset>
+
+     <fieldset>
+       <div class="disclaimer">
+        <input type="checkbox" name="legal" id="legal">
+
+        <label for="legal">Random long-winded legal stuff that you have to agree to or else we might end up getting sued really hard.</label>
+        </div>
+        <div>
+
+        </div>
+       <input type="submit" name="submit" value="Create Account">
+     </fieldset>
+   </form>
+ </body>
+
+ </html>
