@@ -1,0 +1,163 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>To Do List</title>
+     <meta name="description" content="DESCRIPTION">
+    <link rel="stylesheet" href="main.css">
+
+ </head>
+
+ <body>
+   <main>
+     <input id="modal" type="checkbox">
+     <div class="activater">
+            <label for="modal" class="dimmer">
+       <div class="form">
+
+         <form>
+           <dl>
+             <dd>
+                <label for="title">Title</label>
+             </dd><!--
+          --><dt>
+               <input type="text" name="title" id="title" value="Item 2">
+             </dt>
+             <dd>
+                <label for="day">Due Date</label>
+             </dd><!--
+          --><dt>
+               <input type="number" name="day" id="day" value="16">
+             </dt>
+             <dd class="textarea">
+                <label for="description">Description</label>
+             </dd><!--
+          --><dt>
+               <textarea type="number" name="description" id="description" placeholder="Description"></textarea>
+             </dt>
+           </dl>
+           <a href="#"><label for="modal">Save</label></a>
+           <a href="#">Mark As Complete</a>
+         </form>
+       </div>
+     </label>
+   </div>
+
+     <nav>
+       <table class="remaining">
+         <tr>
+         <th>
+           <h2><img src="images/list-icon.png" alt="">All Todos</h2>
+         </th>
+         <th><span class="count inactive">18</span></th>
+        </tr>
+        <tr class="active">
+          <td>02/16</td>
+          <td><span class="count">8</span></td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+          <td><span class="count inactive">8</span></td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+          <td><span class="count inactive">8</span></td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+          <td><span class="count inactive">8</span></td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+          <td><span class="count inactive">8</span></td>
+        </tr>
+       </table>
+
+       <table class="completed">
+         <tr>
+         <th>
+           <h2><img src="images/checked-box.png" alt="">Completed</h2>
+         </th>
+        </tr>
+        <tr>
+          <td>02/16</td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+        </tr>
+        <tr>
+          <td>02/16</td>
+        </tr>
+       </table>
+
+     </nav>
+
+     <section>
+       <header>
+         <img src="images/tripple-bars.png" alt="three tiny horizontal lines">
+         <h1>02/16<span class="count">8</span></h1>
+       </header>
+       <table>
+         <tr>
+           <th colspan="2">
+             <h2>
+               <img src="images/plus.png" alt="a small blue plus sign">
+               Add new to do
+             </h2>
+           </th>
+         </tr>
+         <tr>
+           <td>
+             <label><input type="checkbox" name="item1">Item 1</label>
+           </td>
+           <td>
+             <img src="images/bin.png" alt="A small rubbish bin icon.">
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <label for="modal"><input type="checkbox" name="item2">Item 2</label>
+           </td>
+           <td>
+             <img src="images/bin.png" alt="A small rubbish bin icon.">
+           </td>
+         </tr>
+         <tr>
+           <td class="done">
+             <label><input type="checkbox" name="item3">Item 3</label>
+           </td>
+           <td>
+             <img src="images/bin.png" alt="A small rubbish bin icon.">
+           </td>
+         </tr>
+         <tr>
+           <td class="done">
+             <label><input type="checkbox" name="item4">Item 4</label>
+           </td>
+           <td>
+             <img src="images/bin.png" alt="A small rubbish bin icon.">
+           </td>
+         </tr>
+         <tr>
+           <td class="done">
+             <label><input type="checkbox" name="item5">Item 5</label>
+           </td>
+           <td>
+             <img src="images/bin.png" alt="A small rubbish bin icon.">
+           </td>
+         </tr>
+      </table>
+
+     </section>
+   </main>
+
+ </body>
+
+ </html>
