@@ -69,32 +69,33 @@ section, nav {
 
 nav {
   float:left;
-  width: 28%;
+  width: 330px;
   background: #464f77;
   height: 100vh;
-  padding-top: 3px;
-  color: white;
+  min-height: 650px;
+  color: #a3a7bb;
 }
 nav table {
-  text-align: left;
-  box-sizing: border-box;
   width: 100%;
   position: relative;
-  margin: 68px 0 68px 0;
+  margin-top: 60px;
+}
+
+table.completed {
+  margin-top: 40px;
 }
 
 table.completed td {
   text-decoration: line-through;
-  color: #a3a7bb;
   text-align: left;
 }
 
 table.completed th {
-  text-align: left;
+  padding-bottom: 17px;
 }
 
 nav th:first-child, nav td:first-child {
-  padding-left: 139px;
+  padding-left: 137px;
 }
 
 nav th:last-child, nav td:last-child {
@@ -102,36 +103,64 @@ nav th:last-child, nav td:last-child {
 }
 
 nav th {
-  padding: 16px 0;
+  color: white;
+  padding: 16px 0 15px 0;
+  letter-spacing: 2px;
+  text-align: left;
 }
 
+/* I couldn't work out how to get the longer numbers
+right (i.e. the circle expands, but it doesn't look quite like the specs) so I just manually adjusted it to look like the specs in headers. Maybe this has something to do with my lack of helvetica... */
+
+nav th .count {
+  padding: 1px 5px 1px 3px;
+}
 nav td {
-  padding: 14px 0;
+  padding: 12px 0;
 }
 
 nav tr.active {
   background: #383f5f;
+  color: white;
+}
+
+/* Tiny bit of optional stuff, makes any row look "active" when we hover over it. I tred to use the hamburger thing to actually let the user select which row is active, but it's being weird and I suspect it's something really annoying and complicated to do with tables, so I stopped.
+
+nav tr:not(:first-child):hover {
+  background: #383f5f;
+  color: white;
+}
+
+nav tr:not(:first-child):hover .count {
+  color: white;
+  background-color: #148fd5;
+}
+
+*/
+
+td:last-child, .remaining th:last-child {
+  text-align: right;
 }
 
 nav img {
   position: absolute;
   left: 102px;
-  top: 7px;
+  top: 10px;
 }
 
 section {
-  float: right;
-  width: 72%;
-  padding: 0 20px;
+  position: relative;
+  margin-left: 330px;
+  padding: 0 100px 0 22px;
 }
 
-section td.done {
+section td.done label {
   text-decoration: line-through;
   color: #b3b3b3;
 }
 
 section header {
-  margin: 23px 0 44px 0;
+  margin: 0 0 25px 12px;
   font-size: 1.31rem;
 }
 
@@ -140,109 +169,160 @@ section header {
   font-size: 0.88rem;
   color: white;
   background-color: #148fd5;
-  margin-left: 20px;
-  vertical-align: 2px;
-  padding: 1px 6px 1px 6px;
+  margin: 0 2px 0 20px;
+  padding: 1px 5px 1px 5px;
   border-radius: 9px;
+  letter-spacing: 0px;
 }
 
 .inactive {
   background: #6b7292;
+  color: #c4c7d3;
+}
+
+section .count {
+  vertical-align: 3px;
 }
 
 section header img {
-  margin-bottom: 35px;
+  margin: 23px 0 30px 0;
+  visibility: hidden;
 }
 
-section tr {
-  border-bottom: 1px solid #e7e7e7;
+section td, section th {
+  width: 50%;
+  padding: 14px 0px 13px 8px;
+}
+
+section td {
+  border-top: 1px solid #e7e7e7;
 }
 
 section th {
   text-align: left;
-}
-
-section th h2 {
-  font-size: 1rem;
   color: #3498d8;
 }
 
-section th img, section input[type="checkbox"] {
-  margin-right: 16px;
+section th img, section .box {
+  margin-right: 14px;
 }
 
 section table {
   width: 100%;
 }
 
-td:last-child, .remaining th:last-child {
-  text-align: right;
-}
-
-section td, section th {
-  width: 50%;
-  padding: 18px 0px 16px 11px;
-}
-
-
-section input[type="checkbox"] {
-  box-sizing: border-box;
-  border: 1px solid #9c9c9c;
-  background: white;
+.box {
+  display: inline-block;
+  background: url("images/unticked-box.png");
   width: 14px;
   height: 14px;
-  appearance: none;
 }
 
+.done .box {
+  background: url("images/ticked-box.png");
+}
+
+section label {
+  margin-left: -2px;
+  display: inline-block;
+}
+
+section label:hover {
+  color: #148fd5;
+  cursor: pointer;
+}
+
+section .done label:hover {
+  color: Salmon;
+}
 /* -----------------------MODAL------------------------- */
 
 .form, .dimmer {
   box-sizing: border-box;
-  position: fixed;
 }
+
 .form {
-  font-size: 0.8rem;
-  width: 577px;
-  height: 400px;
-  top: 102px;
-  left: 441px;
+  position: absolute;
+  margin-left: 50px;
+  max-width: 570px;
+  min-width: 350px;
+  top: 17.8%;
+  right: 21%;
   background: white;
-  padding: 36px 39px 39px 30px;
+  padding: 35px 34px 24px 30px;
 }
 
 .dimmer {
-  border: 900px solid rgba(0,0,0,0.2);
-}
-
-.form dd, .form dt {
-  text-align: left;
-  display: inline-block;
-}
-
-.form dd {
-  width: 18%;
+  position: fixed;
+  right: 0;
+  width: 110vw;
+  height: 110vh;
+  background: rgba(0,0,0,0.2);
+  display: block;
 }
 
 .form dt {
-  width: 80%;
+  float: left;
+  min-width: 105px;
+  margin-bottom: 5px; /*-----------------------*/
+}
+
+.form dd {
+  margin-left: 105px;
+  display: block;
   margin-bottom: 24px;
 }
 
-.form input, .form textarea  {
+.form dd:last-child {
+  margin-bottom: 20px;
+}
+
+.form input, .form textarea, .form select  {
   box-sizing: border-box;
   width: 100%;
   font-size: inherit;
   font-family: inherit;
-  padding: 10px;
+  padding: 7px;
+}
+
+.form select {
+  width: 117px;
+}
+
+.form span {
+  margin: 0 10px;
+}
+
+.slash-container {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+dt {
+  margin-top: 9px;
+  vertical-align: top;
+}
+ select:invalid {
+   color: #757575;
+ }
+
+option {
+  color: black;
+}
+
+/* without this the disabled option displays as black the first time you select an option as soon as you move down the list. */
+
+option:disabled {
+  color: #757575;
 }
 
 .form textarea {
-  height: 148px;
+  height: 140px;
   resize: none;
 }
 
-.textarea {
-  vertical-align: 126px;
+.form-buttons {
+    margin-left: 105px;
 }
 
 .form a {
@@ -250,30 +330,78 @@ section input[type="checkbox"] {
   box-sizing: border-box;
   border-radius: 5px;
   padding-top: 10px;
-  margin-left: 18%;
-  width: 184px;
+  margin: 0 18px 12px 0;
+  width: 180px;
   height: 36px;
   color: white;
   background: #148fd5;
   text-align: center;
 }
 
-.form a + a {
-  margin-left: 18px;
-}
 
-#modal {
+#modal, .activater, #nav-bar {
   display: none;
-}
-
-.activater {
-  display: none;
-}
-
-.activater label {
-  display: block;
 }
 
 #modal:checked + .activater {
   display: block;
+}
+
+/* -------------------------- BREAKPOINTS --------------------- */
+
+@media screen and (max-width: 768px){
+  nav {
+    display: none;
+  }
+
+  section header img {
+    visibility: visible;
+  }
+
+  #nav-bar:checked + nav {
+    display: block;
+  }
+
+  #nav-bar:checked ~ section {
+    margin-left: 335px;
+  }
+
+  section {
+    margin-left: 0;
+    min-width: 290px;
+  }
+
+  .form {
+    top: 5%;
+    margin-left: 0;
+    position: fixed;
+    left: 6%;
+  }
+
+  /* some extra optional stuff to save some space
+  as we get thinner. everything functions as specified with or without it.
+
+
+  nav {
+    width: 250px;
+  }
+
+  section {
+    padding-right: 30px;
+    min-width: 220px;
+  }
+
+  #nav-bar:checked ~ section {
+    margin-left: 250px;
+  }
+
+  nav th:first-child, nav td:first-child {
+    padding-left: 60px;
+  }
+
+  nav img {
+    left: 22px;
+  }
+
+    */
 }
