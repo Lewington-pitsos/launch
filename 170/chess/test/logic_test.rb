@@ -110,7 +110,6 @@ class PlayerTest < Minitest::Test
     assert_equal("black", @bob.last_colour)
     assert_equal("white", @sam.last_colour)
 
-
     Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 3)
     assert_equal("white", @harry.last_colour)
     assert_equal("white", @bob.last_colour)

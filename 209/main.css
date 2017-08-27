@@ -16,35 +16,35 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote, q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 ul {
@@ -59,7 +59,7 @@ a {
 /* -------------------------------------------------------------------- */
 
 html{
-  font-size: 16px;
+  font-size: 18px;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -69,57 +69,60 @@ section, nav {
 
 nav {
   float:left;
-  width: 330px;
+  width: 335px;
   background: #464f77;
   height: 100vh;
   min-height: 650px;
   color: #a3a7bb;
 }
-nav table {
+nav ul {
   width: 100%;
   position: relative;
-  margin-top: 60px;
+  margin-top: 71px;
 }
 
-table.completed {
-  margin-top: 40px;
+ul.completed {
+  margin-top: 41px;
 }
 
-table.completed td {
+.completed li {
   text-decoration: line-through;
   text-align: left;
 }
 
-table.completed th {
-  padding-bottom: 17px;
+.completed .title {
+  padding-bottom: 18px;
 }
 
-nav th:first-child, nav td:first-child {
-  padding-left: 137px;
+nav li {
+  padding: 14px 0 14px 138px;
 }
 
 nav th:last-child, nav td:last-child {
   padding-right: 30px;
 }
 
-nav th {
+nav li.title {
+  text-decoration: none;
   color: white;
-  padding: 16px 0 15px 0;
+  padding: 16px 0 16px inherit;
   letter-spacing: 2px;
-  text-align: left;
+}
+
+nav li.title p {
+  display: inline-block;
 }
 
 /* I couldn't work out how to get the longer numbers
 right (i.e. the circle expands, but it doesn't look quite like the specs) so I just manually adjusted it to look like the specs in headers. Maybe this has something to do with my lack of helvetica... */
 
-nav th .count {
+nav .count {
   padding: 1px 5px 1px 3px;
-}
-nav td {
-  padding: 12px 0;
+  float: right;
+  margin-right: 29px;
 }
 
-nav tr.active {
+nav li.active {
   background: #383f5f;
   color: white;
 }
@@ -138,29 +141,21 @@ nav tr:not(:first-child):hover .count {
 
 */
 
-td:last-child, .remaining th:last-child {
-  text-align: right;
-}
-
 nav img {
   position: absolute;
   left: 102px;
-  top: 10px;
+  top: 5px;
 }
 
 section {
   position: relative;
-  margin-left: 330px;
-  padding: 0 100px 0 22px;
-}
-
-section td.done label {
-  text-decoration: line-through;
-  color: #b3b3b3;
+  margin-left: 335px;
+  padding: 0 100px 0 20px;
 }
 
 section header {
-  margin: 0 0 25px 12px;
+
+  padding: 0 0 44px 12px;
   font-size: 1.31rem;
 }
 
@@ -172,7 +167,7 @@ section header {
   margin: 0 2px 0 20px;
   padding: 1px 5px 1px 5px;
   border-radius: 9px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 }
 
 .inactive {
@@ -185,26 +180,33 @@ section .count {
 }
 
 section header img {
-  margin: 23px 0 30px 0;
+  margin: 23px 0 36px 0;
   visibility: hidden;
 }
 
-section td, section th {
-  width: 50%;
-  padding: 14px 0px 13px 8px;
+section li a {
+  margin-left: 12px;
+  float: right;
 }
 
-section td {
+section li {
+  width: 100%;
+  padding: 17px 0 17px 12px;
   border-top: 1px solid #e7e7e7;
 }
 
-section th {
-  text-align: left;
+section .done label {
+  text-decoration: line-through;
+  color: #b3b3b3;
+}
+
+section > h3{
+  margin: 0 0 16px 12px;
   color: #3498d8;
 }
 
-section th img, section .box {
-  margin-right: 14px;
+section h3 img, section .box {
+  margin-right: 12px;
 }
 
 section table {
@@ -223,18 +225,19 @@ section table {
 }
 
 section label {
-  margin-left: -2px;
   display: inline-block;
 }
 
-section label:hover {
+section li label:hover {
   color: #148fd5;
   cursor: pointer;
 }
-
+/* alternate :hover colour for finished todo items
 section .done label:hover {
   color: Salmon;
 }
+
+*/
 /* -----------------------MODAL------------------------- */
 
 .form, .dimmer {
@@ -244,12 +247,12 @@ section .done label:hover {
 .form {
   position: absolute;
   margin-left: 50px;
-  max-width: 570px;
+  max-width: 575px;
   min-width: 350px;
-  top: 17.8%;
-  right: 21%;
+  top: 13.1%;
+  right: 15.4%;
   background: white;
-  padding: 35px 34px 24px 30px;
+  padding: 35px 38px 39px 24px;
 }
 
 .dimmer {
@@ -261,16 +264,19 @@ section .done label:hover {
   display: block;
 }
 
+.form dl {
+  margin-bottom: 22px;
+}
+
 .form dt {
   float: left;
-  min-width: 105px;
-  margin-bottom: 5px; /*-----------------------*/
+  min-width: 108px;
 }
 
 .form dd {
-  margin-left: 105px;
+  margin-left: 108px;
   display: block;
-  margin-bottom: 24px;
+  margin-bottom: 21px;
 }
 
 .form dd:last-child {
@@ -282,29 +288,28 @@ section .done label:hover {
   width: 100%;
   font-size: inherit;
   font-family: inherit;
-  padding: 7px;
+  padding: 10px 14px;
 }
 
 .form select {
-  width: 117px;
+  width: 120px;
+  -webkit-appearance: none;
+  background: url("images/select-arrows.png") no-repeat;
+  background-position: 95% 50%;
 }
 
-.form span {
-  margin: 0 10px;
-}
-
-.slash-container {
-  display: inline-block;
-  white-space: nowrap;
+.slash-spacer {
+  margin: 0 8px 0 9px;
 }
 
 dt {
   margin-top: 9px;
   vertical-align: top;
 }
- select:invalid {
-   color: #757575;
- }
+
+select.example {
+  color: #757575;
+}
 
 option {
   color: black;
@@ -322,22 +327,25 @@ option:disabled {
 }
 
 .form-buttons {
-    margin-left: 105px;
+    margin-left: 108px;
 }
 
 .form a {
   display: inline-block;
   box-sizing: border-box;
   border-radius: 5px;
-  padding-top: 10px;
+  padding-top: 11px;
   margin: 0 18px 12px 0;
-  width: 180px;
+  width: 184px;
   height: 36px;
   color: white;
   background: #148fd5;
   text-align: center;
 }
 
+.form a:last-child {
+  margin-right: 0;
+}
 
 #modal, .activater, #nav-bar {
   display: none;

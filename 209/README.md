@@ -7,3 +7,5 @@ I don't have Helvetica font, and it seems to cost like $48 so I've been using Ar
 Neither of the buttons on the modal make it go away. My reasoning was that both of these would be sending some request to the server, which would probably mean a page-refresh, which would get rid of the modal anyway. Instead the only way to exit the modal is by clicking on some of the greyed out area, which seems intuitive to me at least.
 
 I am assuming that we're supposed to make the modal look ok on thinner screens so I did that.
+
+I am assuming that I'm supposed to make links out of all the things that would probably be links.
