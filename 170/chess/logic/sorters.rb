@@ -2,9 +2,24 @@ require_relative "player"
 
 class Sorter
 
-  attr_accessor :players, :pairs
+  @@first_round_method = Proc.new do |list, _, index|
+    index == list.length ? nil : list[index]
+  end
 
-  def initialize array
+  @@normal_method = Proc.new do |list, colour, index|
+    if index == list.length
+      nil
+    elsif list[index].last_colour != colour
+      list[index]
+    else
+      @@normal_method.call(list, colour, index + 1)
+    end
+  end
+
+  attr_accessor :players, :pairs, :round
+
+  def initialize array, round
+    @round = round
     @players = array.sort_by do |a|
       a.score + a.tiebreak*0.00001
     end.reverse
@@ -12,11 +27,30 @@ class Sorter
   end
 
   def pair
+    paired_players = []
     current_pairs = []
-    players.each_with_index do |player, index|
-      current_pairs << Pair.new(player, players[index + 1]) if index.even?
+    finder = round == 1 ? @@first_round_method : @@normal_method
+    while !players.empty?
+      player = players[0]
+      opponent = finder.call(players, player.last_colour, 1)
+      if player.last_colour == "white"
+        current_pairs << Pair.new(opponent, player)
+      else
+        current_pairs << Pair.new(player, opponent)
+      end
+      adjust_player_lists paired_players, player, opponent
     end
+
+    self.players = paired_players
+
     current_pairs
+  end
+
+  def adjust_player_lists paired_players, player, opponent
+    paired_players << player
+    paired_players << opponent if opponent
+    players.delete(player)
+    players.delete(opponent) if opponent
   end
 end
 

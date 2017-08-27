@@ -1,25 +1,40 @@
 class Player
-  attr_accessor :score, :name, :tiebreak, :playing
+  attr_accessor :score, :name, :tiebreak, :playing, :last_colour
   def initialize hash={}
     @score = hash[:score] || 0.0
     @tiebreak = hash[:tiebreak] || 0.0
     @name = hash[:name]
     @playing = true
+    @last_colour = hash[:last_colour] || nil;
   end
 
   def toggle
     self.playing = !playing
+  end
+
+  def set_white
+    self.last_colour = "white"
+  end
+
+  def set_black
+    self.last_colour = "black"
   end
 end
 
 class Pair
   attr_accessor :players, :white, :black, :winner
   def initialize white, black
-    @white = white
-    @black = (black || Player.new({name: "BYE"}))
+    @white = check_present white
+    self.white.set_white
+    @black = check_present black
+    self.black.set_black
     @players = {@white.name => white, @black.name => black}
     @winner = nil
     @loser = nil
+  end
+
+  def check_present player
+    (player || Player.new({name: "BYE"}))
   end
 
   def undo_win player
@@ -46,6 +61,8 @@ class Pair
   def auto_draw
     if black.name == "BYE"
       win white.name
+    elsif white.name == "BYE"
+      win black.name
     else
       players.each { |_, v| v.score += 0.5}
       update_tiebreak
