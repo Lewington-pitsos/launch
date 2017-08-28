@@ -14,11 +14,25 @@ class PlayerTest < Minitest::Test
     @pair = Pair.new(@bob, @sam)
   end
 
-  def test_bye
-    pair = Pair.new(@bob, nil)
+  def test_bye_works_in_pair
+    pair = Pair.new(@bob, Player.new({name: "BYE"}))
     pair.auto_draw
     assert_equal(1, @bob.score)
     assert(pair.winner)
+  end
+
+  def test_bye_assigned_to_last_player_first_round
+    sorter = Sorter.new([@harry, @sarah, @bob])
+    sorter.pair
+    assert_equal(@bob, sorter.pairs[1].black)
+    assert_equal("BYE", sorter.pairs[1].white.name)
+  end
+
+  def test_bye_assigned_to_last_player_later_rounds
+    sorter = Sorter.new([@harry, @sarah, @sam])
+    sorter.pair
+    assert_equal(@sam, sorter.pairs[1].white)
+    assert_equal("BYE", sorter.pairs[1].black.name)
   end
 
   def test_playing
@@ -66,13 +80,13 @@ class PlayerTest < Minitest::Test
   #----------------------------- BLACK AND WHITE ----------------------------#
 
   def test_set_colors_round_1
-    Sorter.new([@harry, @bill, @sarah, @daniel], 1)
-    assert_equal("white", @harry.last_colour)
+    Sorter.new([@harry, @bill, @sarah, @daniel]).pair
+    assert_equal("black", @harry.last_colour)
     assert_equal("white", @bob.last_colour)
-    assert_equal("white", @sarah.last_colour)
+    assert_equal("black", @sarah.last_colour)
     assert_equal("black", @sam.last_colour)
-    assert_equal("black", @bill.last_colour)
-    assert_equal("black", @daniel.last_colour)
+    assert_equal("white", @bill.last_colour)
+    assert_equal("white", @daniel.last_colour)
   end
 
   def test_pair_sets_colors
@@ -80,76 +94,101 @@ class PlayerTest < Minitest::Test
     assert_equal("white", @bob.last_colour)
   end
 
+  def test_new_player_auto_assigned_colour
+    assert_equal("black", @sam.last_colour)
+    assert_nil(@harry.last_colour)
+    Sorter.new([@harry, @sam]).pair
+    assert_equal("white", @sam.last_colour)
+    assert_equal("black", @harry.last_colour)
+
+    assert_equal("white", @bob.last_colour)
+    assert_nil(@sarah.last_colour)
+    Sorter.new([@sarah, @bob]).pair
+    assert_equal("black", @bob.last_colour)
+    assert_equal("white", @sarah.last_colour)
+  end
+
+  def test_assigning_colours_to_new_players_in_later_rounds
+    assert_nil(@harry.last_colour)
+    assert_nil(@sarah.last_colour)
+    Sorter.new([@sarah, @harry]).pair
+    assert_equal("black", @harry.last_colour)
+    assert_equal("white", @sarah.last_colour)
+  end
+
   #--------------------------- SORTER ---------------------------------------#
 
   def test_properly_sorted
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill], 1)
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill])
     assert_equal([@harry, @bill, @sarah, @daniel, @bob], sorter.players)
   end
 
-  def test_properly_paired_first_round
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 1)
-    assert_equal(@harry, sorter.pairs[0].white)
-    assert_equal(@sarah, sorter.pairs[1].white)
+  def test_properly_paired_first_round_with_black_higher
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    sorter.pair
+    assert_equal(@harry, sorter.pairs[0].black)
+    assert_equal(@sarah, sorter.pairs[1].black)
     assert_equal(@sam, sorter.pairs[2].white)
   end
 
   def test_paired_with_bye_first_round
-    sorter = Sorter.new([@daniel, @bob, @sarah, @bill, @sam], 1)
+    sorter = Sorter.new([@daniel, @bob, @sarah, @bill, @sam])
+    sorter.pair
     assert_equal(3, sorter.pairs.length)
     assert_equal(@bob, sorter.pairs[-1].black)
   end
 
   def test_not_same_colour_twice
-    Sorter.new([@harry, @bill, @sarah, @daniel], 1)
-    Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 2)
-    assert_equal("black", @harry.last_colour)
-    assert_equal("white", @bill.last_colour)
-    assert_equal("black", @sarah.last_colour)
-    assert_equal("white", @daniel.last_colour)
+    Sorter.new([@harry, @bill, @sarah, @daniel]).pair
+    Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam]).pair
+    assert_equal("white", @harry.last_colour)
+    assert_equal("black", @bill.last_colour)
+    assert_equal("white", @sarah.last_colour)
+    assert_equal("black", @daniel.last_colour)
     assert_equal("black", @bob.last_colour)
     assert_equal("white", @sam.last_colour)
 
-    Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 3)
-    assert_equal("white", @harry.last_colour)
+    Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam]).pair
+    assert_equal("black", @harry.last_colour)
     assert_equal("white", @bob.last_colour)
-    assert_equal("white", @sarah.last_colour)
+    assert_equal("black", @sarah.last_colour)
     assert_equal("black", @sam.last_colour)
-    assert_equal("black", @bill.last_colour)
-    assert_equal("black", @daniel.last_colour)
+    assert_equal("white", @bill.last_colour)
+    assert_equal("white", @daniel.last_colour)
   end
 
   def test_sorts_by_colour
-    sorter = Sorter.new([@harry, @bill, @sarah, @daniel], 1)
-    tourney = Round.new(sorter.pairs)
+    sorter = Sorter.new([@harry, @bill, @sarah, @daniel])
+    tourney = Round.new(sorter.pair)
     tourney.win "sarah"
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 2)
-    assert_equal(@bill, sorter.pairs[0].white)
-    assert_equal(@sarah, sorter.pairs[0].black)
-    assert_equal(@harry, sorter.pairs[1].black)
-    assert_equal(@daniel, sorter.pairs[1].white)
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    sorter.pair
+    assert_equal(@bill, sorter.pairs[0].black)
+    assert_equal(@sarah, sorter.pairs[0].white)
+    assert_equal(@harry, sorter.pairs[1].white)
+    assert_equal(@daniel, sorter.pairs[1].black)
   end
 
   # ---------------------------------TOURNEY -------------------------------- #
 
   def test_tourney_win
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 1)
-    tourney = Round.new(sorter.pairs)
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    tourney = Round.new(sorter.pair)
     tourney.win "sarah"
     assert_equal(1, @sarah.score)
   end
 
   def test_tourney_draw
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 1)
-    tourney = Round.new(sorter.pairs)
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    tourney = Round.new(sorter.pair)
     tourney.draw "harry"
     assert_equal(1.5, @harry.score)
     assert_equal(0.5, @bill.score)
   end
 
   def test_tourney_round_finish
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 1)
-    tourney = Round.new(sorter.pairs)
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    tourney = Round.new(sorter.pair)
     tourney.win "harry"
     tourney.finish_round
     assert_equal(2, @harry.score)
@@ -159,8 +198,8 @@ class PlayerTest < Minitest::Test
   end
 
   def test_tourney_undo_win
-    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam], 1)
-    tourney = Round.new(sorter.pairs)
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
+    tourney = Round.new(sorter.pair)
     tourney.win "sarah"
     assert_equal(1, @sarah.score)
     tourney.undo_win "sarah"
