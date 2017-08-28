@@ -1,12 +1,20 @@
-<h3>Enter Player Details</h3>
+<div class="player-form">
+<h2>Enter Player Details:</h2>
+<ul class="load-list">
+<li>
 <form action="/new_player" method="post">
-<label>Name:
+<label><p>Name:</p>
   <input name="name" type="text" />
 </label>
-<label>Score
+</li>
+<li>
+    <button type="submit" value="submit" class="confirm">Confirm</button>
+<label><p>Score:</p>
   <input name="score" type="text" />
 </label>
-  <button type="submit" value="submit">Confirm</button>
-</form>
 
+</form>
+</li>
+</ul>
 <a href="/players">Return to Player List</a>
+</div>

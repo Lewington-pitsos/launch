@@ -1,58 +1,68 @@
-<h2>Ladder (Round <%= session[:round_no] %>):</h2>
-<ol>
-<% @player_list.each do |player| %>
-<li class="player-list">
-<form action="/toggle/<%= player.name %>" method="post" class="inline">
-  <button type="submit" value="Submit" class="button">
-    <div class="<%= check_playing(player) %>"><%= player.name %>: <%= player.score %></div>
-  </button>
-</form>
-<form action="/delete_player/<%= player.name %>" method="post" class="inline">
-  <button type="submit" value="Submit">
-    <div>Delete</div>
-  </button>
-</form>
-</li>
-<% end %>
-</ol>
 
-<div class="holder">
-  <a href="/new_player"><button class="new-player">New Player</button></a>
-
-  <a href="/new_round"><button class="break">New Round</button></a>
-</div>
-
-<div class="holder">
+<div class="load-related">
 <h2>Saving and Loading:</h2>
 
-
+<ul class="load-list">
+<li>
 <form action="/load" method="get">
   <button type="submit" value="Submit">
     <p>Load Tourniment</p>
   </button>
 </form>
-
+</li>
+<li>
 <form action="/save" method="post">
-  <label>Save Current Tourniment As:
-    <input name="filename" type="text" />
-  </label>
-  <button type="submit" value="Submit">
+  <button type="submit" value="Submit" class="confirm">
     <p>Confirm</p>
   </button>
+  <label><p>Save Current Tourniment As:</p>
+    <input name="filename" type="text" />
+  </label>
 </form>
-
+</li>
+<li>
 <form action="/tourniment/new" method="post">
-  <label>New Tourniment:
-    <input name="filename" type="text" />
-  </label>
-  <button type="submit" value="Submit">
+  <button type="submit" value="Submit" class="confirm">
     <p>Confirm</p>
   </button>
+  <label><p>New Tourniment:</p>
+    <input name="filename" type="text" />
+  </label>
 </form>
-
+</li>
+<li>
 <form action="/autosave" method="post">
   <button type="submit" value="Submit">
     <p>Auso-Save Current Tourniment</p>
   </button>
 </form>
+
+</li>
+</ul>
+</div>
+
+<div class="ladder">
+<h2>Ladder (Round <%= session[:round_no] %>):</h2>
+<ol>
+<% @player_list.each do |player| %>
+<li class="player-list <%= check_playing(player) %>">
+<div class="clearfix">
+<form class="delete-form" action="/delete_player/<%= player.name %>" method="post" class="delete">
+  <button class="delete-player" type="submit" value="Submit">
+    <div>Delete</div>
+  </button>
+</form>
+<form action="/toggle/<%= player.name %>" method="post" class="player-name">
+  <button type="submit" value="Submit" class="player-name">
+    <%= player.name %>: <%= player.score %>
+  </button>
+</form>
+</div>
+</li>
+<% end %>
+</ol>
+
+  <a href="/new_player"><button class="new-player">New Player</button></a>
+
+  <a href="/new_round"><button class="new-round">New Round</button></a>
 </div>

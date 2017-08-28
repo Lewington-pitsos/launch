@@ -5,6 +5,9 @@ require_relative "logic/player"
 require_relative "logic/sorters"
 require_relative "logic/file_logic"
 
+also_reload '/public/style/main.css'
+also_reload 'logic/player.rb'
+also_reload 'logic/sorters.rb'
 configure do
   enable :sessions
   set :session_secret, "secret"
@@ -104,7 +107,7 @@ end
 
 post "/autosave" do
   autosave
-  session[:success] = "File Written"
+  session[:success] = "#{session[:current_name]} Successfully Saved"
   redirect "/players"
 end
 
@@ -180,6 +183,22 @@ helpers do
       "playing"
     else
       "not_playing"
+    end
+  end
+
+  def check_finished pair
+    if pair.winner
+      "/undo_win/"
+    else
+      "/win/"
+    end
+  end
+
+  def is_winner name, pair
+    if name == pair.winner
+      "winner"
+    else
+      ""
     end
   end
 end

@@ -1,65 +1,392 @@
-.not_playing {
-  text-decoration: line-through;
-  color: grey;
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-.pair.finished {
-  background-color: Salmon;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.inline {
-  float: left;
-  clear: right;
-  margin-right: 30px;
+/* -------------------------------------------------------------------- */
+
+html {
+  font-size: 16px;
+}
+
+/* ------------------------ GENERAL --------------- */
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+}
+
+/* ------------------------ PLAYER LIST --------------- */
+
+.ladder, .file-list, .load-related, .player-form, .round {
+  box-sizing: border-box;
+  padding: 30px;
+  height: 85%;
+  border-left: 1px solid white;
+}
+
+.ladder {
+  margin-right: 50%;
+  border-color: rgba(143, 188, 143, 0.4);
+  min-width: 330px;
 }
 
 .button {
   width: 130px;
 }
 
-.holding-list {
-  padding: 40px;
+ol {
+  margin-bottom: 80px;
+  list-style-position: outside;
+  counter-reset: player;
 }
 
-.player-list {
-  padding: 15px;
+li.player-list {
+  box-sizing: border-box;
+  position: relative;
+  counter-increment: player;
+  width: 100%;
+  height: 65px;
+  border-bottom: 1px solid rgba(143, 188, 143, 0.4);
 }
 
-.break {
-  float: left;
-  width: 300px;
-  height: 60px;
-  background-color: DarkSeaGreen;
-  border: none;
+li.player-list:hover {
+  background: #eee;
+}
+
+li.player-list:before {
+  content: counter(player) ".";
+  position: absolute;
+  top: 23px;
+  left: 10px;
+}
+
+.clear {
   clear: both;
+}
+
+
+form.player-name {
+  display: border-box;
+  margin-right: 100px;
+  height: 100%;
+  width: auto;
+}
+
+.player-name button{
+  text-align: left;
+  display: border-box;
+  width: 100%;
+  padding: 25px 0 25px 50px;
+  background: inherit;
+  border: none;
+}
+
+li.not_playing .player-name {
+  text-decoration: line-through;
+  color: grey;
+}
+
+form.delete-form {
+  width: 100px;
+  float: right;
+  text-align: right;
+}
+
+button.delete-player {
+  padding: 25px 20px;
+  background: inherit;
+  border: none;
+}
+
+
+.new-player, .new-round {
+  display: block;
+  width: 250px;
+  height: 60px;
   margin-bottom: 10px;
 }
 
 .new-player {
-  float: left;
-  width: 300px;
-  height: 60px;
-  background-color: Red;
-  border: none;
-  clear: both;
-  margin-bottom: 10px;
+  border: 1px solid rgb(170, 38, 34);
+  background-color: rgba(250, 128, 114, 0.5);
 }
 
-.holder {
-  float: left;
-  clear: both;
+.new-round {
+  border: 1px solid rgb(43, 88, 43);
+  background: rgba(143, 188, 143, 0.4);
+}
+
+.load-related {
+  width: 45%;
+  float: right;
+  min-width: 375px;
+  padding: 30px 0 30px 30px;
+  border-color: rgba(90, 50, 90, 0.3);
+}
+
+ul.load-list li {
+  height: 80px;
+  margin: 30px 0;
+}
+
+ul.load-list form {
+  height: 100%;
+}
+
+ul.load-list button, ul.load-list label {
+  font-size: 0.8rem;
+  padding: 20px;
+  background: rgba(90, 50, 90, 0.3);
+  border: 1px solid rgb(100, 70, 110);
+  height: 80%;
+}
+
+ul.load-list label {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin-right: 127px;
+  padding: 0 10px;
+}
+
+ul.load-list label * {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+ul.load-list label p {
+  margin-right: 8px;
+}
+
+button.confirm {
+  float: right;
+  margin-right: 0;
+}
+
+
+/* ul.load-list li:last-child {
+  padding-bottom: 80px;
+  border-bottom: 1px solid rgba(90, 50, 90, 0.3);
+}
+*/
+
+/* --------------------------- FILE LIST --------------- */
+
+.file-list {
+  border-left: 1px solid rgba(90, 50, 90, 0.3);
+}
+
+.file-list li:last-child {
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(90, 50, 90, 0.3);
+}
+
+.file-list form {
+  display: inline-block;
+}
+
+.file-list li form:first-child > button {
+  width: 200px;
+  margin-right: 30px;
+}
+
+.file-list > a {
+  color: rgb(100, 70, 110);
+  text-decoration: underline;
+}
+
+/* --------------------------- NEW PLAYER --------------- */
+
+.player-form {
+  border-color: rgba(250, 128, 114, 0.5);
+  max-width: 550px;
+  min-width: 425px;
+}
+
+.player-form label * {
+  margin-left: 8px;
+  margin-bottom: 4px;
+}
+
+.player-form ul.load-list button, .player-form ul.load-list label {
+    border: 1px solid rgb(170, 38, 34);
+    background-color: rgba(250, 128, 114, 0.5);
+}
+
+.player-form li:last-child {
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(250, 128, 114, 0.5);
+}
+
+.player-form label {
+  display: inline-block;
+}
+
+.player-form > a {
+  color: rgb(170, 38, 34);
+  text-decoration: underline;
+}
+
+/* --------------------------- ROUND --------------- */
+.round {
+  border-color: rgba(143, 188, 143, 0.4);
+  min-width: 420px;
+}
+
+.round ol {
+  width: 100%;
+}
+
+.round li {
+  width: 100%;
+  padding: 15px 0;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.round > a {
+  color: rgb(43, 88, 43);
+  text-decoration: underline;
+}
+
+.round li form {
+  width: 30%;
+  display: inline-block;
+}
+
+.round li button {
+  width: 100%;
+  height: 65px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+}
+
+.first {
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.round h3 {
+  font-size: 1.5rem;
+}
+
+.round > form {
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(143, 188, 143, 0.4);
+}
+
+.round .winner > button {
+  background-color: rgba(143, 188, 143, 0.4);
+  border: 1px solid rgb(43, 88, 43);
+}
+
+/* --------------------------- LAYOUT --------------- */
+
+main {
+  padding: 20px;
 }
 
 h3.error, h3.success {
-  width: 300px;
-  height: 100px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 10px 20px 20px 20px;
+  border-radius: 0 0 10px 10px;
 }
 
 .error {
-  background: rgb(255, 20, 100);
+  background: rgba(250, 128, 114, 0.5);
 }
 
 .success {
-  background: rgb(20, 255, 100);
+  background: rgba(143, 188, 143, 0.4);
+}
+
+
+/* ----------------------- BREAKING --------------- */
+
+@media screen and (max-width: 780px) {
+  .load-related {
+    width: auto;
+    float: none;
+    margin-bottom: 5px;
+    max-width: 570px;
+  }
+
+  .ladder, .file-list, .load-related, .player-form, .round {
+    padding-left: 15px;
+  }
+
+  main {
+    padding-left: 10px;
+  }
+
+  .ladder {
+    margin-right: 30px;
+    border-color: rgba(143, 188, 143, 0.4);
+    min-width: 330px;
+  }
+
 }
