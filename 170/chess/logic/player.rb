@@ -24,17 +24,13 @@ end
 class Pair
   attr_accessor :players, :white, :black, :winner
   def initialize white, black
-    @white = check_present white
-    self.white.set_white
-    @black = check_present black
-    self.black.set_black
+    @white = white
+    white.set_white
+    @black = black
+    black.set_black
     @players = {@white.name => white, @black.name => black}
     @winner = nil
     @loser = nil
-  end
-
-  def check_present player
-    (player || Player.new({name: "BYE"}))
   end
 
   def undo_win player
