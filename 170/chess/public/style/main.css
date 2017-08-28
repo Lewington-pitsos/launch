@@ -39,7 +39,7 @@
   float: left;
   width: 300px;
   height: 60px;
-  background-color: salmon;
+  background-color: Red;
   border: none;
   clear: both;
   margin-bottom: 10px;
@@ -48,4 +48,18 @@
 .holder {
   float: left;
   clear: both;
+}
+
+h3.error, h3.success {
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.error {
+  background: rgb(255, 20, 100);
+}
+
+.success {
+  background: rgb(20, 255, 100);
 }

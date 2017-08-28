@@ -1,31 +1,38 @@
 ---
-- !ruby/object:Player
-  score: 0.0
-  tiebreak: 0.0
-  name: bob
-  playing: true
-- !ruby/object:Player
-  score: 0.0
-  tiebreak: 0.0
-  name: sam
-  playing: true
-- !ruby/object:Player
-  score: 1.0
-  tiebreak: 0.0
-  name: harry
-  playing: true
-- !ruby/object:Player
-  score: 0.0
-  tiebreak: 0.5
-  name: daniel
-  playing: true
-- !ruby/object:Player
-  score: 0.0
-  tiebreak: 1.0
-  name: sarah
-  playing: true
-- !ruby/object:Player
-  score: 0.0
-  tiebreak: 99.0
-  name: bill
-  playing: true
+- - !ruby/object:Player
+    score: 0.0
+    tiebreak: 0.0
+    name: bob
+    playing: true
+    last_colour: white
+  - !ruby/object:Player
+    score: 0.0
+    tiebreak: 0.0
+    name: sam
+    playing: true
+    last_colour: black
+  - !ruby/object:Player
+    score: 1.0
+    tiebreak: 0.0
+    name: harry
+    playing: true
+    last_colour: white
+  - !ruby/object:Player
+    score: 0.0
+    tiebreak: 0.5
+    name: daniel
+    playing: true
+    last_colour: black
+  - !ruby/object:Player
+    score: 0.0
+    tiebreak: 1.0
+    name: sarah
+    playing: true
+
+  - !ruby/object:Player
+    score: 0.0
+    tiebreak: 99.0
+    name: bill
+    playing: true
+    last_colour: white
+- 0

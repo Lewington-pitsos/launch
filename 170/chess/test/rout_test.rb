@@ -214,4 +214,23 @@ class RoutTesting < Minitest::Test
     assert_equal 200, last_response.status
     assert_includes last_response.body, "harry: 1.0"
   end
+
+  # -------------------------- ROUND NUMBER ---------------------- #
+
+  def test_round_increments
+    get "/players"
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "Round 0"
+
+    get "/new_round"
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "Round 1"
+
+    post "/finish"
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "Round 1"
+  end
 end

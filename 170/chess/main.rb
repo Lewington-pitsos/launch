@@ -59,7 +59,7 @@ end
 get "/new_round" do
   playing = session[:list].select {|i| i.playing}
   list = Sorter.new(playing)
-  @round = Round.new(list.pairs)
+  @round = Round.new(list.pair, session[:round_no])
   session[:round] = @round
 
   erb :round
@@ -85,6 +85,8 @@ end
 
 post "/finish" do
   session[:round].finish_round
+  session[:round_no] = session[:round].number
+  autosave
 
   redirect "/players"
 end
@@ -92,18 +94,22 @@ end
 # ------------------------ SAVING/LOADING Files ---------------------------- #
 
 post "/tourniment/new" do
-  write_yaml session[:list], "#{data_path}#{session[:current_name]}"
+  write_yaml [session[:list], 0], "#{data_path}#{session[:current_name]}"
   create_file params[:filename]
-  
+
   load_file params[:filename] + ".yaml"
   session[:success] = "New Tourniment Created: #{params[:filename]}"
   redirect "/players"
 end
 
 post "/autosave" do
-  write_yaml session[:list], "#{data_path}#{session[:current_name]}"
+  autosave
   session[:success] = "File Written"
   redirect "/players"
+end
+
+def autosave
+  write_yaml [session[:list], session[:round_no]], "#{data_path}#{session[:current_name]}"
 end
 
 def check_file name
@@ -111,7 +117,7 @@ def check_file name
   check name, files
 end
 
-def create_file input, state = []
+def create_file input, state = [[], 0]
   name = input.strip
 
   if session[:error] = check_file(name)
@@ -122,7 +128,7 @@ def create_file input, state = []
 end
 
 post "/save" do
-  create_file params[:filename], session[:list]
+  create_file params[:filename], [session[:list], session[:round_no]]
   session[:success] = "File Written"
   redirect "/players"
 end
@@ -133,7 +139,9 @@ get "/load" do
 end
 
 def load_file name
-  session[:list] = read_yaml "#{data_path}#{name}"
+  file = (read_yaml "#{data_path}#{name}")
+  session[:list] = file[0]
+  session[:round_no] = file[1]
   session[:current_name] = name
 end
 
