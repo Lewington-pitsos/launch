@@ -1,6 +1,6 @@
-\copy bidders (id, name) FROM 'bidders.csv' DELIMITER ',' CSV HEADER;
-\copy items (id, name, start_price, sale_price) FROM 'items.csv' DELIMITER ',' CSV HEADER;
-\copy bids (id, bidder_id, item_id, amount) FROM 'bids.csv' DELIMITER ',' CSV HEADER;
+\copy bidders (id, name) FROM 'exam/bidders.csv' DELIMITER ',' CSV HEADER;
+\copy items (id, name, start_price, sale_price) FROM 'exam/items.csv' DELIMITER ',' CSV HEADER;
+\copy bids (id, bidder_id, item_id, amount) FROM 'exam/bids.csv' DELIMITER ',' CSV HEADER;
 
 
 SELECT *  FROM(SELECT name, count(amount)
@@ -68,3 +68,5 @@ SELECT name, count(bids.*)
   SELECT id FROM items
   WHERE ROW('Painting', 100.00, 250.00) =
     ROW(name, start_price, sale_price);
+
+SELECT bidder_id, item_id FROM bids GROUP BY bidder_id, item_id;

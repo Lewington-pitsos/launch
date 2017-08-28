@@ -59,7 +59,7 @@ a {
 /* -------------------------------------------------------------------- */
 
 html{
-  font-size: 18px;
+  font-size: 16px;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -78,11 +78,11 @@ nav {
 nav ul {
   width: 100%;
   position: relative;
-  margin-top: 71px;
+  margin-top: 63px;
 }
 
-ul.completed {
-  margin-top: 41px;
+nav ul.completed {
+  margin-top: 47px;
 }
 
 .completed li {
@@ -91,60 +91,56 @@ ul.completed {
 }
 
 .completed .title {
+  padding-top: 12px;
   padding-bottom: 18px;
 }
 
-nav li {
-  padding: 14px 0 14px 138px;
+nav .completed li {
+  padding: 11px 0 13px 138px;
 }
 
+nav .remaining li {
+  padding: 13px 0 11px 138px;
+}
 nav th:last-child, nav td:last-child {
   padding-right: 30px;
 }
 
 nav li.title {
+  font-size: 18px;
   text-decoration: none;
   color: white;
-  padding: 16px 0 16px inherit;
-  letter-spacing: 2px;
+  padding: 14px 0 13px 138px;
+  letter-spacing: 1px;
 }
 
 nav li.title p {
   display: inline-block;
 }
 
-/* I couldn't work out how to get the longer numbers
-right (i.e. the circle expands, but it doesn't look quite like the specs) so I just manually adjusted it to look like the specs in headers. Maybe this has something to do with my lack of helvetica... */
-
 nav .count {
-  padding: 1px 5px 1px 3px;
   float: right;
-  margin-right: 29px;
+  margin-top: -1px;
+  margin-right: 32px;
 }
+
+nav .title .count  {
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  padding-left: 3px;
+  font-size: 0.88rem;
+}
+
 
 nav li.active {
   background: #383f5f;
   color: white;
 }
 
-/* Tiny bit of optional stuff, makes any row look "active" when we hover over it. I tred to use the hamburger thing to actually let the user select which row is active, but it's being weird and I suspect it's something really annoying and complicated to do with tables, so I stopped.
-
-nav tr:not(:first-child):hover {
-  background: #383f5f;
-  color: white;
-}
-
-nav tr:not(:first-child):hover .count {
-  color: white;
-  background-color: #148fd5;
-}
-
-*/
-
 nav img {
   position: absolute;
   left: 102px;
-  top: 5px;
+  top: 8px;
 }
 
 section {
@@ -154,9 +150,9 @@ section {
 }
 
 section header {
-
-  padding: 0 0 44px 12px;
-  font-size: 1.31rem;
+  letter-spacing: 0.6px;
+  padding: 0 0 41px 12px;
+  font-size: 21px; font-size: 1.3125rem;
 }
 
 .count {
@@ -165,8 +161,8 @@ section header {
   color: white;
   background-color: #148fd5;
   margin: 0 2px 0 20px;
-  padding: 1px 5px 1px 5px;
-  border-radius: 9px;
+  padding: 2px 5px 2px 5px;
+  border-radius: 900px;
   letter-spacing: 0;
 }
 
@@ -176,11 +172,13 @@ section header {
 }
 
 section .count {
-  vertical-align: 3px;
+  padding: 1px 5px 1px 6px;
+  vertical-align: 2.5px;
+  letter-spacing: 0.5px;
 }
 
 section header img {
-  margin: 23px 0 36px 0;
+  margin: 23px 0 30px 0;
   visibility: hidden;
 }
 
@@ -189,9 +187,14 @@ section li a {
   float: right;
 }
 
+section h3 a {
+  margin-left: -2px;
+}
+
 section li {
+  box-sizing: border-box;
   width: 100%;
-  padding: 17px 0 17px 12px;
+  padding: 16px 0 15px 12px;
   border-top: 1px solid #e7e7e7;
 }
 
@@ -201,16 +204,13 @@ section .done label {
 }
 
 section > h3{
-  margin: 0 0 16px 12px;
+  margin: 0 0 14px 12px;
   color: #3498d8;
+  letter-spacing: 0.6px;
 }
 
 section h3 img, section .box {
   margin-right: 12px;
-}
-
-section table {
-  width: 100%;
 }
 
 .box {
@@ -232,12 +232,7 @@ section li label:hover {
   color: #148fd5;
   cursor: pointer;
 }
-/* alternate :hover colour for finished todo items
-section .done label:hover {
-  color: Salmon;
-}
 
-*/
 /* -----------------------MODAL------------------------- */
 
 .form, .dimmer {
@@ -246,11 +241,12 @@ section .done label:hover {
 
 .form {
   position: absolute;
-  margin-left: 50px;
   max-width: 575px;
   min-width: 350px;
-  top: 13.1%;
-  right: 15.4%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 107px;
   background: white;
   padding: 35px 38px 39px 24px;
 }
@@ -286,17 +282,22 @@ section .done label:hover {
 .form input, .form textarea, .form select  {
   box-sizing: border-box;
   width: 100%;
-  font-size: inherit;
+  font-size: 16px; font-size: 1rem;
   font-family: inherit;
   padding: 10px 14px;
+  border: 1px solid #b3b3b3;
 }
 
 .form select {
   width: 120px;
-  -webkit-appearance: none;
+  /*the following 2 lines cause warnings in validation, but I'm assuming warnings are ok */
+    -webkit-appearance: none;
+       -moz-appearance: none;
   background: url("images/select-arrows.png") no-repeat;
   background-position: 95% 50%;
 }
+
+/* apparently these drop down boxes look like they have rounded corners in some circumstances but I can't seem to replicate the effect in any of the browsers I have tested on */
 
 .slash-spacer {
   margin: 0 8px 0 9px;
@@ -327,7 +328,7 @@ option:disabled {
 }
 
 .form-buttons {
-    margin-left: 108px;
+  margin-left: 108px;
 }
 
 .form a {
@@ -375,41 +376,8 @@ option:disabled {
   }
 
   section {
+    height: 100%;
     margin-left: 0;
     min-width: 290px;
   }
-
-  .form {
-    top: 5%;
-    margin-left: 0;
-    position: fixed;
-    left: 6%;
-  }
-
-  /* some extra optional stuff to save some space
-  as we get thinner. everything functions as specified with or without it.
-
-
-  nav {
-    width: 250px;
-  }
-
-  section {
-    padding-right: 30px;
-    min-width: 220px;
-  }
-
-  #nav-bar:checked ~ section {
-    margin-left: 250px;
-  }
-
-  nav th:first-child, nav td:first-child {
-    padding-left: 60px;
-  }
-
-  nav img {
-    left: 22px;
-  }
-
-    */
 }
