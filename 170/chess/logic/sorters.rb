@@ -56,7 +56,7 @@ class Round
 
   attr_accessor :pairs, :number
 
-  def initialize pairs, number
+  def initialize pairs, number=0
     @pairs = pairs
     @number = number + 1
   end

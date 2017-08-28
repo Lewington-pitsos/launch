@@ -34,7 +34,7 @@ class Pair
   end
 
   def undo_win player
-    if winner = players[player]
+    if winner == player && winner = players[player] # i.e. player is actually a key in players
       winner.score -= 1
       undo_tiebreak
     end
