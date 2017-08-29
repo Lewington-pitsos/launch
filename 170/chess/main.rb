@@ -12,10 +12,9 @@ configure do
   enable :sessions
   set :session_secret, "secret"
   use Rack::Session::Cookie, key: 'rack.session',
-                         path: '/',
-                         secret: 'secret'
+                             path: '/',
+                             secret: 'secret'
 end
-
 
 not_found do
   redirect "/load"
@@ -34,17 +33,15 @@ def check_score score
 end
 
 def check_player name
-  players = session[:list].map {|i| i.name}
+  players = session[:list].map(&:name)
   check name, players
 end
 
 get "/new_player" do
-
   erb :new_player
 end
 
 post "/new_player" do
-
   if session[:error] = check_player(params[:name].strip)
     redirect "new_player"
   end
@@ -54,7 +51,7 @@ post "/new_player" do
   end
 
   converted_score = convert_score params[:score].to_f
-  session[:list] << Player.new({name: params[:name], score: converted_score} )
+  session[:list] << Player.new(name: params[:name], score: converted_score)
 
   session[:success] = "#{params[:name]} added to tourniment"
 
@@ -67,7 +64,9 @@ get "/players" do
 end
 
 post "/delete_player/:name" do
-  session[:list].each {|i| session[:list].delete(i) if i.name == params[:name]}
+  session[:list].each do |player|
+    session[:list].delete(player) if player.name == params[:name]
+  end
 
   redirect "/players"
 end
@@ -80,7 +79,6 @@ get "/edit_player/:name/:score" do
 end
 
 post "/edit_player/:old_name/:old_score" do
-
   if params[:old_name] != params[:name]
     if session[:error] = check_player(params[:name].strip)
       redirect "/edit_player/#{params[:old_name]}/#{params[:old_score]}"
@@ -90,7 +88,9 @@ post "/edit_player/:old_name/:old_score" do
   if session[:error] = check_score(params[:score])
     redirect "/edit_player/#{params[:old_name]}/#{params[:old_score]}"
   end
-  to_edit = session[:list].select {|player| player.name == params[:old_name] }[0]
+  to_edit = session[:list].select do |player|
+    player.name == params[:old_name]
+  end[0]
 
   to_edit.score = convert_score params[:score].to_f
   to_edit.name = params[:name]
@@ -103,7 +103,7 @@ end
 # --------------------------- ROUND RELATED ----------------------------- #
 
 get "/new_round" do
-  playing = session[:list].select {|i| i.playing}
+  playing = session[:list].select(&:playing)
   list = Sorter.new(playing)
   @round = Round.new(list.pair, session[:round_no])
   session[:round] = @round
@@ -155,21 +155,19 @@ post "/autosave" do
 end
 
 def autosave
-  write_yaml [session[:list], session[:round_no]], "#{data_path}#{session[:current_name]}"
+  write_yaml [session[:list], session[:round_no]],
+             "#{data_path}#{session[:current_name]}"
 end
 
 def check_file name
-  files = Dir.glob("#{data_path}*").map {|file| File.basename(file, ".yaml")}
+  files = Dir.glob("#{data_path}*").map { |file| File.basename(file, ".yaml") }
   check name, files
 end
 
 def create_file input, state = [[], 0]
   name = input.strip
 
-  if session[:error] = check_file(name)
-    redirect "/players"
-  end
-
+  redirect "/players" if session[:error] = check_file(name)
   write_yaml state, "#{data_path}#{name + '.yaml'}"
 end
 
@@ -180,7 +178,7 @@ post "/save" do
 end
 
 get "/load" do
-  @files = Dir.glob("#{data_path}*").map {|file| File.basename(file)}
+  @files = Dir.glob("#{data_path}*").map { |file| File.basename(file) }
   erb :file_list
 end
 
@@ -192,7 +190,6 @@ def load_file name
 end
 
 post "/load/:filename" do
-
   load_file params[:filename]
 
   session[:success] = "#{params[:filename]} successfully loaded"
@@ -210,7 +207,6 @@ end
 # ----------------------------------- MISC --------------------------------- #
 
 post "/toggle/:name" do
-
   session[:list].each do |player|
     player.toggle if player.name == params[:name]
   end
@@ -251,7 +247,5 @@ def check name, list
     "That name was invalid."
   elsif list.include?(name)
     "That name already exists, please use a new one"
-  else
-    nil
   end
 end
