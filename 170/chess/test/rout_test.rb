@@ -52,7 +52,7 @@ class RoutTesting < Minitest::Test
   def test_load_screen
     get "/load"
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "<h3>Tourniment Files: </h3>"
+    assert_includes last_response.body, "Tournament Files:"
   end
 
   # -------------------------- ADDING/DELETING Players ---------------------- #
@@ -85,6 +85,29 @@ class RoutTesting < Minitest::Test
     assert_includes last_response.body, "That name already exists, please use a new one"
   end
 
+  def test_add_weird_score_inputs
+    post "/new_player", name: "Igor", score: ""
+    assert_equal 302, last_response.status
+
+    get "/players"
+    assert_equal 200, last_response.status
+    assert_match(/Igor:\s*0.0/, last_response.body)
+
+    post "/new_player", name: "Beatrix", score: "423f"
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That score was invalid."
+
+    post "/new_player", name: "Lestrade", score: "0.13"
+    assert_equal 302, last_response.status
+
+    get "/players"
+    assert_equal 200, last_response.status
+    assert_match(/Lestrade:\s*0.0/, last_response.body)
+  end
+
   def test_delete_player
     post "/delete_player/sam"
     assert_equal 302, last_response.status
@@ -92,6 +115,84 @@ class RoutTesting < Minitest::Test
     get last_response["Location"]
     assert_equal 200, last_response.status
     refute_includes last_response.body, "sam"
+  end
+
+  def test_edit_player_rout
+    get "/edit_player/sam/0.0"
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "sam"
+    assert_includes last_response.body, "0.0"
+  end
+
+  def test_edit_player_works
+    post "/edit_player/sam/0.0", name: "Igor", score: "3"
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_match(/Igor:\s*3.0/, last_response.body)
+    refute_includes last_response.body, "sam"
+  end
+
+  def test_edit_keeping_same_name
+    post "/edit_player/sam/0.0", name: "sam", score: "3"
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_match(/sam:\s*3.0/, last_response.body)
+  end
+
+  def test_edit_weird_score_inputs
+    post "/edit_player/sam/0.0", name: "sam", score: ""
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_match(/sam:\s*0.0/, last_response.body)
+
+    post "/edit_player/sam/0.0", name: "sam", score: "423f"
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That score was invalid."
+
+    post "/edit_player/sam/0.0", name: "sam", score: "0.13"
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_match(/sam:\s*0.0/, last_response.body)
+  end
+
+  def test_edit_blocks_bad_names
+    post "/edit_player/sam/0.0", name: "  %%:", score: "3"
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That name was invalid."
+
+    post "/edit_player/sam/0.0", name: "  ", score: "3"
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That name was invalid."
+
+    post "/edit_player/sam/0.0", name: "", score: "3"
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That name was invalid."
+
+    post "/edit_player/sam/0.0", name: "-", score: "3"
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That name was invalid."
+  end
+
+  def test_edit_blocks_taken_names
+    post "/edit_player/sam/0.0", name: "bill", score: "3"
+    get last_response["Location"]
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "That name already exists, please use a new one"
   end
 
   # -------------------------- SAVING/LOADING ---------------------- #
@@ -166,7 +267,7 @@ class RoutTesting < Minitest::Test
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "class=\"not_playing\""
+    assert_includes last_response.body, "not_playing"
 
     get "/new_round"
     assert_equal 200, last_response.status
@@ -176,43 +277,50 @@ class RoutTesting < Minitest::Test
   def test_add_permenent_points
     get "/new_round"
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "harry: 1.0"
+    assert_includes last_response.body, "harry:"
+    assert_includes last_response.body, "1.0"
 
     post "/win/harry"
     assert_equal 302, last_response.status
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "harry: 2.0"
+    assert_includes last_response.body, "harry:"
+    assert_includes last_response.body, " 2.0"
 
     post "/finish"
     assert_equal 302, last_response.status
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "harry: 2.0"
-    assert_includes last_response.body, "bob: 0.5"
-    assert_includes last_response.body, "sam: 0.5"
+    assert_includes last_response.body, "harry:"
+    assert_includes last_response.body, " 2.0"
+    assert_includes last_response.body, "bob:"
+    assert_includes last_response.body, " 0.5"
   end
 
   def test_undo_win
     get "/new_round"
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "harry: 1.0"
+    assert_includes last_response.body, "harry:"
+    assert_includes last_response.body, "1.0"
 
     post "/win/harry"
     assert_equal 302, last_response.status
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "harry: 2.0"
+    assert_includes last_response.body, "harry:"
+    assert_includes last_response.body, " 2.0"
+
 
     post "/undo_win/harry"
     assert_equal 302, last_response.status
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "harry: 1.0"
+    assert_includes last_response.body, "harry:"
+    assert_includes last_response.body, "1.0"
   end
 
   # -------------------------- ROUND NUMBER ---------------------- #
@@ -220,17 +328,17 @@ class RoutTesting < Minitest::Test
   def test_round_increments
     get "/players"
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "Round 0"
+    assert_match(/Round\s*0/, last_response.body)
 
     get "/new_round"
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "Round 1"
+    assert_match(/Round\s*1/, last_response.body)
 
     post "/finish"
     assert_equal 302, last_response.status
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "Round 1"
+    assert_match(/Round\s*1/, last_response.body)
   end
 end

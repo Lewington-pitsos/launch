@@ -23,6 +23,16 @@ end
 
 # ------------------------ ADDING/DELETING players ------------------------ #
 
+def convert_score score
+  (score * 2).round / 2.0
+end
+
+def check_score score
+  unless score.to_f.to_s == score || score.to_i.to_s == score || score == ""
+    "That score was invalid."
+  end
+end
+
 def check_player name
   players = session[:list].map {|i| i.name}
   check name, players
@@ -39,7 +49,12 @@ post "/new_player" do
     redirect "new_player"
   end
 
-  session[:list] << Player.new({name: params[:name], score: params[:score].to_f})
+  if session[:error] = check_score(params[:score])
+    redirect "/new_player"
+  end
+
+  converted_score = convert_score params[:score].to_f
+  session[:list] << Player.new({name: params[:name], score: converted_score} )
 
   session[:success] = "#{params[:name]} added to tourniment"
 
@@ -72,9 +87,12 @@ post "/edit_player/:old_name/:old_score" do
     end
   end
 
+  if session[:error] = check_score(params[:score])
+    redirect "/edit_player/#{params[:old_name]}/#{params[:old_score]}"
+  end
   to_edit = session[:list].select {|player| player.name == params[:old_name] }[0]
 
-  to_edit.score = params[:score].to_f
+  to_edit.score = convert_score params[:score].to_f
   to_edit.name = params[:name]
 
   session[:success] = "Details Updated for: #{params[:name]}"
