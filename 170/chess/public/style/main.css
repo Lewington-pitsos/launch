@@ -3,19 +3,7 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -23,25 +11,31 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
+
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol, ul {
   list-style: none;
 }
+
 blockquote, q {
   quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before, blockquote:after, q:before, q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -52,11 +46,13 @@ a {
   color: inherit;
 }
 
+
 /* -------------------------------------------------------------------- */
 
 html {
   font-size: 16px;
 }
+
 
 /* ------------------------ GENERAL --------------- */
 
@@ -64,6 +60,31 @@ h2 {
   font-size: 2.2rem;
   margin-bottom: 50px;
 }
+
+.red {
+  border: 1px solid rgb(170, 38, 34);
+  background: rgba(250, 128, 114, 0.5);
+}
+
+.brown {
+  background: rgba(90, 50, 90, 0.3);
+  border: 1px solid rgb(100, 70, 110);
+}
+
+.green {
+  border: 1px solid rgb(43, 88, 43);
+  background: rgba(143, 188, 143, 0.4);
+}
+
+.grey {
+  background-color: lightgrey;
+  border: 1px solid grey;
+}
+
+button:hover, label:hover {
+  cursor: pointer;
+}
+
 
 /* ------------------------ PLAYER LIST --------------- */
 
@@ -114,7 +135,6 @@ li.player-list:before {
   clear: both;
 }
 
-
 form.player-name {
   display: border-box;
   margin-right: 100px;
@@ -122,7 +142,7 @@ form.player-name {
   width: auto;
 }
 
-.player-name button{
+.player-name button {
   text-align: left;
   display: border-box;
   width: 100%;
@@ -148,50 +168,37 @@ button.delete-player {
   border: none;
 }
 
-
-.new-player, .new-round {
+.prominent {
   display: block;
   width: 250px;
   height: 60px;
   margin-bottom: 10px;
 }
 
-.new-player {
-  border: 1px solid rgb(170, 38, 34);
-  background-color: rgba(250, 128, 114, 0.5);
-}
-
-.new-round {
-  border: 1px solid rgb(43, 88, 43);
-  background: rgba(143, 188, 143, 0.4);
-}
-
 .load-related {
   width: 45%;
   float: right;
-  min-width: 375px;
   padding: 30px 0 30px 30px;
   border-color: rgba(90, 50, 90, 0.3);
+  min-width: 370px;
 }
 
-ul.load-list li {
+ul.menu li {
   height: 80px;
   margin: 30px 0;
 }
 
-ul.load-list form {
+ul.menu form {
   height: 100%;
 }
 
-ul.load-list button, ul.load-list label {
+ul.menu button, ul.menu label {
   font-size: 0.8rem;
   padding: 20px;
-  background: rgba(90, 50, 90, 0.3);
-  border: 1px solid rgb(100, 70, 110);
   height: 80%;
 }
 
-ul.load-list label {
+ul.menu label {
   align-items: center;
   justify-content: center;
   display: flex;
@@ -201,14 +208,15 @@ ul.load-list label {
   font-family: sans-serif;
   margin-right: 127px;
   padding: 0 10px;
+  min-width: 220px;
 }
 
-ul.load-list label * {
+ul.menu label * {
   display: inline-block;
   margin-bottom: 4px;
 }
 
-ul.load-list label p {
+ul.menu label p {
   margin-right: 8px;
 }
 
@@ -217,76 +225,62 @@ button.confirm {
   margin-right: 0;
 }
 
-
-/* ul.load-list li:last-child {
-  padding-bottom: 80px;
-  border-bottom: 1px solid rgba(90, 50, 90, 0.3);
+.menu {
+  margin-bottom: 20px;
+  border-bottom: 1px solid white;
 }
-*/
+
 
 /* --------------------------- FILE LIST --------------- */
 
-.file-list {
-  border-left: 1px solid rgba(90, 50, 90, 0.3);
+.file-list, .file-list .menu {
+  border-color: rgba(90, 50, 90, 0.3);
 }
 
-.file-list li:last-child {
-  padding-bottom: 30px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(90, 50, 90, 0.3);
+.file-list {
+  min-width: 360px;
 }
 
 .file-list form {
   display: inline-block;
 }
 
-.file-list li form:first-child > button {
+button.file-name {
   width: 200px;
   margin-right: 30px;
 }
 
-.file-list > a {
+.file.list>.back-link {
   color: rgb(100, 70, 110);
+}
+
+.back-link {
   text-decoration: underline;
 }
+
 
 /* --------------------------- NEW PLAYER --------------- */
 
 .player-form {
   border-color: rgba(250, 128, 114, 0.5);
-  max-width: 550px;
-  min-width: 425px;
+  max-width: 500px;
+  min-width: 350px;
 }
 
-.player-form label * {
-  margin-left: 8px;
-  margin-bottom: 4px;
+.player-form .menu {
+  border-color: rgba(250, 128, 114, 0.5);
 }
 
-.player-form ul.load-list button, .player-form ul.load-list label {
-    border: 1px solid rgb(170, 38, 34);
-    background-color: rgba(250, 128, 114, 0.5);
-}
-
-.player-form li:last-child {
-  padding-bottom: 30px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(250, 128, 114, 0.5);
-}
-
-.player-form label {
-  display: inline-block;
-}
-
-.player-form > a {
+.player-form>.back-link {
   color: rgb(170, 38, 34);
-  text-decoration: underline;
 }
+
 
 /* --------------------------- ROUND --------------- */
+
 .round {
   border-color: rgba(143, 188, 143, 0.4);
-  min-width: 420px;
+  min-width: 296px;
 }
 
 .round ol {
@@ -302,43 +296,42 @@ button.confirm {
   align-items: center;
 }
 
-
-.round > a {
+.round .back-link {
   color: rgb(43, 88, 43);
-  text-decoration: underline;
 }
 
 .round li form {
   width: 30%;
+  min-width: 100px;
   display: inline-block;
 }
 
 .round li button {
   width: 100%;
   height: 65px;
-  background-color: lightgrey;
-  border: 1px solid grey;
 }
 
 .first {
   border-bottom: 1px solid black;
   margin-bottom: 20px;
-}
-
-.round h3 {
   font-size: 1.5rem;
 }
 
-.round > form {
+.round>form {
   padding-bottom: 30px;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(143, 188, 143, 0.4);
 }
 
-.round .winner > button {
+.round .winner>button {
   background-color: rgba(143, 188, 143, 0.4);
   border: 1px solid rgb(43, 88, 43);
 }
+
+.round form:not(.winner)[action*="/undo_win/"] button:hover {
+  cursor: default;
+}
+
 
 /* --------------------------- LAYOUT --------------- */
 
@@ -372,21 +365,43 @@ h3.error, h3.success {
     width: auto;
     float: none;
     margin-bottom: 5px;
-    max-width: 570px;
+    max-width: 500px;
+    min-width: 340px;
   }
-
+  .load-related ul.menu li {
+    height: 65px;
+    margin: 10px;
+  }
+  .load-related ul.menu button {
+    padding: 10px;
+  }
+  .load-related ul.menu label {
+    margin-right: 105px;
+    min-width: 200px;
+  }
+  .load-related .confirm {
+    margin-right: 20px
+  }
   .ladder, .file-list, .load-related, .player-form, .round {
     padding-left: 15px;
   }
-
   main {
     padding-left: 10px;
   }
-
   .ladder {
-    margin-right: 30px;
+    padding-right: 8px;
+    margin-right: 0;
     border-color: rgba(143, 188, 143, 0.4);
-    min-width: 330px;
+    min-width: 310px;
   }
+  h3.error, h3.success {
+    padding: 10px;
+    border-radius: 0 0 7px 7px;
+  }
+}
 
+@media screen and (max-width: 420px) {
+  main {
+    padding-right: 10px;
+  }
 }

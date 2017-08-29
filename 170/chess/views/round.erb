@@ -1,33 +1,36 @@
 <div class="round">
-<h2>Round <%= @round.number %></h2>
-<ol>
-  <li class="first">
-    <h3>White</h3>
-    <h3>Black</h3>
-  </li>
-  <% @round.pairs.each do |pair| %>
+  <h2>Round
+    <%= @round.number %></h2>
+  <ol>
+    <li class="first">
+      <h3>White</h3>
+      <h3>Black</h3>
+    </li>
+    <% @round.pairs.each do |pair| %>
 
     <li class="unfinished">
       <form action="<%= check_finished pair %><%= pair.white.name %>" method="post" class="<%= is_winner pair.white.name, pair %>">
-        <button type="submit" value="Submit" class="button">
-          <p><%= pair.white.name %>: <%= pair.white.score %></p>
+        <button type="submit" value="Submit" class="grey">
+          <p><%= pair.white.name %>:
+            <%= pair.white.score %></p>
         </button>
       </form>
       V.S.
       <form action="<%= check_finished pair %><%= pair.black.name %>" method="post" class="<%= is_winner pair.black.name, pair %>">
-        <button type="submit" value="Submit">
-          <p><%= pair.black.name %>: <%= pair.black.score %></p>
+        <button type="submit" value="Submit" class="grey">
+          <p><%= pair.black.name %>:
+            <%= pair.black.score %></p>
         </button>
       </form>
     </li>
 
-  <% end %>
-</ol>
-<form action="/finish" method="post">
-  <button type="submit" value="Submit" class="new-player">
-    <p>Finish Round</p>
-  </button>
-</form>
+    <% end %>
+  </ol>
+  <form action="/finish" method="post">
+    <button type="submit" value="Submit" class="prominent grey">
+      <p>Finish Round</p>
+    </button>
+  </form>
 
-<a href="/players">Back to Players</a>
+  <a class="back-link" href="/players">Return to Players</a>
 </div>

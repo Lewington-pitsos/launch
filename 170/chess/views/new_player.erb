@@ -1,20 +1,22 @@
 <div class="player-form">
-<h2>Enter Player Details:</h2>
-<ul class="load-list">
-<li>
-<form action="/new_player" method="post">
-<label><p>Name:</p>
-  <input name="name" type="text" />
-</label>
-</li>
-<li>
-    <button type="submit" value="submit" class="confirm">Confirm</button>
-<label><p>Score:</p>
-  <input name="score" type="text" />
-</label>
+  <h2>Enter Player Details:</h2>
+  <ul class="menu">
+    <li>
+      <form action="/new_player" method="post">
+        <label class="red">
+          <p>Name:</p>
+          <input name="name" type="text"/>
+        </label>
+      </li>
+      <li>
+        <button type="submit" value="submit" class="confirm red">Confirm</button>
+        <label class="red">
+          <p>Score:</p>
+          <input name="score" type="text"/>
+        </label>
 
-</form>
-</li>
-</ul>
-<a href="/players">Return to Player List</a>
+      </form>
+    </li>
+  </ul>
+  <a class="back-link" href="/players">Return to Player List</a>
 </div>

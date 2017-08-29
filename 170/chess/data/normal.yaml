@@ -1,32 +1,32 @@
 ---
 - - !ruby/object:Player
-    score: 5.0
-    tiebreak: 27.5
+    score: 8.5
+    tiebreak: 65.0
     name: bob
     playing: true
-    last_colour: black
+    last_colour: white
   - !ruby/object:Player
-    score: 3.0
-    tiebreak: 8.0
+    score: 6.5
+    tiebreak: 55.5
     name: harry
     playing: true
-    last_colour: white
+    last_colour: black
   - !ruby/object:Player
-    score: 2.0
-    tiebreak: 4.0
+    score: 7.0
+    tiebreak: 26.5
     name: daniel
     playing: true
-    last_colour: black
-  - !ruby/object:Player
-    score: 2.5
-    tiebreak: 5.5
-    name: sarah
-    playing: true
     last_colour: white
   - !ruby/object:Player
-    score: 2.0
-    tiebreak: 16.5
-    name: bill
+    score: 5.5
+    tiebreak: 41.5
+    name: sarah
     playing: true
     last_colour: black
-- 0
+  - !ruby/object:Player
+    score: 7.0
+    tiebreak: 25.5
+    name: bill
+    playing: true
+    last_colour: white
+- 1
