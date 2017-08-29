@@ -1,0 +1,22 @@
+<div class="player-form edit_player">
+  <h2><%= @player_name %>:</h2>
+  <ul class="menu">
+    <li>
+      <form action="/edit_player/<%= @player_name %>/<%= @score %>" method="post">
+        <label class="red">
+          <p>Reset Name:</p>
+          <input name="name" type="text" value="<%= @player_name %>">
+        </label>
+      </li>
+      <li>
+        <button type="submit" value="submit" class="confirm red">Confirm</button>
+        <label class="red">
+          <p>Reset Score:</p>
+          <input name="score" type="text"value="<%= @score %>">
+        </label>
+
+      </form>
+    </li>
+  </ul>
+  <a class="back-link" href="/players">Return to Player List</a>
+</div>

@@ -57,6 +57,31 @@ post "/delete_player/:name" do
   redirect "/players"
 end
 
+get "/edit_player/:name/:score" do
+  @player_name = params[:name]
+  @score = params[:score]
+
+  erb :edit_player
+end
+
+post "/edit_player/:old_name/:old_score" do
+
+  if params[:old_name] != params[:name]
+    if session[:error] = check_player(params[:name].strip)
+      redirect "/edit_player/#{params[:old_name]}/#{params[:old_score]}"
+    end
+  end
+
+  to_edit = session[:list].select {|player| player.name == params[:old_name] }[0]
+
+  to_edit.score = params[:score].to_f
+  to_edit.name = params[:name]
+
+  session[:success] = "Details Updated for: #{params[:name]}"
+
+  redirect "/players"
+end
+
 # --------------------------- ROUND RELATED ----------------------------- #
 
 get "/new_round" do

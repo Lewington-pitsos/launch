@@ -137,7 +137,7 @@ li.player-list:before {
 
 form.player-name {
   display: border-box;
-  margin-right: 100px;
+  margin-right: 200px;
   height: 100%;
   width: auto;
 }
@@ -157,9 +157,10 @@ li.not_playing .player-name {
 }
 
 form.delete-form {
-  width: 100px;
+  width: 80px;
   float: right;
   text-align: right;
+  margin-left: 15px;
 }
 
 button.delete-player {
@@ -265,6 +266,10 @@ button.file-name {
   border-color: rgba(250, 128, 114, 0.5);
   max-width: 500px;
   min-width: 350px;
+}
+
+.player-form.edit_player {
+  min-width: 370px;
 }
 
 .player-form .menu {
