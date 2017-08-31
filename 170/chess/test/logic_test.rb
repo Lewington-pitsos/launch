@@ -116,6 +116,17 @@ class PlayerTest < Minitest::Test
     assert_equal("white", @sarah.last_colour)
   end
 
+  def test_more_of_one_colour
+    Pair.new(@sarah, @bill)
+    Pair.new(@daniel, @harry)
+    sorter = Sorter.new([@bob, @daniel, @sarah, @sam])
+    sorter.pair
+    assert_equal("daniel", sorter.pairs[-1].white.name)
+    assert_equal("bob", sorter.pairs[-1].black.name)
+    assert_equal("sarah", sorter.pairs[0].black.name)
+    assert_equal("sam", sorter.pairs[0].white.name)
+  end
+
   #--------------------------- SORTER ---------------------------------------#
 
   def test_properly_sorted

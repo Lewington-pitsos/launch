@@ -43,10 +43,13 @@ class Sorter
     players.delete(opponent) unless opponent.name == "BYE"
   end
 
-  def find_opponent list, colour, index = 1
+  def find_opponent list, colour, index=1
     possible_opponent = list[index]
-    if index == list.length
+    if list.length == 1
       Player.new(name: "BYE")
+    elsif index == list.length
+      # this covers the case where there are > 2 more player of one colour. We make the next-highest player opponent, regardless of their colour. The higher of player or opponent will end up black.
+      list[1]
     elsif !colour || (possible_opponent.last_colour != colour)
       possible_opponent
     else
