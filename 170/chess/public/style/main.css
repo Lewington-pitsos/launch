@@ -212,6 +212,11 @@ ul.menu label {
   min-width: 220px;
 }
 
+.load-related ul.menu form.new-tournament {
+  width: 85%;
+  min-width: 340px;
+}
+
 ul.menu label * {
   display: inline-block;
   margin-bottom: 4px;
@@ -251,7 +256,26 @@ button.file-name {
   margin-right: 30px;
 }
 
-.file.list>.back-link {
+.file-list button.execute {
+  box-sizing: border-box;
+  padding: 20px 0;
+  width: 80px;
+}
+
+.file-list form[action*="new"] {
+  width: 310px;
+}
+
+.file-list .menu label {
+  width: 200px;
+  min-width: 200px;
+}
+
+.file-list .menu label input {
+  width: 140px;
+}
+
+.file.list > .back-link {
   color: rgb(100, 70, 110);
 }
 
@@ -402,6 +426,10 @@ h3.error, h3.success {
   h3.error, h3.success {
     padding: 10px;
     border-radius: 0 0 7px 7px;
+  }
+
+  .load-related ul.menu form.new-tournament {
+    min-width: 304px;
   }
 }
 

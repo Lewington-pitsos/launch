@@ -7,13 +7,24 @@
         <button type="submit" value="Submit" class="file-name brown">
           <%= file %>
         </button>
-      </form>
-      <form action="/delete/<%= file %>" method="post" Error: source does not appear to be markup.>
-        <button type="submit" value="Submit" class="brown">Delete</button>
+      </form><!--
+    --><form action="/delete/<%= file %>" method="post"   Error: source does not appear to be markup.>
+        <button type="submit" value="Submit" class="brown execute">Delete</button>
       </form>
     </li>
 
     <% end %>
+    <li>
+      <form action="/tourniment/new" method="post">
+        <button type="submit" value="Submit" class="confirm brown execute">
+          <p>Confirm</p>
+        </button>
+        <label class="brown" id="test">
+          <p>New Tourniment:</p>
+          <input name="filename" type="text"/>
+        </label>
+      </form>
+    </li>
   </ul>
   <a class="back-link" href="/players">Return to Player List</a>
 </div>
