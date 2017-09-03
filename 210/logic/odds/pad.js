@@ -293,9 +293,47 @@ function substr(string, start, length) {
   return result;
 }
 
+function substring(string, start, end) {
+
+  if (end === undefined) {
+    end = string.length;
+  }
+
+  array = [start, end];
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] < 0 || isNaN(array[i])) {
+      array[i] = 0;
+    }
+
+    if (array[i] > string.length)  {
+      array[i] = string.length;
+    }
+  }
+
+  start = array[0];
+  end = array[1];
+
+  if (start === end) {
+    return '';
+  }
+
+  if (start > end) {
+    start = [end, end = start][0];
+  }
+
+  var result = '';
+  for (; (start < end && start < string.length); start++) {
+    result += string[start];
+  }
+
+  return result;
+}
+
 var string = 'hello world';
-console.log(substr(string, 2, 4))     // "llo "
-console.log(substr(string, -3, 2))    // "rl"
-console.log(substr(string, 8, 20))    // "rld"
-console.log(substr(string, 0, -20))   // ""
-console.log(substr(string, 0, 0))     // ""
+
+console.log(substring(string, 2, 4))    // "ll"
+console.log(substring(string, 4, 2))    // "ll"
+console.log(substring(string, 0, -1))   // ""
+console.log(substring(string, 2))       // "llo world"
+console.log(substring(string, 'a'))     // "hello world"
+console.log(substring(string, 8, 20))   // "rld"
