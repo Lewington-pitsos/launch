@@ -5,6 +5,10 @@ require_relative "logic/player"
 require_relative "logic/sorters"
 require_relative "logic/file_logic"
 
+INVALID_SCORE_MESSAGE = "That score was invalid."
+INVALID_NAME_MESSAGE = "That name was invalid."
+EXTANT_NAME_MESSAGE = "That name already exists, please use a new one"
+
 also_reload '/public/style/main.css'
 also_reload 'logic/player.rb'
 also_reload 'logic/sorters.rb'
@@ -28,7 +32,7 @@ end
 
 def check_score score
   unless score.to_f.to_s == score || score.to_i.to_s == score || score == ""
-    "That score was invalid."
+    INVALID_SCORE_MESSAGE
   end
 end
 
@@ -137,10 +141,10 @@ post "/finish" do
   redirect "/players"
 end
 
-# ------------------------ SAVING/LOADING Files ---------------------------- #
+# --------------------- DELETING/SAVING/LOADING Files ------------------------ #
 
 post "/tourniment/new" do
-  write_yaml [session[:list], 0], "#{data_path}#{session[:current_name]}"
+  write_yaml [session[:list], 0], "#{data_path}#{session[:current_name]}.yaml"
   create_file params[:filename]
 
   load_file params[:filename] + ".yaml"
@@ -156,7 +160,7 @@ end
 
 def autosave
   write_yaml [session[:list], session[:round_no]],
-             "#{data_path}#{session[:current_name]}"
+             "#{data_path}#{session[:current_name]}.yaml"
 end
 
 def check_file name
@@ -167,7 +171,10 @@ end
 def create_file input, state = [[], 0]
   name = input.strip
 
-  redirect "/players" if session[:error] = check_file(name)
+  if session[:error] = check_file(name)
+    redirect '/players' unless params[:source] == 'load'
+    redirect '/load'
+  end
   write_yaml state, "#{data_path}#{name + '.yaml'}"
 end
 
@@ -178,7 +185,7 @@ post "/save" do
 end
 
 get "/load" do
-  @files = Dir.glob("#{data_path}*").map { |file| File.basename(file) }
+  @files = Dir.glob("#{data_path}*").map { |file| File.basename(file, '.yaml') }
   erb :file_list
 end
 
@@ -186,11 +193,11 @@ def load_file name
   file = (read_yaml "#{data_path}#{name}")
   session[:list] = file[0]
   session[:round_no] = file[1]
-  session[:current_name] = name
+  session[:current_name] = name.gsub(/.yaml/, '')
 end
 
 post "/load/:filename" do
-  load_file params[:filename]
+  load_file params[:filename] + '.yaml'
 
   session[:success] = "#{params[:filename]} successfully loaded"
 
@@ -199,7 +206,8 @@ end
 
 post "/delete/:filename" do
   require "fileutils"
-  FileUtils.rm "#{data_path}#{params[:filename]}"
+  session[:current_name] = nil;
+  FileUtils.rm "#{data_path}#{params[:filename]}.yaml"
 
   redirect "/load"
 end
@@ -244,8 +252,8 @@ end
 
 def check name, list
   if name == "" || name == ".yaml" || name.match(/[^\w]/)
-    "That name was invalid."
+    INVALID_NAME_MESSAGE
   elsif list.include?(name)
-    "That name already exists, please use a new one"
+    EXTANT_NAME_MESSAGE
   end
 end

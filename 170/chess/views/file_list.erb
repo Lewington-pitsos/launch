@@ -19,12 +19,17 @@
         <button type="submit" value="Submit" class="confirm brown execute">
           <p>Confirm</p>
         </button>
-        <label class="brown" id="test">
+        <label class="brown">
           <p>New Tourniment:</p>
           <input name="filename" type="text"/>
+          <input type="hidden" name="source" value="load" />
         </label>
       </form>
     </li>
   </ul>
+  <% if session[:current_name] %>
+
   <a class="back-link" href="/players">Return to Player List</a>
+
+  <% end %>
 </div>

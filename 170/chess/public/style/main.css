@@ -289,7 +289,7 @@ button.file-name {
 .player-form {
   border-color: rgba(250, 128, 114, 0.5);
   max-width: 500px;
-  min-width: 350px;
+  min-width: 370px;
 }
 
 .player-form.edit_player {
@@ -398,7 +398,7 @@ h3.error, h3.success {
     min-width: 340px;
   }
   .load-related ul.menu li {
-    height: 65px;
+    height: 70px;
     margin: 10px;
   }
   .load-related ul.menu button {
@@ -429,7 +429,7 @@ h3.error, h3.success {
   }
 
   .load-related ul.menu form.new-tournament {
-    min-width: 304px;
+    min-width: 305px;
   }
 }
 
