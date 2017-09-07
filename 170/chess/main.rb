@@ -219,7 +219,7 @@ post "/toggle/:name" do
     player.toggle if player.name == params[:name]
   end
 
-  redirect "players"
+  redirect "/players"
 end
 
 # ----------------------------- MISC METHODS ------------------------------ #

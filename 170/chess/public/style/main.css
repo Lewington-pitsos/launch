@@ -42,8 +42,8 @@ table {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 
@@ -62,18 +62,21 @@ h2 {
 }
 
 .red {
-  border: 1px solid rgb(170, 38, 34);
+  background: rgb(250, 128, 114);
   background: rgba(250, 128, 114, 0.5);
+  border: 1px solid rgb(170, 38, 34);
 }
 
 .brown {
+  background: rgb(90, 50, 90);
   background: rgba(90, 50, 90, 0.3);
   border: 1px solid rgb(100, 70, 110);
 }
 
 .green {
-  border: 1px solid rgb(43, 88, 43);
+  background: rgb(143, 188, 143);
   background: rgba(143, 188, 143, 0.4);
+  border: 1px solid rgb(43, 88, 43);
 }
 
 .grey {
@@ -85,39 +88,45 @@ button:hover, label:hover {
   cursor: pointer;
 }
 
+input {
+  padding: 2px 4px;
+}
+
+button {
+  background: inherit;
+  border: none;
+}
+
 
 /* ------------------------ PLAYER LIST --------------- */
 
 .ladder, .file-list, .load-related, .player-form, .round {
-  box-sizing: border-box;
-  padding: 30px;
-  height: 85%;
   border-left: 1px solid white;
+  box-sizing: border-box;
+  height: 85%;
+  padding: 30px;
 }
 
 .ladder {
-  margin-right: 50%;
+  border-color: rgb(143, 188, 143);
   border-color: rgba(143, 188, 143, 0.4);
+  margin-right: 50%;
   min-width: 330px;
 }
 
-.button {
-  width: 130px;
-}
-
 ol {
-  margin-bottom: 80px;
   list-style-position: outside;
-  counter-reset: player;
+  margin-bottom: 80px;
 }
 
 li.player-list {
-  box-sizing: border-box;
-  position: relative;
-  counter-increment: player;
-  width: 100%;
-  height: 65px;
+  border-bottom: 1px solid rgb(143, 188, 143);
   border-bottom: 1px solid rgba(143, 188, 143, 0.4);
+  box-sizing: border-box;
+  counter-increment: player;
+  height: 65px;
+  position: relative;
+  width: 100%;
 }
 
 li.player-list:hover {
@@ -126,62 +135,55 @@ li.player-list:hover {
 
 li.player-list:before {
   content: counter(player) ".";
+  left: 10px;
   position: absolute;
   top: 23px;
-  left: 10px;
-}
-
-.clear {
-  clear: both;
 }
 
 form.player-name {
-  display: border-box;
-  margin-right: 200px;
   height: 100%;
-  width: auto;
+  margin-right: 200px;
 }
 
 .player-name button {
-  text-align: left;
-  display: border-box;
-  width: 100%;
   padding: 25px 0 25px 50px;
-  background: inherit;
-  border: none;
+  text-align: left;
+  width: 100%;
 }
 
-li.not_playing .player-name {
-  text-decoration: line-through;
+
+/* these should also float to the botton of the list */
+
+.not_playing .player-name {
   color: grey;
+  text-decoration: line-through;
 }
 
-form.delete-form {
-  width: 80px;
+.delete-form {
   float: right;
-  text-align: right;
   margin-left: 15px;
+  text-align: right;
+  width: 80px;
 }
 
-button.delete-player {
+.delete-player {
   padding: 25px 20px;
-  background: inherit;
-  border: none;
 }
 
 .prominent {
   display: block;
-  width: 250px;
   height: 60px;
   margin-bottom: 10px;
+  width: 250px;
 }
 
 .load-related {
-  width: 45%;
-  float: right;
-  padding: 30px 0 30px 30px;
+  border-color: rgb(90, 50, 90);
   border-color: rgba(90, 50, 90, 0.3);
+  float: right;
   min-width: 370px;
+  padding: 30px 0 30px 30px;
+  width: 45%;
 }
 
 ul.menu li {
@@ -195,29 +197,29 @@ ul.menu form {
 
 ul.menu button, ul.menu label {
   font-size: 0.8rem;
-  padding: 20px;
   height: 80%;
+  padding: 20px;
 }
 
 ul.menu label {
+  align-content: center;
   align-items: center;
-  justify-content: center;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
-  box-sizing: border-box;
   font-family: sans-serif;
+  justify-content: center;
   margin-right: 127px;
-  padding: 0 10px;
   min-width: 220px;
+  padding: 0 10px;
 }
 
 .load-related ul.menu form.new-tournament {
-  width: 85%;
   min-width: 340px;
+  width: 85%;
 }
 
-ul.menu label * {
+ul.menu label p, ul.menu label input {
   display: inline-block;
   margin-bottom: 4px;
 }
@@ -232,14 +234,15 @@ button.confirm {
 }
 
 .menu {
-  margin-bottom: 20px;
   border-bottom: 1px solid white;
+  margin-bottom: 20px;
 }
 
 
 /* --------------------------- FILE LIST --------------- */
 
 .file-list, .file-list .menu {
+  border-color: rgb(90, 50, 90);
   border-color: rgba(90, 50, 90, 0.3);
 }
 
@@ -251,31 +254,31 @@ button.confirm {
   display: inline-block;
 }
 
-button.file-name {
-  width: 200px;
+.file-name {
   margin-right: 30px;
+  width: 200px;
 }
 
-.file-list button.execute {
+.file-list .execute {
   box-sizing: border-box;
   padding: 20px 0;
   width: 80px;
 }
 
-.file-list form[action*="new"] {
+.file-list form[action="/tourniment/new"] {
   width: 310px;
 }
 
 .file-list .menu label {
-  width: 200px;
   min-width: 200px;
+  width: 200px;
 }
 
 .file-list .menu label input {
   width: 140px;
 }
 
-.file.list > .back-link {
+.file .list>.back-link {
   color: rgb(100, 70, 110);
 }
 
@@ -287,16 +290,18 @@ button.file-name {
 /* --------------------------- NEW PLAYER --------------- */
 
 .player-form {
+  border-color: rgb(250, 128, 114);
   border-color: rgba(250, 128, 114, 0.5);
   max-width: 500px;
   min-width: 370px;
 }
 
-.player-form.edit_player {
+.player-form .edit_player {
   min-width: 370px;
 }
 
 .player-form .menu {
+  border-color: rgb(250, 128, 114);
   border-color: rgba(250, 128, 114, 0.5);
 }
 
@@ -308,6 +313,7 @@ button.file-name {
 /* --------------------------- ROUND --------------- */
 
 .round {
+  border-color: rgb(143, 188, 143);
   border-color: rgba(143, 188, 143, 0.4);
   min-width: 296px;
 }
@@ -317,12 +323,12 @@ button.file-name {
 }
 
 .round li {
-  width: 100%;
-  padding: 15px 0;
-  font-family: sans-serif;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
+  font-family: sans-serif;
+  justify-content: space-between;
+  padding: 15px 0;
+  width: 100%;
 }
 
 .round .back-link {
@@ -330,29 +336,31 @@ button.file-name {
 }
 
 .round li form {
-  width: 30%;
-  min-width: 100px;
   display: inline-block;
+  min-width: 100px;
+  width: 30%;
 }
 
 .round li button {
-  width: 100%;
   height: 65px;
+  width: 100%;
 }
 
 .first {
   border-bottom: 1px solid black;
-  margin-bottom: 20px;
   font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .round>form {
-  padding-bottom: 30px;
-  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(143, 188, 143);
   border-bottom: 1px solid rgba(143, 188, 143, 0.4);
+  margin-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 .round .winner>button {
+  background-color: rgb(143, 188, 143);
   background-color: rgba(143, 188, 143, 0.4);
   border: 1px solid rgb(43, 88, 43);
 }
@@ -368,21 +376,23 @@ main {
   padding: 20px;
 }
 
-h3.error, h3.success {
-  display: flex;
+.error, .success {
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.2rem;
-  padding: 10px 20px 20px 20px;
   border-radius: 0 0 10px 10px;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  padding: 10px 20px 20px 20px;
+  text-align: center;
 }
 
 .error {
+  background: rgb(250, 128, 114);
   background: rgba(250, 128, 114, 0.5);
 }
 
 .success {
+  background: rgb(143, 188, 143);
   background: rgba(143, 188, 143, 0.4);
 }
 
@@ -391,11 +401,11 @@ h3.error, h3.success {
 
 @media screen and (max-width: 780px) {
   .load-related {
-    width: auto;
     float: none;
     margin-bottom: 5px;
     max-width: 500px;
     min-width: 340px;
+    width: auto;
   }
   .load-related ul.menu li {
     height: 70px;
@@ -418,16 +428,16 @@ h3.error, h3.success {
     padding-left: 10px;
   }
   .ladder {
-    padding-right: 8px;
-    margin-right: 0;
+    border-color: rgb(143, 188, 143);
     border-color: rgba(143, 188, 143, 0.4);
+    margin-right: 0;
     min-width: 310px;
+    padding-right: 8px;
   }
-  h3.error, h3.success {
+  .error, .success {
     padding: 10px;
     border-radius: 0 0 7px 7px;
   }
-
   .load-related ul.menu form.new-tournament {
     min-width: 305px;
   }
