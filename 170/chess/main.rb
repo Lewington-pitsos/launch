@@ -212,11 +212,19 @@ post "/delete/:filename" do
   redirect "/load"
 end
 
-# ----------------------------------- MISC --------------------------------- #
+# ----------------------------------- TOGGLE --------------------------------- #
 
 post "/toggle/:name" do
   session[:list].each do |player|
     player.toggle if player.name == params[:name]
+  end
+
+  redirect "/players"
+end
+
+get '/toggle_all' do
+  session[:list].each do |player|
+    player.toggle unless player.playing
   end
 
   redirect "/players"
