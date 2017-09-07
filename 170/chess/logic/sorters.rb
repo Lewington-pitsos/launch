@@ -4,9 +4,10 @@ class Sorter
   attr_accessor :players, :pairs, :round
 
   def initialize array
-    @players = array.sort_by do |a|
-      a.score + a.tiebreak * 0.00001
-    end.reverse
+    @players = array.sort_by do |player|
+      playing = (player.playing ? 1000000 : 0 )
+      -(playing + player.score + (player.tiebreak * 0.00001))
+    end
   end
 
   def pair
@@ -38,9 +39,11 @@ class Sorter
 
   def adjust_player_lists paired_players, player, opponent
     paired_players << player
-    paired_players << opponent unless opponent.name == "BYE"
     players.delete(player)
-    players.delete(opponent) unless opponent.name == "BYE"
+    unless opponent.name == "BYE"
+      paired_players << opponent
+      players.delete(opponent)
+    end
   end
 
   def find_opponent list, colour, index=1

@@ -134,6 +134,12 @@ class PlayerTest < Minitest::Test
     assert_equal([@harry, @bill, @sarah, @daniel, @bob], sorter.players)
   end
 
+  def test_not_playing_sort
+    @harry.toggle
+    sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill])
+    assert_equal(@harry, sorter.players[-1])
+  end
+
   def test_properly_paired_first_round_with_black_higher
     sorter = Sorter.new([@harry, @daniel, @bob, @sarah, @bill, @sam])
     sorter.pair

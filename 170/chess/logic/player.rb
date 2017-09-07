@@ -1,5 +1,6 @@
 class Player
-  attr_accessor :score, :name, :tiebreak, :playing, :last_colour
+  attr_reader :playing, :last_colour
+  attr_accessor :score, :name, :tiebreak
   def initialize hash={}
     @score = hash[:score] || 0.0
     @tiebreak = hash[:tiebreak] || 0.0
@@ -19,6 +20,10 @@ class Player
   def set_black
     self.last_colour = 'black'
   end
+
+  private
+
+  attr_writer :playing, :last_colour
 end
 
 class Pair
@@ -30,7 +35,6 @@ class Pair
     black.set_black
     @players = { @white.name => white, @black.name => black }
     @winner = nil
-    @loser = nil
   end
 
   def undo_win player

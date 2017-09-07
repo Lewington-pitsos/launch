@@ -1,38 +1,50 @@
 ---
 - - !ruby/object:Player
-    score: 9.5
-    tiebreak: 89.0
+    score: 0.0
+    tiebreak: 26.5
     name: bob
-    playing: true
-    last_colour: black
-  - !ruby/object:Player
-    score: 8.5
-    tiebreak: 82.5
-    name: harry
     playing: true
     last_colour: white
   - !ruby/object:Player
-    score: 9.0
-    tiebreak: 39.5
-    name: daniel
+    score: 1.0
+    tiebreak: 15.0
+    name: phil
     playing: true
-    last_colour: black
+    last_colour: white
   - !ruby/object:Player
-    score: 3.0
-    tiebreak: 65.0
+    score: 0.5
+    tiebreak: 13.0
     name: sarah
     playing: true
     last_colour: white
   - !ruby/object:Player
-    score: 8.0
-    tiebreak: 31.0
+    score: 1.0
+    tiebreak: 21.5
+    name: keenan
+    playing: true
+    last_colour: black
+  - !ruby/object:Player
+    score: 0.0
+    tiebreak: 10.5
+    name: allissa
+    playing: true
+    last_colour: black
+  - !ruby/object:Player
+    score: 1.5
+    tiebreak: 24.0
+    name: megan
+    playing: true
+    last_colour: white
+  - !ruby/object:Player
+    score: 1.0
+    tiebreak: 13.5
     name: bill
     playing: true
     last_colour: black
   - !ruby/object:Player
-    score: 4.0
-    tiebreak: 17.5
-    name: Xavier
+    score: 1.0
+    tiebreak: 15.5
+    name: natalie
     playing: true
-    last_colour: white
+    last_colour: black
 - 0
