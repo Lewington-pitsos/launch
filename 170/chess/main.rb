@@ -24,6 +24,12 @@ not_found do
   redirect "/load"
 end
 
+get '/start' do
+  session[:success] = 'Welcome to SimpleChess'
+
+  redirect '/load'
+end
+
 # ------------------------ ADDING/DELETING players ------------------------ #
 
 def convert_score score
