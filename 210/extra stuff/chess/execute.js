@@ -8,6 +8,8 @@ bob.move();
 
 console.log(frank.board);
 
+frank.move();
+
 bob.move();
 
 console.log(frank.board);
