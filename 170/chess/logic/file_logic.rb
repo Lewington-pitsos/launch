@@ -1,5 +1,7 @@
 require "yaml"
 
+# all this does is make reading and writing files with yaml slightl easier
+
 def read_yaml filename
   YAML.load_file filename
 end

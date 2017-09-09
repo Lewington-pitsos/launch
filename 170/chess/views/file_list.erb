@@ -28,7 +28,8 @@
     </li>
   </ul>
   <% if session[:current_name] %>
-
+  <!-- this is to avoid the back-link being present before any file has been loaded or if one has just been deleted -->
+  
   <a class="back-link" href="/players">Return to Player List</a>
 
   <% end %>
