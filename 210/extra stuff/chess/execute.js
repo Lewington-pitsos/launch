@@ -1,12 +1,13 @@
 fiver = makeBoard(5);
-console.log(fiver);
 
-bob = makePlayer(fiver, 1);
+var frank = new Human(fiver, 9);
 
-console.log(bob);
+var bob = new Computer(fiver, 1);
 
-var frank = makeHuman(fiver, 2);
+bob.move();
 
-console.log(frank);
+console.log(frank.board);
 
-frank.play();
+bob.move();
+
+console.log(frank.board);

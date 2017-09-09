@@ -1,24 +1,46 @@
-function makePlayer(board, token) {
-  return {
-    border: board.length,
-    board: board,
-    token: token,
-  };
+function Player(board, token) {
+  this.board = board;
+  this.token = token;
+  this.border = function() {
+    return this.board.length;
+  }
+
+  this.placeAt = function (coordinates) {
+    this.board[coordinates[0]][coordinates[1]] = this.token;
+  }
+
+  this.test = function(coordinates){
+    return (coordinates[0] < this.border() && coordinates[1] < this.border());
+  }
+
+  this.move = function(){
+    var input = this.chooseSpace();
+    if (this.test(input)) {
+      this.placeAt(input);
+    } else {
+      this.move();
+    }
+  }
 }
 
-function makeHuman(board, token) {
-  makePlayer.call(this, board, token);
+function Human(board, token) {
+  Player.call(this, board, token);
 
-  this.play = function() {
-    var y = Number(prompt("enter row"));
-    var x = Number(prompt("enter column"));
+  this.chooseSpace = function() {
+    var row = Number(prompt('choose a row index'));
+    var col = Number(prompt('choose a clumn index'));
+    return [row, col];
+  }
+}
 
-    if (x < this.border && y < this.border) {
-      this.board[y][x] = this.token;
-    } else {
-      alert('that move was wrong');
-    }
-  };
+function Computer(board, token) {
+  Player.call(this, board, token);
 
-  return this;
+  this.chooseSpace = function() {
+    var row = Math.floor(Math.random() * 4);
+    var col = Math.floor(Math.random() * 4);
+    console.log(row);
+    console.log(col);
+    return [row, col];
+  }
 }
