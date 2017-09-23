@@ -1,50 +1,42 @@
-function makeAddFocus(textField, blinker) {
-  return function addFocus(event) {
-    if (!textField.classList.contains('focused')) {
-      blinker = setInterval(function() {
-        textField.classList.toggle('cursor');
-      }, 500);
-        document.addEventListener('click', makeRemoveFocus(blinker, textField));
-    } else {
-      clearInterval(blinker);
-      textField.classList.remove('cursor');
-    }
+var blinker;
 
-    textField.classList.toggle('focused');
-    return blinker;
+function addFocus(event) {
+  var target = event.target;
+  removeFocus();
+  if (target.classList.contains('text-field')) {
+    target.classList.add('focused');
+    blinker = setInterval(function() {
+      target.classList.toggle('cursor');
+    }, 500);
   }
 }
 
+function isFocused(element) {
+  return element.classList.contains('focused');
+}
 
-function makeRemoveFocus(blinker, textField) {
-  return function(event) {
-    if (event.target !== textField) {
-      clearInterval(blinker);
-      textField.classList.remove('cursor');
-      textField.classList.remove('focused');
-    }
+function removeFocus() {
+  var element = document.querySelector('.focused');
+  if (element) {
+    clearInterval(blinker);
+    element.classList.remove('cursor');
+    element.classList.remove('focused');
   }
 }
 
-function makeInput(textField, content) {
-  return function(event) {
-      if (textField.classList.contains('focused')) {
-      if (event.key === 'Backspace') {
-        content.textContent = content.textContent.slice(0, -1);
-      } else {
-        content.textContent += event.key;
-      }
+function typeInput(event) {
+  var target = document.querySelector('.focused');
+  if (target) {
+    var content = target.firstElementChild;
+    if (event.key === 'Backspace') {
+      content.textContent = content.textContent.slice(0, -1);
+    } else if (event.key.length === 1) {
+      content.textContent += event.key;
     }
   }
 }
 
-function toggleCursor(element) {
-  element.classList.toggle('cursor');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  var content = document.querySelector('.content');
-  var textField = document.getElementsByClassName('text-field')[0];
-  var blinker = textField.addEventListener('click', makeAddFocus(textField, blinker));
-  document.addEventListener('keydown', makeInput(textField, content));
+window.addEventListener('DOMContentLoaded', function() {
+  window.addEventListener('click', addFocus);
+  window.addEventListener('keydown', typeInput);
 })
