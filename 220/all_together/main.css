@@ -1,0 +1,68 @@
+body {
+  background: #3c3;
+  font-family: sans-serif;
+}
+
+main {
+  width: 900px;
+  margin: auto;
+  background: white;
+}
+
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: linear-gradient(#557, #889);
+  margin-bottom: 30px;
+}
+
+.wrapper {
+  padding: 30px 30px 100px 30px;
+}
+
+label {
+  display: block;
+  width: 100px;
+}
+
+input[type='radio'] {
+  float: right;
+}
+
+h4 {
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+input[type='number'] {
+  width: 60px;
+  height: 20px;
+  padding: 2px;
+}
+
+button {
+  margin-top: 30px;
+  display: block;
+}
+
+.shape {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+}
+
+
+.square, .circle {
+  background: yellow;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.star {
+  background: url('star.png');
+  background-repeat: no-repeat;
+}

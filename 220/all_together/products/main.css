@@ -1,0 +1,39 @@
+body {
+  background: #33b;
+  padding: 40px 100px;
+}
+
+main {
+  padding: 40px;
+  height: 900px;
+  background: white;
+  border-radius: 20px;
+}
+
+.search-bar {
+  float: left;
+  width: 20%;
+}
+
+.search-bar label {
+  display: block;
+}
+
+
+.product-list {
+  margin-left: 20%;
+}
+
+
+.invisible {
+  display: none;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid grey;
+}
+
+li:hover {
+  background: lightgreen;
+}

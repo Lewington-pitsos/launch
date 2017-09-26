@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>TITLE</title>
+    <meta name="description" content="DESCRIPTION">
+    <script src="jquery-3.2.1.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="stage">
+    </div>
+    <div class="wrapper">
+    <div class="action">
+      <a href="#" id="start">Start</a>
+      |
+      <a href="#" id="end">Stop</a>
+    </div>
+      <form>
+        <h2>Add a Shape</h2>
+        <h3>Type</h3>
+        <label>Square<input type="radio" name="shape" value="square" checked></label>
+        <label>Cirlce<input type="radio" name="shape" value="circle"></label>
+        <label>Star<input type="radio" name="shape" value="star"></label>
+        <h4>Starting Point</h4>
+        <input type="number" name="x-start" maxlength="3" placeholder="x:">
+        <input type="number" name="y-start" maxlength="3" placeholder="y:">
+
+        <h4>Starting Point</h4>
+        <input type="number" name="x-end" maxlength="3" placeholder="x:">
+        <input type="number" name="y-end" maxlength="3" placeholder="y:">
+        <button type="submit">add</button>
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>

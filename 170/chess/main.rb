@@ -49,8 +49,8 @@ def convert_score score
   (score * 2).round / 2.0
 end
 
-# empty strings get converted to 0
 def check_score score
+  # empty strings get converted to 0
   unless score.to_f.to_s == score || score.to_i.to_s == score || score == ""
     INVALID_SCORE_MESSAGE
   end

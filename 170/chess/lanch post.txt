@@ -1,7 +1,0 @@
-I don't know if I'm allowed to ask for a code review on stuff like this, but in either case I'd really appreciate any feedback on this lil' guy: [Github Link](https://github.com/Lewington-pitsos/launch/tree/master/170/chess).
-
-Basically I teach chess to classes of kids in my spare time and I thought I'd make a little program to help me run tournaments. It isn't deployed at this stage by any means (I had an absurdly difficult time deploying things to Heroku so I haven't been brave enough to try with this yet), but it can be run easily (on windows devices at least) through a batch file I included. 
-
-So: I was wondering if there are any glaring issues (last time I got feedback on something there were a lot of glaring issues, haha) especially where routing is concerned, and what I could/should do to make it seem more professional. I figure I've sunk enough hours into this thing that it might be worth turning into a portfolio item... 
-
-Cheers!

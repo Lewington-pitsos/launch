@@ -243,8 +243,7 @@ function stringToWords(string) {
 }
 
 function longestSentence(text) {
-
-  var result = (text .match(/\w.+?[!?.]/g) || [])
+  var result = (text.match(/\w.+?[!?.]/g) || [])
     .map(stringToWords)
     .reduce(longestArray, []);
 
@@ -256,4 +255,5 @@ function longestSentence(text) {
 longestSentence(longText);
 longestSentence('hello.  ');
 longestSentence('');
-longestSentence('hello  ');
+longestSentence('hello  '); // 0 words, i'm, assuming this is ok since we're counting sentences here, so we only care about stuff that's syntactically a sentence
+longestSentence('hello h.');
