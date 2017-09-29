@@ -1,0 +1,38 @@
+html, body {
+  margin-top: -8px;
+  padding: 0;
+}
+
+body {
+  background: #444;
+  height: 100vh;
+}
+
+a {
+  color: Darkred;
+}
+
+main {
+  background: #ccc;
+  margin: auto;
+  width: 800px;
+  padding: 60px;
+  height: 100vh;
+}
+
+p {
+  display: none;
+  text-align: justify;
+}
+
+fieldset {
+  margin: 0;
+}
+
+a.active {
+  color: darkGreen;
+}
+
+p.active {
+  display: block;
+}
