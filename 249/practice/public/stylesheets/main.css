@@ -1,0 +1,350 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*  ----------------------------------------------------------------------- */
+
+html {
+  font-family: sans-serif;
+}
+
+header {
+  padding-top: 30px;
+  padding-bottom: 15px;
+  background: #6f5499;
+  background: linear-gradient(#563d7c, #6f5499);
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+h1:hover, button:hover {
+  cursor: pointer;
+}
+
+header p {
+  color: #cdbfe3;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.top-form, #filler, #no-results {
+  border-radius: 6px;
+  background: #f5f5f5;
+  border: 1px solid #e3e3e3;
+}
+
+.top-form {
+  padding: 20px 100px;
+}
+
+button {
+  font-size: 18px;
+  color: #563d7c;
+  border: 1px solid #563d7c;
+  background: transparent;
+  padding: 12px 16px;
+  border-radius: 5px;
+}
+
+button:hover {
+  color: white;
+  background-color: #563d7c;
+}
+
+/* ------------------------------------ SEARCH -------------------- */
+
+.search-wrapper {
+  float: right;
+  width: 290px;
+}
+
+input.text {
+  border-radius: 4px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.search-wrapper li {
+  display: inline-block;
+  margin: 5px 20px 0 0;
+}
+
+.search-wrapper li input {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.search-wrapper label {
+  width: 170px;
+}
+
+.top-form input.text {
+  width: 85%;
+}
+
+::-webkit-input-placeholder {
+  color: #aaa;
+}
+
+/* ------------------------------------ SEARCH -------------------- */
+
+main, footer, .slide{
+  margin: auto;
+  width: 1000px;
+}
+
+main .contact {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.screen {
+  position: relative;
+  height: 0px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  background: white;
+}
+
+
+/* ------------------------------------- Form --------------------------- */
+#form {
+  height: 530px;
+  top: 400px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+fieldset {
+  width: 100%;
+  border-top: 1px solid #eee;
+}
+
+fieldset dd, fieldset dt {
+  display: inline-block;
+  margin-top: 30px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+fieldset dd {
+  text-align: right;
+  width: 200px;
+  margin-right: 40px;
+}
+
+fieldset dt {
+  vertical-align: middle;
+}
+
+fieldset dt input {
+  width: 450px;
+}
+
+.tags {
+  width: 468px;
+  text-align: left;
+}
+
+fieldset .tags input {
+  width: 30px;
+  float: right;
+}
+
+fieldset label {
+  margin: 10px 0;
+  font-weight: normal;
+  display: block;
+  width: 200px;
+}
+
+.warning {
+  padding-left: 390px;
+  display: none;
+  color: darkred;
+  font-size: 12px;
+  margin: 5px 0 0 0;
+  text-align: left;
+}
+
+fieldset dt .incorrect {
+  border: 1px solid Darkred;
+}
+
+.warning.incorrect {
+  display: block;
+}
+
+fieldset dd.incorrect {
+  color: darkred;
+}
+
+fieldset dt button {
+  width: 220px;
+}
+
+fieldset dt button:first-child {
+  margin-right: 25px;
+}
+
+.curtain {
+  width: 100%;
+  background: white;
+}
+
+/* ------------------------------------- Form --------------------------- */
+
+#filler, #no-results {
+  padding: 40px 0 20px 0;
+  margin: 30px 15px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.contact-display ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+footer {
+  padding-top: 40px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-size: 14px;
+  height: 120px;
+}
+
+a {
+  text-decoration: none;
+  color: #428bca;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
+
+#query, #tags {
+  font-weight: bold;
+}
+
+/* ---------------------- Contact Template -------------------- */
+
+.contact-display li {
+  border-bottom: 1px solid #eee;
+  margin: 50px 20px 0 0;
+  padding-bottom: 20px;
+  width: 230px;
+  overflow: hidden;
+}
+
+.contact-display dl {
+  margin: 30px 0 25px 0;
+}
+
+.contact-display li dt {
+  font-weight: bold;
+}
+
+.contact-display li dd {
+}
+
+.contact-display li dd, li dt {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.contact-display li button {
+  font-size: 14px;
+  padding: 6px 15px 6px 30px;
+  margin-right: 20px;
+  background-repeat: no-repeat;
+  background-position: 15% 50%;
+}
+
+.contact-display li .edit {
+  background-image: url("../images/crayon.PNG");
+}
+
+.contact-display li .edit:hover {
+  background-image: url("../images/crayon-white.PNG");
+  background-position: 12% 50%;
+}
+
+.contact-display li .delete {
+  background-image: url("../images/garbage.PNG");
+}
+
+.contact-display li .delete:hover {
+  background-image: url("../images/garbage-white.PNG");
+  background-position: 12% 50%;
+}
+
+.tag-list {
+  color: #428bca;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contact Manager</title>
+    <link rel="stylesheet" href="public/stylesheets/main.css">
+    <script src="public/javascripts/jquery-3.2.1.js" charset="utf-8"></script>
+    <script src="public/javascripts/handlebars-v4.0.10.js" charset="utf-8"></script>
+    <script src="public/javascripts/main.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Contact Manager</h1>
+      <p>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</p>
+    </header>
+    <main>
+      <section class="screen">
+      <div class="slide" id="info">
+        <div class="top-form">
+          <div class="search-wrapper">
+            <input id="search" type="text" class="text" placeholder="Search">
+            <ul>
+              <li><label>Sales<input type="checkbox" value="sales"></label></li>
+              <li><label>Marketing<input type="checkbox" value="marketing"></label></li>
+              <li>Clown<label><input type="checkbox" value="clown"></label></li>
+            </ul>
+          </div>
+
+
+          <button class="add swapper">Add Contact</button>
+        </div>
+        <section id="filler" class="contact-display">
+          <h3>There are no contacts.</h3>
+          <button class="add swapper">Add Contact</button>
+        </section>
+        <section id="no-results" class="contact-display hidden">
+          <h3>There are no <span id="tags"></span> contacts<span id="match"></span>.</h3>
+        </section>
+        <section class="contact-display">
+          <ul>
+          </ul>
+        </section>
+      </div>
+
+
+      <div class="slide" id="form">
+        <form class="contact">
+          <h2>Create Contact</h2>
+          <fieldset>
+          <dl>
+            <dd>Full name:</dd>
+            <dt><input type="text" id="name" class="text" value="SA@sda.com"></dt><br>
+            <p class="warning">Please enter the name field.</p>
+            <dd>Email address:</dd>
+            <dt><input type="email" id="email" class="text" value="SA@sda.com"></dt><br>
+            <p class="warning">Please enter the valid email field.</p>
+            <dd>Telephone number:</dd>
+            <dt><input type="tel" id="number" class="text" value="SA@sda.com"></dt><br>
+            <p class="warning">Please enter the phone field.</p>
+            <dd>Tags:</dd>
+            <dt class="tags">
+              <label>Sales<input type="checkbox" id="sales" value="sales" class="checkbox"></label>
+              <label>Marketing<input type="checkbox" id="marketing" value="marketing" class="checkbox"></label>
+              <label>Clown<input type="checkbox" id="clown" value="clown" class="checkbox"></label>
+            </dt><br>
+            <dd></dd>
+            <dt>
+              <button type="submit">Submit</button>
+              <button class="swapper" id="cancel">Cancel</button>
+            </dt>
+          </dl>
+          <div class="curtain"></div>
+          </fieldset>
+        </form>
+      </div>
+      </section>
+
+    </main>
+    <footer>
+      <p>Developed by <a href="#">Devsaran.com</a> and <a href="#">239 Listing Real Estate.</a></p>
+    </footer>
+
+
+    <script id="contact-template" type="text/x-handlebars-template">
+      <li>
+        <h3>{{name}}</h3>
+        <dl>
+          <dt>Phone Number:</dt>
+          <dd>{{phone}}</dd>
+          <dt>Email:</dt>
+          <dd>{{email}}</dd>
+          <dt>Tags</dt>
+          <dd class="tag-list">{{tags}}</dd>
+        </dl>
+        <button class="edit swapper">Edit</button>
+        <button class="delete">Delete</button>
+      </li>
+    </script>
+  </body>
+</html>
