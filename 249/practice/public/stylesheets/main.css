@@ -299,8 +299,13 @@ a:hover {
   border-bottom: 1px solid #eee;
   margin: 50px 20px 0 0;
   padding-bottom: 20px;
+  height: 230px;
   width: 230px;
   overflow: hidden;
+}
+
+.contact-display li:last-child {
+  margin-bottom: 70px;
 }
 
 .contact-display dl {
