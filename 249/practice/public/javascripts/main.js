@@ -469,7 +469,7 @@ $(function() {
       var current = $(element)
       if (current.val()) {
         this.textValues.push(current.val())
-        if (current.hasClass('incorrect')) {
+        if (current.parent().hasClass('incorrect')) {
           // stop displaying the incorrect state if the value is now correct
           // which means next attempted submission will look normal
           this.removeIncorrect(current);
@@ -494,16 +494,14 @@ $(function() {
 
     displayIncorrect: function(current) {
       // uses the html to make the currnet input look incorrect
-      current.addClass('incorrect');
+      current.parent().addClass('incorrect');
       current.parent().prev().addClass('incorrect');
-      current.parent().nextAll('.warning').eq(0).addClass('incorrect');
     },
 
     removeIncorrect: function(current) {
       // resets html to make the currnet input look normal
-      current.removeClass('incorrect');
+      current.parent().removeClass('incorrect');
       current.parent().prev().removeClass('incorrect');
-      current.parent().nextAll('.warning').eq(0).removeClass('incorrect');
     },
 
     init: function() {

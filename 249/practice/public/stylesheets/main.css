@@ -185,17 +185,18 @@ fieldset dd, fieldset dt {
   font-weight: bold;
 }
 
-fieldset dd {
+fieldset dt {
   text-align: right;
   width: 200px;
   margin-right: 40px;
 }
 
-fieldset dt {
+fieldset dd {
   vertical-align: middle;
+  margin-right: 100px;
 }
 
-fieldset dt input {
+fieldset dd input {
   width: 450px;
 }
 
@@ -217,7 +218,7 @@ fieldset label {
 }
 
 .warning {
-  padding-left: 390px;
+  font-weight: normal;
   display: none;
   color: darkred;
   font-size: 12px;
@@ -225,29 +226,24 @@ fieldset label {
   text-align: left;
 }
 
-fieldset dt .incorrect {
+fieldset .incorrect input {
   border: 1px solid Darkred;
 }
 
-.warning.incorrect {
+.incorrect .warning {
   display: block;
 }
 
-fieldset dd.incorrect {
+fieldset dt.incorrect {
   color: darkred;
 }
 
-fieldset dt button {
+fieldset dd button {
   width: 220px;
 }
 
-fieldset dt button:first-child {
+fieldset dd button:first-child {
   margin-right: 25px;
-}
-
-.curtain {
-  width: 100%;
-  background: white;
 }
 
 /* ------------------------------------- Form --------------------------- */
