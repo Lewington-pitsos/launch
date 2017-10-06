@@ -3,7 +3,7 @@
 
 
 var currentContact;
-var allContacts = [];
+var allContacts;
 
 
 
@@ -18,7 +18,7 @@ $(function() {
   */
 
 
-  var allContacts = JSON.parse(localStorage.getItem('contacts'));
+  var allContacts = JSON.parse(localStorage.getItem('contacts')) || [];
   var view = $('.screen');
   var list = $('.contact-display ul');
   var emptyList = $('#filler');
