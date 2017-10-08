@@ -285,8 +285,8 @@ $(function() {
       if (this.toUpdate) {
         this.updateTodo(todo, completed);
       } else {
-        fauxReload()
         this.addTodo(todo);
+        fauxReload()
       }
     },
 
@@ -400,6 +400,7 @@ $(function() {
       var formattedDate = toDateString(date);
       navManager.deleteAt(date, complete);
       listManager.deleteAt(id, complete);
+      modalDisplayManager.clearPlaceholderDate();
     },
 
     createNewModal: function(id) {
@@ -415,6 +416,7 @@ $(function() {
       this.toUpdate = info;
       newInfo = Object.assign({}, info);
       this.updateTodo(newInfo, !info.complete, true);
+      modalDisplayManager.clearPlaceholderDate();
     },
 
     reMakeList: function(list, date) {
@@ -432,7 +434,6 @@ $(function() {
             .getTodo(formattedDate)
             .forEach(todo => toRender.push(todo));
         }
-
 
         listManager.hideAll(toRender, date, list === 'completed');
       }
