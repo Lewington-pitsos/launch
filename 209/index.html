@@ -16,14 +16,14 @@
   <input type="checkbox" id="nav-bar">
   <nav>
     <ul class="remaining">
-      <li class="title active">
+      <li class="title active" name="">
         <p><img src="public/images/list-icon.png" alt="">All Todos</p>
         <span class="count inactive">0</span>
       </li>
     </ul>
 
     <ul class="completed">
-      <li class="title">
+      <li class="title" name="">
         <p><img src="public/images/checked-box.png" alt="">Completed</p>
         <span class="count inactive">0</span>
       </li>
@@ -81,7 +81,7 @@
                 <option value="30">30</option>
                 <option value="31">31</option>
               </select><span class="slash-spacer">/</span><!--
-           --><select id="month_start"
+           --><select id="month"
                  name="month_start" class="example"  required>
                 <option value="" disabled selected>Month</option>
                 <option value="01">January</option>
@@ -97,7 +97,7 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
               </select><span class="slash-spacer">/</span><!--
-           --><select id="year_start"
+           --><select id="year"
                 name="year_start" class="example"  required>
                 <option value="" selected disabled>Year</option>
                 <option value="17">2017</option>
@@ -116,7 +116,7 @@
           </dl>
           <div class="form-buttons">
             <span><a href="#">Save</a></span>
-            <span><a href="#" id="complete">Mark As Complete</a></span>
+            <span id="mark"><a href="#" id="complete">Mark As Complete</a></span>
           </div>
         </form>
       </div>
@@ -124,7 +124,7 @@
 
     <header class="active">
       <label for="nav-bar"><img src="public/images/tripple-bars.png" alt="three tiny horizontal lines"></label>
-      <h1>02/16<span class="count">0</span></h1>
+      <h1><span class="list-title">All Todos</span><span class="count">0</span></h1>
     </header>
 
     <h3 class="modal-bringer"><img src="public/images/plus.png" alt="a small blue plus sign"><a href="#">
