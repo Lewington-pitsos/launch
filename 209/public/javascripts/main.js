@@ -206,13 +206,13 @@ $(function() {
       this.currentId = (Object.keys(all)
         .map(i => Number(i))
         .reverse()[0] + 1 || 0);
-      console.log(this.currentId);
+      console.log(`first current Id: ${this.currentId}`);
       this.addAllTodos();
     },
 
     addAllTodos: function() {
       Object.values(this.allTodos)
-        .forEach(this.firstUpdate.bind(this));
+        .forEach(this.firstRender.bind(this));
     },
 
     firstUpdate: function(todo) {
@@ -224,6 +224,26 @@ $(function() {
       }
 
       this.addToDisplay(todo.date, todo.complete, todo.title, currentIndex, todo.id, true);
+    },
+
+    firstRender: function(todo) {
+      console.log(todo);
+      var date = toDateString(todo.date)
+      listManager.addNew(todo.id,
+         date,
+         todo.title,
+         todo.complete,
+         true);
+
+      // first add to the top of the nav:
+      var index = this.incomplete.getIndex(todo.date);
+      navManager.addNew(date, index, false);
+
+      // then add to the bottom IFF the current todo is complete
+      if (todo.complete) {
+        var bottomIndex = this.completed.getIndex(todo.date);
+        navManager.addNew(date, index, true);
+      }
     },
 
     processTodo: function(todo, completed) {
@@ -252,9 +272,17 @@ $(function() {
       this.currentId++;
     },
 
-    updateTodo: function(info, completed) {
+    updateTodo: function(info, marked, swapping) {
       var id = this.updateId;
-      info.complete = completed;
+      // completed specifies whether the user clicked 'mark as complete'. If this is false, the complete property of info should be whatever it was before the update UNLESS the operation being performed is a completion-swap, in which case, marked (now no-longer tied to the modal in any way) will be the value for the new completion
+
+      if (swapping || marked) {
+        info.complete = marked;
+      } else {
+        info.complete = this.toUpdate.complete;
+      }
+
+      info.id = id;
 
       // update both of the collection objects in ALL circumstances
       this.update(this.incomplete, info.date, this.toUpdate.date, id);
@@ -264,7 +292,7 @@ $(function() {
       }
 
       // delete both old values/dates in the nav bar if we're moving away from the complete list, otherwise, jsut delete from the incomplete list
-      if (completed && completed !== this.toUpdate.complete) {
+      if (info.complete && info.complete !== this.toUpdate.complete) {
         navManager.deleteAt(this.toUpdate.date, false);
       } else {
         navManager.deleteAt(this.toUpdate.date, true);
@@ -295,19 +323,6 @@ $(function() {
     update: function(object, newDate, oldDate, id) {
       object.deleteId(oldDate, id);
       object.addId(newDate, id);
-    },
-
-    switchCompletion: function(oldCompletion, newCompletion, date, newDate, id) {
-      if (oldCompletion === newCompletion) {
-        oldCompletion.deleteId(date, id);
-        newCompletion.addId(newDate, id);
-      } else {
-        if (oldCompletion === this.complete) {
-          oldCompletion.deleteId(date, id);
-        } else {
-          newCompletion.addId(newDate, id);
-        }
-      }
     },
 
     addToDisplay: function(date, complete, title, currentIndex, id, update) {
@@ -348,41 +363,9 @@ $(function() {
       this.updateId = id;
       this.toUpdate = info;
       newInfo = Object.assign({}, info);
-      this.updateTodo(newInfo, !info.complete);
-    },
-    /*
-    recategorize: function(id) {
-      var todo = this.allTodos[id];
-
-      var newComplete = (!todo.complete ? this.completed : this.incomplete);
-      var oldComplete = (todo.complete ? this.completed : this.incomplete);
-
-      this.switchCompletion(oldComplete, newComplete, todo.date, todo.date, id);
-
-      var index = newComplete.getIndex(todo.date);
-      if (todo.complete) {
-        this.displayDeletion(todo.date, id, todo.complete);
-      } else {
-        listManager.deleteAt(id, todo.complete);
-      }
-
-      todo.complete = !(todo.complete);
-      this.addToDisplay(todo.date, todo.complete, todo.title, index, id, true);
+      this.updateTodo(newInfo, !info.complete, true);
     },
 
-    updateCompletion: function(oldComplete, oldDate, newDate, id) {
-      var currentIndex;
-      if (oldComplete) {
-        currentIndex = this.completed.getIndex(oldDate);
-        this.switchCompletion(this.completed, this.incomplete, oldDate, newDate, id);
-      } else {
-        currentIndex = this.incomplete.getIndex(oldDate);
-        this.switchCompletion(this.incomplete, this.completed, oldDate, newDate, id);
-      }
-
-      return currentIndex;
-    },
-    */
     reMakeList: function(list, date) {
       if (!date) {
         this.displayAllIn(list);
@@ -409,7 +392,6 @@ $(function() {
         this.clearNavEffects();
       } else {
         var completedTodos = this.completed.getAllIds();
-        console.log(completedTodos);
         listManager.hideAll(completedTodos, null, true);
       }
     },
@@ -446,6 +428,14 @@ $(function() {
       }
     },
 
+    addFirstTime: function(date, index, complete) {
+      if (complete) {
+        this.addToList(date, index, this.$completed);
+      }
+
+      this.addToList(date, index, this.$incomplete);
+    },
+
     addToList: function(date, index, $list) {
       var $sameDate = $list.find(`[name="${date}"]`);
       if ($sameDate.length) {
@@ -467,20 +457,19 @@ $(function() {
       }
     },
 
-    addNewDate: function(date, index, list) {
+    addNewDate: function(date, index, $list) {
       // adds the appropriate element to the right index in the list
       //  if the list is empty, it just appends the element
       //  Same goes if the index is higher than the last list element's index
       var element = this.makeNewList({date: date, count: 1});
-      if (!list.length) { // only true if there are no entries in the current
-                          // list
-        list.append(element);
+      if (!$list.length) { // iff no entries in the current list
+        $list.append(element);
       } else {
-        var nextElement = list.find('li:not(.title)').eq(index);
+        var nextElement = $list.find('li:not(.title)').eq(index);
         if (nextElement.length) {
           nextElement.before(element);
         } else {
-          list.append(element);
+          $list.append(element);
         }
       }
     },
@@ -532,6 +521,7 @@ $(function() {
     // for storing which elements are being displayed currently
     currentDate: undefined,
     complete: undefined,
+
     addNew: function(id, date, title, complete, update) {
       var context = {
         id: id,
@@ -640,7 +630,6 @@ $(function() {
           $(this).removeClass('hidden');
         }
       });
-      console.log(this.$listNumber);
       this.$listNumber.text(array.length);
     },
 
@@ -680,7 +669,6 @@ $(function() {
       var target = $(e.target);
       var id = Number(target.closest('tr').attr('id'));
       if (target.hasClass('content')) {
-        console.log(id);
         todosManager.switchList(id);
       } else if (target.closest('td').hasClass('bin')) {
         todosManager.deleteTodo(id);
@@ -772,13 +760,12 @@ $(function() {
     },
 
     checkStorage: function() {
-      console.log(localStorage.getItem('hasData'));
+      console.log(`has Data: ${localStorage.getItem('hasData')}`);
       if (localStorage.getItem('hasData')) {
         var all = JSON.parse(localStorage.getItem('allTodos'));
         var incomplete = JSON.parse(localStorage.getItem('incomplete'));
         var completed = JSON.parse(localStorage.getItem('completed'));
-        console.log(all);
-        //todosManager.addData(all, incomplete, completed);
+        todosManager.addData(all, incomplete, completed);
       }
     },
 
