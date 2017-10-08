@@ -253,6 +253,10 @@ section .bin:hover {
   background: rgba(205,100,0, 0.2);
 }
 
+.hidden {
+  display: none;
+}
+
 /* -----------------------MODAL------------------------- */
 
 .form, .dimmer {
