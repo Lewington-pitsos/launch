@@ -10,6 +10,8 @@ $(function() {
     $allInputs: $('input'),
     $descriptionText: $('#description'),
     $dateInputs: $('select'),
+    $completeMarker: $('#complete'),
+    update: false,
 
     modalListener: function() {
       this.$modalBringer.on('click', this.showModal.bind(this));
@@ -17,17 +19,34 @@ $(function() {
 
     showModal: function() {
       this.$modalParent.css('display', 'block');
-      this.$modalBanisher.on('click', this.hideModal.bind(this));
+      this.$modalParent.animate({opacity: 1}, 500);
+      if (this.update) {
+        this.$modalBanisher.on('click', this.hideModal.bind(this));
+      } else {
+        this.$completeMarker.on('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          alert('Cannot mark as complete as item has not been created yet!')
+        })
+      }
+
     },
 
     hideModal: function() {
-      // cosmetically hided the modal and resets all the modals input values to blank
-      this.$modalParent.css('display', 'none');
+      // firstly stop the modal from automatically acting like there's an update next time
+      this.update = false;
+      this.$completeMarker.unbind('click');
+      // cosmetically hide the modal and resets all the modals input values to blank
+      this.$modalParent.animate({opacity: 0}, 500, this.resetDisplay.bind(this));
       this.$modalBanisher.unbind('click');
 
       this.$allInputs.val('');
       this.$dateInputs.val('');
       this.$descriptionText.val('');
+    },
+
+    resetDisplay: function() {
+      this.$modalParent.css('display', 'none');
     },
 
     renderModal: function(todo) {
@@ -36,6 +55,7 @@ $(function() {
       $month.val(toDoubleDigits(todo.month));
       $year.val(todo.year || '');
       $description.val(todo.desc)
+      this.update = true;
       this.showModal();
     },
 
@@ -61,7 +81,7 @@ $(function() {
 
 
   var inputManager = {
-    $modalSubmits: $('.form-buttons a'),
+    $modalSubmits: $('.form-buttons span'),
     addformListener: function() {
       this.$modalSubmits.on('click', this.processInput.bind(this));
     },
@@ -75,9 +95,10 @@ $(function() {
         month: Number($month.val()),
         year: Number($year.val()),
         date: visibleDate,
-        complete: e.target.getAttribute('id') === 'complete'
+        complete: null,
       }
-      todosManager.processTodo(todo)
+
+      todosManager.processTodo(todo, e.target.getAttribute('id') === 'complete')
       modalDisplayManager.hideModal();
     },
 
@@ -205,10 +226,10 @@ $(function() {
       this.addToDisplay(todo.date, todo.complete, todo.title, currentIndex, todo.id, true);
     },
 
-    processTodo: function(todo, update) {
+    processTodo: function(todo, completed) {
       this.clearNavEffects();
       if (this.toUpdate) {
-        this.updateTodo(todo);
+        this.updateTodo(todo, completed);
       } else {
         this.addTodo(todo);
       }
@@ -231,16 +252,9 @@ $(function() {
       this.currentId++;
     },
 
-    updateTodo: function(info) {
+    updateTodo: function(info, completed) {
       var id = this.updateId;
-      if (!info.complete) {
-         info.complete = this.toUpdate.complete;
-         // because you can't set a todo to incoimplete through the modal
-      }
-
-
-      //var newComplete = (info.complete ? this.completed : this.incomplete);
-      //var oldComplete = (this.toUpdate.complete ? this.completed : this.incomplete);
+      info.complete = completed;
 
       // update both of the collection objects in ALL circumstances
       this.update(this.incomplete, info.date, this.toUpdate.date, id);
@@ -249,8 +263,13 @@ $(function() {
         this.update(this.completed, info.date, this.toUpdate.date, id);
       }
 
-      // replace both old values/dates in the nav bar
-      navManager.deleteAt(this.toUpdate.date, true);
+      // delete both old values/dates in the nav bar if we're moving away from the complete list, otherwise, jsut delete from the incomplete list
+      if (completed && completed !== this.toUpdate.complete) {
+        navManager.deleteAt(this.toUpdate.date, false);
+      } else {
+        navManager.deleteAt(this.toUpdate.date, true);
+      }
+
 
       var formattedDate = toDateString(info.date);
       // add to the top ?????
@@ -328,11 +347,10 @@ $(function() {
       var info = this.allTodos[id];
       this.updateId = id;
       this.toUpdate = info;
-      info.complete = !info.complete
       newInfo = Object.assign({}, info);
-      this.updateTodo(newInfo);
+      this.updateTodo(newInfo, !info.complete);
     },
-
+    /*
     recategorize: function(id) {
       var todo = this.allTodos[id];
 
@@ -364,7 +382,7 @@ $(function() {
 
       return currentIndex;
     },
-
+    */
     reMakeList: function(list, date) {
       if (!date) {
         this.displayAllIn(list);
@@ -506,6 +524,7 @@ $(function() {
   */
 
   var listManager = {
+    $listNumber: $('h1 .count'),
     makeTodo: Handlebars.compile($('#todo-template').html()),
     lastIncompleteIndex: -1, // index where the first complete element is or will be inserted
     visible: null,
@@ -528,6 +547,8 @@ $(function() {
         this.insertNewTodo(todoElement);
       }
 
+      // there's always a deletion whenever we add something, even if the addition is just an update
+      this.$listNumber.text(Number(this.$listNumber.text()) + 1)
     },
 
     insertNewTodo: function(todo) {
@@ -607,6 +628,7 @@ $(function() {
 
       var toDelete = $(`#${id}`);
       toDelete.remove();
+      this.$listNumber.text(Number(this.$listNumber.text()) - 1)
     },
 
     hideAll: function(array, date, complete) {
@@ -618,13 +640,15 @@ $(function() {
           $(this).removeClass('hidden');
         }
       });
-
+      console.log(this.$listNumber);
+      this.$listNumber.text(array.length);
     },
 
     showAll: function() {
       $todoTable.children().removeClass('hidden');
       this.currentDate = undefined;
       this.complete = undefined;
+      this.$listNumber.text($todoTable.children().length);
     },
 
     init: function() {

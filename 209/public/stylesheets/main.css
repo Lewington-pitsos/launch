@@ -355,12 +355,16 @@ option:disabled {
   margin-left: 108px;
 }
 
+.form-buttons span {
+  display: inline-block;
+  margin: 0 16px 12px 0;
+}
+
 .form a {
   display: inline-block;
   box-sizing: border-box;
   border-radius: 5px;
   padding-top: 11px;
-  margin: 0 18px 12px 0;
   width: 184px;
   height: 36px;
   color: white;
@@ -374,6 +378,10 @@ option:disabled {
 
 #modal, .activater, #nav-bar {
   display: none;
+}
+
+.activater {
+  opacity: 0;
 }
 
 /* -------------------------- BREAKPOINTS --------------------- */
