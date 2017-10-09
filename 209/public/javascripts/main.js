@@ -55,7 +55,6 @@ $(function() {
 
     renderModal: function(todo) {
       $title.val(todo.title)
-      console.log(this.currentDate);
       this.usePlaceholderDate(todo);
 
       $description.val(todo.desc)
@@ -106,7 +105,6 @@ $(function() {
     },
 
     processInput: function(e) {
-      console.log();
       if (e.currentTarget.id !== 'mark') {
         this.saveInput();
       } else {
@@ -126,7 +124,7 @@ $(function() {
         complete: null,
       }
 
-      todosManager.processTodo(todo, false);
+      todosManager.processTodo(todo);
       // i.e. specifiying whether the 'mark as complete' button was pressed
       modalDisplayManager.clearPlaceholderDate();
       // we only reset the dates when a save is made for some reason
@@ -163,6 +161,8 @@ $(function() {
     - adds new entries by associating each incoming date with an empty array, to which it adds all ids associated with that date
     - deletes elements based on date and id
     - can also return the number of entries for agiven date
+    - can sort itself and return the sorted index ofa  given date
+    - can return the total number of stored dates
   */
 
 
@@ -233,15 +233,15 @@ $(function() {
 
   var todosManager = {
     completed: Object.create(IdTracker).init(),
-    incomplete: Object.create(IdTracker).init(),
+    fullList: Object.create(IdTracker).init(),
     allTodos: {},
     currentId: 0,
     toUpdate: false,
     updateId: false,
 
-    addData: function(all, incomplete, completed) {
+    addData: function(all, fullList, completed) {
       this.allTodos = all;
-      this.incomplete.allIds = incomplete;
+      this.fullList.allIds = fullList;
       this.completed.allIds = completed;
       this.currentId = (Object.keys(all)
         .map(i => Number(i))
@@ -257,7 +257,7 @@ $(function() {
     },
 
     firstRender: function(todo) {
-      // we need to pre-populate the nav lists
+      // render each todo to the list in default (i.e. id) order
       var date = toDateString(todo.date)
       listManager.addNew(todo.id,
          date,
@@ -266,7 +266,7 @@ $(function() {
          true);
 
       // first add to the top of the nav:
-      var index = this.incomplete.getIndex(todo.date);
+      var index = this.fullList.getIndex(todo.date);
       navManager.addNew(date, index, false, true);
 
       // then add to the bottom IFF the current todo is complete
@@ -277,13 +277,15 @@ $(function() {
     },
 
     renderDummies: function() {
-      navManager.renderDummiesFor(this.incomplete.getDatesNumber(), true)
+      // We use indexing in the date-storing arrays to make sure we put the dates in the right order in the nav. Because of this, if adding lots of nav elements at the same time we first have to render out dummy elements to the nav so that the indicies match up properly.
+      navManager.renderDummiesFor(this.fullList.getDatesNumber(), true)
       navManager.renderDummiesFor(this.completed.getDatesNumber(), false)
     },
 
-    processTodo: function(todo, completed) {
+    processTodo: function(todo) {
+      // checks if a todo is being added ot updated
       if (this.toUpdate) {
-        this.updateTodo(todo, completed);
+        this.updateTodo(todo);
       } else {
         this.addTodo(todo);
         fauxReload()
@@ -305,25 +307,24 @@ $(function() {
       // adds the todo to Alltodos, giving it a unique id, then adds that id to the appropriate idtracker object. Then prompts List and nav managers to make cosmetic changes
       todo.id = this.currentId;
       this.allTodos[this.currentId] = todo;
-      this.incomplete.addId(todo.date, this.currentId);
+      this.fullList.addId(todo.date, this.currentId);
       var currentIndex;
       if (todo.complete) {
         this.completed.addId(todo.date, this.currentId);
         currentIndex = this.completed.getIndex(todo.date)
       } else {
-        currentIndex = this.incomplete.getIndex(todo.date)
+        currentIndex = this.fullList.getIndex(todo.date)
       }
 
       this.addToDisplay(todo.date, todo.complete, todo.title, currentIndex, this.currentId);
       this.currentId++;
     },
 
-    updateTodo: function(info, marked, swapping) {
+    updateTodo: function(info, completeValue, swapping) {
       var id = this.updateId;
-      // completed specifies whether the user clicked 'mark as complete'. If this is false, the complete property of info should be whatever it was before the update UNLESS the operation being performed is a completion-swap, in which case, marked (now no-longer tied to the modal in any way) will be the value for the new completion
-
-      if (swapping || marked) {
-        info.complete = marked;
+      // The complete property of info should be whatever it was before the update UNLESS the update being performed is a completion-swap, in which case we have passed in the new value
+      if (swapping) {
+        info.complete = completeValue;
       } else {
         info.complete = this.toUpdate.complete;
       }
@@ -331,26 +332,25 @@ $(function() {
       info.id = id;
 
       // update both of the collection objects in ALL circumstances
-      this.update(this.incomplete, info.date, this.toUpdate.date, id);
+      this.update(this.fullList, info.date, this.toUpdate.date, id);
       this.completed.deleteId(this.toUpdate.date, id);
       if (info.complete) {
         this.update(this.completed, info.date, this.toUpdate.date, id);
       }
 
-      // delete both old values/dates in the nav bar if we're moving away from the complete list, otherwise, jsut delete from the incomplete list
+      // delete both old values/dates in the nav bar if we're moving away from the complete list, otherwise, just delete from the incomplete list
       if (info.complete && info.complete !== this.toUpdate.complete) {
         navManager.deleteAt(this.toUpdate.date, false);
       } else {
         navManager.deleteAt(this.toUpdate.date, true);
       }
 
-
       var formattedDate = toDateString(info.date);
-      // add to the top ?????
-      var topIndex = this.incomplete.getIndex(info.date);
+      // add a date entry to the top no matter what (one always gets deleted from the top)
+      var topIndex = this.fullList.getIndex(info.date);
       navManager.addNew(formattedDate, topIndex, false);
 
-      // add to bottom if we're complete
+      // add thje same entry to bottom if we're currently complete (whether we just became incomplete or not)
       if (info.complete) {
         var bottomIndex = this.completed.getIndex(info.date);
         navManager.addNew(formattedDate, bottomIndex, true);
@@ -358,6 +358,7 @@ $(function() {
 
       this.allTodos[id] = info;
 
+      // remove the previoys entry from the list and add a new one with the new (info) data
       listManager.deleteAt(id, this.toUpdate.complete);
       listManager.addNew(id, formattedDate, info.title, info.complete, true);
       navListener.focusCurrent(formattedDate, info.complete);
@@ -391,7 +392,7 @@ $(function() {
         this.completed.deleteId(date, id);
       }
 
-      this.incomplete.deleteId(date, id);
+      this.fullList.deleteId(date, id);
 
       this.displayDeletion(date, id, complete);
     },
@@ -400,7 +401,7 @@ $(function() {
       var formattedDate = toDateString(date);
       navManager.deleteAt(date, complete);
       listManager.deleteAt(id, complete);
-      modalDisplayManager.clearPlaceholderDate();
+      modalDisplayManager.clearPlaceholderDate(); // this seems to be what the live example version does
     },
 
     createNewModal: function(id) {
@@ -426,7 +427,7 @@ $(function() {
         var formattedDate = toDateNumber(date);
         var toRender = [];
         if (list === 'remaining') {
-          this.incomplete
+          this.fullList
             .getTodo(formattedDate)
             .forEach(todo => toRender.push(todo));
         } else {
@@ -468,7 +469,7 @@ $(function() {
 
 
   var navManager = {
-    $incomplete: $('.remaining'),
+    $fullList: $('.remaining'),
     $completed: $('.completed'),
     makeNewList: Handlebars.compile($('#nav-list-template').html()),
 
@@ -476,7 +477,7 @@ $(function() {
       if (complete) {
         this.addToList(date, index, this.$completed, dummy);
       } else {
-        this.addToList(date, index, this.$incomplete, dummy);
+        this.addToList(date, index, this.$fullList, dummy);
       }
     },
 
@@ -528,7 +529,7 @@ $(function() {
         this.removeFrom(this.$completed, formattedDate)
       }
 
-      this.removeFrom(this.$incomplete, formattedDate)
+      this.removeFrom(this.$fullList, formattedDate)
     },
 
     removeFrom: function(list, date) {
@@ -545,17 +546,13 @@ $(function() {
       $list.find('li:not(.title)').eq(index).replaceWith(element);
     },
 
-    renderDummiesFor: function(number, incomplete) {
-      var $list = (incomplete ? this.$incomplete : this.$completed);
+    renderDummiesFor: function(number, fullList) {
+      var $list = (fullList ? this.$fullList : this.$completed);
       for (var i = 0; i < number; i++) {
         $list.append('<li class="dummy"></li>')
       }
 
     },
-
-    init: function() {
-      return this;
-    }
   }
 
 
@@ -723,10 +720,6 @@ $(function() {
     updateTitle: function(newTitle) {
       this.$listTitle.text(newTitle);
     },
-
-    init: function() {
-      return this;
-    }
   }
 
 
@@ -782,7 +775,7 @@ $(function() {
 
   var navListener = {
     $navigator: $('nav'),
-    currentList: $('.remaining'),
+    currentList: 'remaining',
     addNavListener: function() {
       $(this.$navigator).on('click', this.triggerReload.bind(this));
     },
@@ -855,10 +848,10 @@ $(function() {
     saveData: function() {
       if (Object.keys(todosManager).length) {
         var all = JSON.stringify(todosManager.allTodos);
-        var incomplete = JSON.stringify(todosManager.incomplete.allIds);
+        var fullList = JSON.stringify(todosManager.fullList.allIds);
         var completed = JSON.stringify(todosManager.completed.allIds);
         localStorage.setItem('allTodos', all);
-        localStorage.setItem('incomplete', incomplete);
+        localStorage.setItem('fullList', fullList);
         localStorage.setItem('completed', completed);
         localStorage.setItem('hasData', true);
       } else {
@@ -869,9 +862,9 @@ $(function() {
     checkStorage: function() {
       if (localStorage.getItem('hasData')) {
         var all = JSON.parse(localStorage.getItem('allTodos'));
-        var incomplete = JSON.parse(localStorage.getItem('incomplete'));
+        var fullList = JSON.parse(localStorage.getItem('fullList'));
         var completed = JSON.parse(localStorage.getItem('completed'));
-        todosManager.addData(all, incomplete, completed);
+        todosManager.addData(all, fullList, completed);
       }
     },
 
@@ -904,6 +897,7 @@ $(function() {
   }
 
   function toDateNumber(string) {
+    // converts a string into a date used to sort and store ids
     if (string === 'No Due Date') {
       return 0;
     } else {
@@ -924,6 +918,8 @@ $(function() {
   }
 
   function fauxReload() {
+    // clears the table and both nav lists, then promprts the todosManager to re-render both based on it's stored data
+    // also focuses the AllTodos list
     $('li.title span').text(0);
     $('li:not(.title)').remove();
     $('tr').remove();
@@ -935,12 +931,12 @@ $(function() {
 
   // ----------------------------- Helper Functions -------------------//
   // ----------------------------- Global Variables  -------------------//
+    // vairbales used by more than one object, stored here to reduce the number of lookups
 
 
+  var $todoTable = $('table'); // ListManager + listListener
 
-  var $todoTable = $('table');
-
-  var $title = $('#title'); // Input + Modal Display Managers
+  var $title = $('#title'); // Input Manager + Modal Display Manager
   var $day = $('#day');
   var $month = $('#month');
   var $year = $('#year');
@@ -952,9 +948,7 @@ $(function() {
   // ----------------------------- Global Variables  -------------------//
   navListener.init();
   listListener.init();
-  listManager.init();
   inputManager.init();
-  navManager.init();
   modalDisplayManager.init();
   reloadListener.init();
 })
