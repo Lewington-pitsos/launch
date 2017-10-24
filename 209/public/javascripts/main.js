@@ -109,6 +109,7 @@ $(function() {
         this.saveInput();
       } else {
         this.markComplete();
+        // innitially I treated a click on 'mark as complete' as exactly the same as a regular update except that the updated todo would also be set to complete. It would be super trivial to revert to that functionality.
       }
     },
 
@@ -361,7 +362,7 @@ $(function() {
       // remove the previoys entry from the list and add a new one with the new (info) data
       listManager.deleteAt(id, this.toUpdate.complete);
       listManager.addNew(id, formattedDate, info.title, info.complete, true);
-      navListener.focusCurrent(formattedDate, info.complete);
+      navListener.focusCurrent(toDateString(this.toUpdate.date), info.complete);
 
       this.clearUpdateData();
       // super important to reset this or else we will always update and never add new todos
@@ -597,7 +598,7 @@ $(function() {
       }
 
       // there's always a deletion whenever we add something, even if the addition is just an update
-      this.$listNumber.text(Number(this.$listNumber.text()) + 1)
+      this.incrementCount();
     },
 
     renderCompletion: function(id, previousCompletion) {
@@ -667,6 +668,7 @@ $(function() {
       if (this.differentStatus(this.complete, complete) ||
                   this.differentDate(this.currentDate, date)) {
         todo.addClass('hidden');
+        this.decrementCount();
       }
     },
 
@@ -686,6 +688,14 @@ $(function() {
       return false;
     },
 
+    decrementCount: function() {
+      this.$listNumber.text(Number(this.$listNumber.text()) - 1);
+    },
+
+    incrementCount: function() {
+      this.$listNumber.text(Number(this.$listNumber.text()) + 1);
+    },
+
     deleteAt: function(id, complete) {
       if (!complete) {
         this.lastIncompleteIndex--;
@@ -693,7 +703,7 @@ $(function() {
 
       var toDelete = $(`#${id}`);
       toDelete.remove();
-      this.$listNumber.text(Number(this.$listNumber.text()) - 1)
+      this.decrementCount();
     },
 
     hideAll: function(array, date, complete) {

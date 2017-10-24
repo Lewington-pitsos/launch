@@ -31,8 +31,12 @@ essentially the session is responsible for keeping track of:
 =end
 # -------------------------------- MISC routing ---------------------------- #
 
-not_found do
-  redirect "/load"
+configure do
+  enable :sessions
+  set :session_secret, "secret"
+  use Rack::Session::Cookie, key: 'rack.session',
+                             path: '/',
+                             secret: 'secret'
 end
 
 # I wanted to display a welcome message to anyone booting up the app, perhaps there is a more efficient way of doing this.
