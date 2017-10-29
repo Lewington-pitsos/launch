@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Sushi Restaurant Website</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="/"><img src="images/logo.png" alt="logo"></a>
+      <div class="cart">
+        <a href="/">
+          <span class="left">Shopping Cart</span><span class="right"><!--
+          --><span class="count">1</span>
+            item
+          </span>
+        </a>
+      </div>
+    </header>
+    <main>
+      <div id="cart">
+        <ul>
+          <li data-id="1">
+            <figure>
+              <img src="images/sashimi-salad.jpg" alt="cart-item">
+            </figure>
+            <p>2 x $12.00</p>
+          </li>
+        </ul>
+        <section>
+          <h3>Your<br>shopping cart</h3>
+          <p class="total">$24.00</p>
+          <p></p>
+          <footer>
+            <a class="left empty_cart" href="#">Empty cart</a><!--
+            --><a class="right checkout" href="/checkout">Checkout</a>
+          </footer>
+        </section>
+      </div>
+      <div id="content">
+        <div id="checkout">
+          <div class="img_top"></div>
+          <section>
+            <h1>Order Details</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th></th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-id="1">
+                  <td><img src="images/sashimi-salad.jpg" alt="cart-item"></td>
+                  <td>Sashimi salad</td>
+                  <td>
+                    <span class="quantity_modifier">
+                      <i class="fa fa-minus" aria-hidden="true"></i>
+                    </span>
+                    <p>1</p>
+                    <span class="quantity_modifier">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </span>
+                  </td>
+                  <td>$12.00</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Total: <span class="total">$12.00</span></p>
+            <footer>
+              <a href="/">Cancel order</a>
+              <form action="/" method="post">
+                <input type="submit" value="ORDER NOW!">
+              </form>
+            </footer>
+          </section>
+          <div class="img_bottom"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
