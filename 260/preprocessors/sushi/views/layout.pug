@@ -5,9 +5,8 @@ html(lang="en-US")
     +stylesheet_link('main')
     title Sushi Restaurant Website
     link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
-    +js_link('vendor/handlebars-v4.0.11')
-    +js_link('vendor/vendor')
-    +js_link('vendor/handlebar_templates')
+    +js_link('vendor/all')
+    +js_link('handlebars_templates')
   body
     header
       a.logo(href="/")
@@ -36,7 +35,9 @@ html(lang="en-US")
         block content
     
     footer
-  +js_link('models/dish')
-  +js_link('collections/dishes')
-  +js_link('views/dishesview')
-  +js_link('application')
+    +js_link('application')
+    +js_link('models/dish')
+    +js_link('collections/dishes', 'collections/cartitems')
+    +js_link('views/dishesview', 'views/dishview', 'views/cartview', 'views/cartitemview')
+    script(type='text/javascript').
+      Application.init()
