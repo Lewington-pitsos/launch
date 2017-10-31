@@ -1,5 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  ul#items
+    li(data-id="1")
+      article
+        header
+          figure
+            img(src="images/sashimi-salad.jpg" alt="menu-item")
+          h2.name Sashimi salad
+        p.price $12.00
+        footer
+          a(href="#" class="add_cart") Add to cart
