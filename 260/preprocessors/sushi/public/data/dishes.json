@@ -1,0 +1,135 @@
+[
+  {
+    "id": 0,
+    "title": "Sashimi salad",
+    "price": 12,
+    "quantity": 1,
+    "imagePath": "/images/sashimi-salad.jpg"
+  },
+  {
+    "id": 1,
+    "title": "Chirashi sushi",
+    "price": 21,
+    "quantity": 1,
+    "imagePath": "/images/chirashi-sushi.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Seaweed salad",
+    "price": 17,
+    "quantity": 1,
+    "imagePath": "/images/seaweed-salad.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Edamame",
+    "price": 4,
+    "quantity": 1,
+    "imagePath": "/images/edamame.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Miso soup",
+    "price": 4,
+    "quantity": 1,
+    "imagePath": "/images/miso-soup.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Maguro",
+    "price": 12.5,
+    "quantity": 1,
+    "imagePath": "/images/maguro.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Shake",
+    "price": 10,
+    "quantity": 1,
+    "imagePath": "/images/shake.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Shiromi",
+    "price": 9.5,
+    "quantity": 1,
+    "imagePath": "/images/shiromi.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Tekka maki",
+    "price": 6,
+    "quantity": 1,
+    "imagePath": "/images/tekka-maki.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Hosomaki Mix",
+    "price": 17,
+    "quantity": 1,
+    "imagePath": "/images/hosomaki-mix.jpg"
+  },
+  {
+    "id": 10,
+    "title": "California rolls",
+    "price": 7.75,
+    "quantity": 1,
+    "imagePath": "/images/california-rolls.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Seattle rolls",
+    "price": 8,
+    "quantity": 1,
+    "imagePath": "/images/seattle-rolls.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Spicy Tuna rolls",
+    "price": 6,
+    "quantity": 1,
+    "imagePath": "/images/spicytuna-rolls.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Ebi rolls",
+    "price": 8,
+    "quantity": 1,
+    "imagePath": "/images/ebi-rolls.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Chicken Teriyaki",
+    "price": 12,
+    "quantity": 1,
+    "imagePath": "/images/chicken-teriyaki.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Salmon Teriyaki",
+    "price": 13.5,
+    "quantity": 1,
+    "imagePath": "/images/salmon-teriyaki.jpg"
+  },
+  {
+    "id": 16,
+    "title": "Gohan",
+    "price": 3,
+    "quantity": 1,
+    "imagePath": "/images/gohan.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Tori Katsu",
+    "price": 11,
+    "quantity": 1,
+    "imagePath": "/images/tori-katsu.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Yaki Udon",
+    "price": 11.5,
+    "quantity": 1,
+    "imagePath": "/images/yaki-udon.jpg"
+  }
+]

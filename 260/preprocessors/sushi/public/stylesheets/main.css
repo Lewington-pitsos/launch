@@ -95,11 +95,17 @@ main ul li {
   font-size: 14px;
 }
 #cart {
+  display: none;
   height: 120px;
   overflow: hidden;
   background: #000;
   color: #fff;
 }
+
+#cart.visible {
+  display: block;
+}
+
 #cart ul {
   float: left;
   height: inherit;

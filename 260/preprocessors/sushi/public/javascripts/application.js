@@ -1,14 +1,18 @@
 var Application = {
   createDishes: function() {
-    this.dishes = new Dishes({
-      id: 1,
-      imagePath: 'images/sashimi-salad.jpg',
-      price: 12,
-      title: 'Sashimi salad'
+    this.dishes = new Dishes();
+    this.dishes.fetch({
+      success: this.renderDishes.bind(this)
     });
+  },
+  renderDishes: function() {
+    console.log(this.dishes);
     this.dishesView = new DishesView({
       collection: this.dishes
     });
+    this.trackCart();
+    this.bindListeners();
+    this.render();
   },
   trackCart: function() {
     this.cart = new CartItems();
@@ -20,15 +24,13 @@ var Application = {
     this.dishesView.render();
   },
   bindListeners: function() {
+    _.extend(this, Backbone.Events);
     this.on('dish_added', this.addDish.bind(this))
   },
-  addDish: function() {
-    console.log('asdas');
+  addDish: function(id) {
+    this.cartView.addToCart(id, this.dishes.at(id))
   },
   init: function() {
     this.createDishes();
-    this.trackCart();
-    this.bindListeners();
-    this.render();
   }
 }

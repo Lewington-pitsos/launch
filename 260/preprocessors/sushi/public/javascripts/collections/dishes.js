@@ -1,3 +1,4 @@
 var Dishes = Backbone.Collection.extend({
-  model: Dish
+  model: Dish,
+  url: 'data/dishes.json'
 })

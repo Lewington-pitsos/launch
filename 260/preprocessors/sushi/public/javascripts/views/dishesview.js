@@ -6,14 +6,15 @@ var DishesView = Backbone.View.extend({
   },
   triggerAdd: function(e) {
     e.preventDefault();
-    console.log('added');
-    Application.trigger('dish_added');
+    var id = $(e.target).closest('li').attr('data-id')
+    Application.trigger('dish_added', id);
   },
   render: function() {
     this.collection.forEach(this.renderModel.bind(this));
     $('.content').html(this.$el)
   },
   renderModel: function(model) {
+    console.log(model);
     var modelView = new DishView({
       model: model
     })
