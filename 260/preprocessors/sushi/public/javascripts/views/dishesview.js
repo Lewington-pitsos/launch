@@ -1,24 +1,31 @@
 var DishesView = Backbone.View.extend({
-  tagName: 'ul',
-  id: 'items',
+  el: document.querySelector('.content'),
+  $htmlStore: $('<ul>', {id: 'items'}),
   events: {
-    'click .add_cart': 'triggerAdd'
+    'click .add_cart': 'triggerAdd',
+    'click header': 'focusInfo'
   },
   triggerAdd: function(e) {
     e.preventDefault();
-    var id = $(e.target).closest('li').attr('data-id')
+    var id = $(e.target).closest('li').attr('data-id') ||
+              $(e.target).closest('.section').attr('data-id')
     Application.trigger('dish_added', id);
+  },
+  focusInfo: function(e) {
+    e.preventDefault()
+    var id = $(e.target).closest('li').attr('data-id');
+    Application.trigger('dish_focused', id);
   },
   render: function() {
     this.collection.forEach(this.renderModel.bind(this));
-    $('.content').html(this.$el)
+    this.$el.html(this.$htmlStore.clone().wrap('<div>').parent().html());
+    this.$htmlStore = $('<ul>', {id: 'items'});
   },
   renderModel: function(model) {
-    console.log(model);
     var modelView = new DishView({
       model: model
     })
-    this.$el.append(modelView.render().$el.html())
+    this.$htmlStore.append(modelView.render().$el.html());
   },
   initalize: function() {
   }

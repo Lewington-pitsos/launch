@@ -1,0 +1,53 @@
+<div class="section" data-id="{{id}}">
+  <div class="nav prev">
+    <img src="images/nav-prev.png" alt="prev">
+  </div>
+  <figure>
+    <img src="{{imagePath}}" alt="selected-item">
+  </figure>
+  <article>
+    <a class="close" href="/">+</a>
+    <h1>{{title}}</h1>
+    <p>{{description}}</p>
+    <footer>
+      <h2>${{format_price price}}</h2>
+      <a class="add_cart" href="#">Add to cart</a>
+    </footer>
+  </article>
+  <aside>
+    <h3>Nutritional Information</h3>
+    {{#with nutrition}}
+    <table>
+      <tbody>
+        <tr>
+          <td>Protein</td>
+          <td>{{protein}}</td>
+        </tr>
+        <tr>
+          <td>Fat (total)</td>
+          <td>{{fat}}</td>
+        </tr>
+        <tr>
+          <td>Carbohydrate</td>
+          <td>{{carbohydrates}}</td>
+        </tr>
+        <tr>
+          <td>Energy (kj)</td>
+          <td>{{energy_kj}}</td>
+        </tr>
+        <tr>
+          <td>Energy (kcal)</td>
+          <td>{{energy_kcal}}</td>
+        </tr>
+        <tr>
+          <td>Sugar</td>
+          <td>{{suger}}</td>
+        </tr>
+      </tbody>
+    </table>
+    {{/with}}
+  </aside>
+  <div class="nav next">
+    <img src="images/nav-next.png" alt="next">
+  </div>
+</div>
