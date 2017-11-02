@@ -1,0 +1,39 @@
+colors = {
+  delete: red,
+  text: #333333,
+  main: #ffffff,
+  highlight: #ffff9d,
+  border: #888888,
+  button: {
+    text: #ffffff
+    background: green
+  }
+}
+
+apperance()
+  apperance: none
+  -moz-apperance: none
+  -webkit-apperance: none
+
+button()
+  position: relative
+  display: inline-block
+  padding: 10px 25px
+  font-size: 18px
+  text-decoration: none
+  color: colors.button.text
+  cursor: pointer
+  border: none
+  border-radius: 8px
+  background: colors.button.background
+  outline: none
+  apperance()
+  transition: box-shadow 200ms ease, top 200ms ease, left 200ms ease
+  box-shadow: 2px 2px 0 2px darken(colors.button.background, 5)
+  &:hover
+  &:focus
+    color: colors.highlight
+  &:active
+    box-shadow: 1px 1px 0 1px darken(colors.button.background, 5)
+    left: 2px
+    top: 2px

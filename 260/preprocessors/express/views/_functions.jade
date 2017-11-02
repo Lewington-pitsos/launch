@@ -1,0 +1,12 @@
+-
+  function total(a, b) {
+    return (a.price ? a.price * a.quantity : a) + b.price * b.quantity;
+  }
+  
+  function format(price) {
+    return price.toFixed(2);
+  }
+  
+  function cart_quantity() {
+    return cart.reduce(function(a, b) {return (a.quantity ? a.quantity : a) + b.quantity})
+  }

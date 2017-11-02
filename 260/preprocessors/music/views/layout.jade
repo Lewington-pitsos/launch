@@ -1,0 +1,23 @@
+include _mixins
+doctype html
+html
+  head
+    title= title
+    +stylesheet_link('application')
+    link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
+    +js_include_tag('vendor/all')
+    +js_include_tag('handlebars_templates')
+  body
+    header
+      div#cart
+    main
+      block content
+    
+    +js_include_tag('models/album')
+    +js_include_tag('collections/albums', 'collections/cart_items')
+    +js_include_tag('views/album', 'views/form', 'views/index', 'views/cart')
+    +js_include_tag('application')
+    script(type='text/javascript').
+      app.albums = new Albums(!{JSON.stringify(albumsData)});
+    +js_include_tag('router')
+    block scripts

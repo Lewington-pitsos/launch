@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  ul#products
+    each product in products
+      li
+        img(src="images/#{product.cover}")
+        h2= product.title
+        dl
+          dt Console 
+          dd
+            case product.console
+              when "SNES"
+                span.logo.snes(title="SNES") SNES
+              when "PlayStation 2"
+                span.logo.ps2(title="PlayStation 2") PlayStation 2
+              when "GameCube"
+                span.logo.gc(title="GameCube") GameCube
+          dt Year
+          dd= product.release_year
+          dt Genre
+          dd= product.genre
+          dt UPC
+          dd= product.upc
+
+        a(href="#") Add to cart

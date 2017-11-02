@@ -1,0 +1,42 @@
+  <div id="album_new">
+    <h1>Add a new Album</h1>
+    <form action="/albums" method="post">
+      <fieldset>
+        <dl>
+          <dt>
+            <label>Title</label>
+          </dt>
+          <dd>
+            <input type="text" name="title">
+          </dd>
+          <dt>
+            <label>Artist</label>
+          </dt>
+          <dd>
+            <input type="text" name="artist">
+          </dd>
+          <dt>
+            <label>Date</label>
+          </dt>
+          <dd>
+            <input type="text" name="date">
+          </dd>
+          <dt>
+            <label>cover</label>
+          </dt>
+          <dd>
+            <input type="url" name="cover">
+          </dd>
+          <dt>
+            <label>price</label>
+          </dt>
+          <dd>
+            <input type="text" name="price">
+          </dd>
+        </dl>
+      </fieldset>
+      <fieldset class="actions">
+        <input type="submit" value="create">
+    </fieldset>
+  </form>
+</div>

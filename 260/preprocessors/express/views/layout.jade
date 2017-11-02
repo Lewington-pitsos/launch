@@ -1,0 +1,31 @@
+include /_mixins.jade
+include /_mock_cart.jade
+include /_functions.jade
+
+doctype html
+html
+  head
+    title= Webstore
+    +stylesheet_link("application")
+    link(href="http://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css")
+  body
+    main
+      h1 products
+      div#cart
+        h3
+          a(href="#") cart
+            span= cart_quantity()
+        div#items
+          ul
+            each item in cart
+              li #{item.title} x #{item.quantity}
+                span #{format(item.price * item.quantity)}
+            li
+              strong Total
+              span $#{format(cart.reduce(total))}
+          a(href="#") checkout
+      block content
+    +javascript_inclusion("cart")
+    
+    
+    

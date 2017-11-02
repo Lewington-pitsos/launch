@@ -1,0 +1,19 @@
+include _mixins.pug
+
+doctype html
+html
+  head
+    title= title
+    +stylesheet_link_tag('style')
+    +script_include_tag('vendor/all')
+    +script_include_tag('templatesCompiled')
+  body
+    block content
+
+    +script_include_tag('models/album')
+    +script_include_tag('collections/albums', 'collections/cart-items')
+    +script_include_tag('views/album', 'views/albums', 'views/index', 'views/new-album', 'views/cart', 'views/cart-item')
+    +script_include_tag('routers/router')
+    +script_include_tag('app')
+    script(type='text/javascript').
+      App.init(!{JSON.stringify(albums)});
