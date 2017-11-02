@@ -6,8 +6,12 @@ var CartView = Backbone.View.extend({
     'click a.checkout': 'focusCheckout'
   },
   renderAll: function() {
-    this.collection.forEach(this.renderItem.bind(this));
-    this.$el.find('ul').html(this.htmlStore);
+    this.collection.forEach(this.renderAndUpdateTotal.bind(this));
+    this.animateIn();
+  },
+  renderAndUpdateTotal: function(model) {
+    this.renderItem(model);
+    this.updateTotal(model.get('price') * model.get('quantity'));
   },
   findModel: function(id) {
     return this.collection.get(id);
@@ -35,12 +39,7 @@ var CartView = Backbone.View.extend({
   },
   addSingleItem: function(model) {
     this.animateIn();
-    var modelView = new CartItemView({
-      model: model
-    });
-
-    this.$el.find('ul').append(modelView.render().$el.html());
-    this.header.updateNumber(1);
+    this.renderItem(model);
   },
   updateTotal: function(price) {
     this.totalHolder = this.$el.find('.total')
@@ -67,13 +66,16 @@ var CartView = Backbone.View.extend({
   },
   focusCheckout: function(e) {
     e.preventDefault();
-    Application.trigger('visit_checkout');
+    console.log('checkout');
+    router.navigate('cart', {trigger: true});
   },
   renderItem: function(model) {
     var modelView = new CartItemView({
       model: model
     });
-    this.htmlStore += modelView.render().$el.html();
+
+    this.$el.find('ul').append(modelView.render().$el.html());
+    this.header.updateNumber(1);
   },
   removeModel: function(model) {
     var $toRemove = this.$el.find(`[data-id="${model.get('id')}"]`);

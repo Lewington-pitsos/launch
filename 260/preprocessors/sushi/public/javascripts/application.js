@@ -12,10 +12,18 @@ var Application = {
     });
     this.trackCart();
     this.bindListeners();
-    this.render();
+    router.navigate('index', {trigger: true});
+    this.infoView = new InfoView({
+      collection: this.dishes
+    })
   },
   trackCart: function() {
     this.cart = new CartItems();
+    this.cart.fetch({
+      success: this.setCartRelatedViews.bind(this)
+    });
+  },
+  setCartRelatedViews: function() {
     this.cartView = new CartView({
       collection: this.cart,
       header: this.headerView
@@ -24,6 +32,9 @@ var Application = {
       collection: this.cart,
       header: this.headerView
     });
+    if (this.cart.length > 0) {
+      this.cartView.renderAll();
+    }
   },
   render: function() {
     $('#cart').removeClass('hidden');
@@ -32,24 +43,22 @@ var Application = {
   bindListeners: function() {
     _.extend(this, Backbone.Events);
     this.on('dish_added', this.addDish.bind(this));
-    this.on('dish_focused', this.renderDishInfo.bind(this));
-    this.on('index_return', this.render.bind(this));
-    this.on('visit_checkout', this.visitCheckout.bind(this))
   },
   addDish: function(id) {
     this.cartView.addToCart(id, this.dishes.get(id).clone())
   },
+  goDishInfo: function(id) {
+    router.navigate(`info/${id}`, {trigger: true});
+  },
   renderDishInfo: function(id) {
-    this.infoView = new InfoView({
-      collection: this.dishes,
-      id: id
-    })
+    this.infoView.render(id);
   },
   visitCheckout: function() {
     this.checkout.render();
   },
   init: function() {
     this.createDishes();
+    router.navigate('');
   }
 }
 

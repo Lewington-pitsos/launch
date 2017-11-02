@@ -15,8 +15,10 @@ var InfoView = Backbone.View.extend({
     var currentId = this.currentModel.get('id');
     if (currentId < 19) {
       this.currentModel = this.collection.get(this.currentModel.get('id') + 1);
+      this.logToHistory(currentId + 1);
     }
     this.animateForwards();
+
   },
   animateForwards: function() {
     var itemContainer = $('.section').last();
@@ -41,10 +43,15 @@ var InfoView = Backbone.View.extend({
       itemContainer.css('z-index', 1);
     });
   },
+  logToHistory: function(id) {
+    console.log('logged');
+    router.navigate(`info/${id}`)
+  },
   prevItem: function() {
     var currentId = this.currentModel.get('id');
     if (currentId > 1) {
       this.currentModel = this.collection.get(this.currentModel.get('id') - 1);
+      this.logToHistory(currentId - 1);
     }
     this.animateBackwards()
   },
@@ -55,12 +62,11 @@ var InfoView = Backbone.View.extend({
 
     this.$el.find('#item_details').prepend(section.$el.html());
   },
-  render: function() {
+  render: function(id) {
+    this.currentModel = this.collection.get(id);
     this.$el.html(this.template({}));
     this.renderSection();
   },
   initialize: function(options) {
-    this.currentModel = this.collection.get(options.id);
-    this.render();
   }
 })

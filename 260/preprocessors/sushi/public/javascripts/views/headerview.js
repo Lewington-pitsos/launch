@@ -14,6 +14,6 @@ var HeaderView = Backbone.View.extend({
   },
   signalReturn: function(e) {
     e.preventDefault();
-    Application.trigger('index_return');
+    router.navigate('index', {trigger: true});
   },
 })

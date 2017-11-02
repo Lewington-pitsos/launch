@@ -2,7 +2,7 @@ var CheckoutView = Backbone.View.extend({
   el: document.querySelector('.content'),
   template: JST['checkout'],
   events: {
-    'click checkout_footer a, checkout_footer form': 'backToIndex',
+    'click .checkout_footer a, .checkout_footer form': 'backToIndex',
     'click .fa-plus': 'incrimentQuantity',
     'click .fa-minus': 'decrementQuantity'
   },
@@ -39,8 +39,8 @@ var CheckoutView = Backbone.View.extend({
   },
   backToIndex: function(e) {
     e.preventDefault();
-    Application.trigger('index_return')
     this.collection.trigger('empty_self');
+    router.navigate('index', {trigger: true});
   },
   render: function() {
     $('#cart').addClass('hidden')

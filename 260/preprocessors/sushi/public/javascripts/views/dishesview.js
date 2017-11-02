@@ -14,7 +14,7 @@ var DishesView = Backbone.View.extend({
   focusInfo: function(e) {
     e.preventDefault()
     var id = $(e.target).closest('li').attr('data-id');
-    Application.trigger('dish_focused', id);
+    router.navigate(`info/${id}`, {trigger: true});
   },
   render: function() {
     this.collection.forEach(this.renderModel.bind(this));
